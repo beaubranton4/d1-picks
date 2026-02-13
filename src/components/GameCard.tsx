@@ -1,5 +1,6 @@
 import type { GameWithEdges } from '@/lib/types';
 import { EdgeBadge } from './EdgeBadge';
+import { OddsBadge } from './OddsBadge';
 
 interface GameCardProps {
   game: GameWithEdges;
@@ -16,19 +17,27 @@ function formatTeamName(name: string, rank?: number): string {
 }
 
 export function GameCard({ game, muted = false, oddsOnly = false }: GameCardProps) {
-  // For odds-only games (no predictions), show a minimal card
+  // For odds-only games (no predictions), show a card with odds
   if (oddsOnly) {
+    const hasOdds = game.odds && game.odds.length > 0;
+
     return (
       <div className="bg-gray-50 rounded-lg shadow-sm p-4 border border-gray-200">
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-start">
           <div className="flex-1">
             <div className="flex items-center gap-2">
               <span className="text-sm text-gray-400">{game.startTime}</span>
-              <span className="px-2 py-0.5 rounded text-xs font-medium bg-gray-200 text-gray-600">
-                NO PREDICTION
-              </span>
+              {hasOdds ? (
+                <span className="px-2 py-0.5 rounded text-xs font-medium bg-blue-100 text-blue-700">
+                  ODDS ONLY
+                </span>
+              ) : (
+                <span className="px-2 py-0.5 rounded text-xs font-medium bg-gray-200 text-gray-600">
+                  NO ODDS
+                </span>
+              )}
             </div>
-            <h3 className="text-lg font-semibold text-gray-600 mt-1">
+            <h3 className="text-lg font-semibold text-gray-700 mt-1">
               {formatTeamName(game.teamA, game.teamARank)} @{' '}
               {formatTeamName(game.teamB, game.teamBRank)}
             </h3>
@@ -40,6 +49,11 @@ export function GameCard({ game, muted = false, oddsOnly = false }: GameCardProp
             <div className="text-xs text-gray-400 ml-4">{game.broadcast}</div>
           )}
         </div>
+
+        {/* Show odds if available */}
+        {hasOdds && (
+          <OddsBadge odds={game.odds!} teamA={game.teamA} teamB={game.teamB} />
+        )}
       </div>
     );
   }

@@ -87,7 +87,8 @@ export default async function DailyPicksPage({ params }: PageProps) {
   const gamesWithEdges: GameWithEdges[] = matchedGames.map(({ game, odds }) => {
     // Only calculate edges for games with predictions
     const edges = game.hasPrediction ? calculateGameEdges(game, odds) : [];
-    return { ...game, edges };
+    // Pass raw odds for games without predictions
+    return { ...game, edges, odds: game.hasPrediction ? undefined : odds };
   });
 
   // 7. Split into categories

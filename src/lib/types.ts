@@ -49,6 +49,7 @@ export interface BetEdge {
 
 export interface GameWithEdges extends Game {
   edges: BetEdge[];
+  odds?: OddsEntry[]; // Raw odds for games without predictions
 }
 
 export type TeamMappings = Record<string, string[]>;
