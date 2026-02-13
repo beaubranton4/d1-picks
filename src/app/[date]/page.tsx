@@ -1,5 +1,5 @@
 import { Header } from '@/components/Header';
-import { GameCard } from '@/components/GameCard';
+import { GameCard, CompactGameGrid } from '@/components/GameCard';
 import { NoPicksMessage } from '@/components/NoPicksMessage';
 import { EmailCapture } from '@/components/EmailCapture';
 import { ShareButton } from '@/components/ShareButton';
@@ -137,7 +137,7 @@ export default async function DailyPicksPage({ params }: PageProps) {
 
   if (totalGames === 0) {
     return (
-      <div className="container mx-auto px-4 py-8 max-w-4xl">
+      <div className="container mx-auto px-4 py-8 max-w-7xl">
         <Header date={date} />
         <DailyArticleBanner date={date} />
         <NoPicksMessage />
@@ -148,7 +148,7 @@ export default async function DailyPicksPage({ params }: PageProps) {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8 max-w-4xl">
+    <div className="container mx-auto px-4 py-8 max-w-7xl">
       <Header date={date} />
       <DailyArticleBanner date={date} />
 
@@ -175,7 +175,7 @@ export default async function DailyPicksPage({ params }: PageProps) {
             </div>
           </div>
 
-          <div className="space-y-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {picks.map(game => (
               <GameCard key={game.id} game={game} />
             ))}
@@ -197,7 +197,7 @@ export default async function DailyPicksPage({ params }: PageProps) {
               No +EV edge found — showing full analysis
             </p>
           </div>
-          <div className="space-y-4">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
             {otherPredictedGames.map(game => (
               <GameCard key={game.id} game={game} muted />
             ))}
@@ -205,7 +205,7 @@ export default async function DailyPicksPage({ params }: PageProps) {
         </div>
       )}
 
-      {/* Odds-Only Games Section */}
+      {/* All Other Games Section - Compact Grid */}
       {oddsOnlyGames.length > 0 && (
         <div className="mt-10">
           <div className="mb-4 border-b pb-3">
@@ -216,14 +216,10 @@ export default async function DailyPicksPage({ params }: PageProps) {
               </span>
             </h2>
             <p className="text-sm text-gray-500 mt-1">
-              No prediction available — showing schedule only
+              No prediction available — showing schedule and odds
             </p>
           </div>
-          <div className="space-y-3">
-            {oddsOnlyGames.map(game => (
-              <GameCard key={game.id} game={game} oddsOnly />
-            ))}
-          </div>
+          <CompactGameGrid games={oddsOnlyGames} />
         </div>
       )}
 

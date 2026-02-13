@@ -1,6 +1,5 @@
-import type { GameWithEdges } from '@/lib/types';
+import type { GameWithEdges, OddsEntry } from '@/lib/types';
 import { EdgeBadge } from './EdgeBadge';
-import { OddsBadge } from './OddsBadge';
 
 interface GameCardProps {
   game: GameWithEdges;
@@ -16,46 +15,36 @@ function formatTeamName(name: string, rank?: number): string {
   return rank ? `#${rank} ${formatted}` : formatted;
 }
 
+function formatMoneyline(ml: number): string {
+  return ml > 0 ? `+${ml}` : `${ml}`;
+}
+
+function getBestOdds(odds: OddsEntry[], teamName: string): { ml: number; book: string } | null {
+  const teamOdds = odds.filter(o => {
+    const normalized = o.team.toLowerCase().replace(/\s+/g, '_');
+    return normalized.includes(teamName.replace(/_/g, '')) ||
+           teamName.includes(normalized.replace(/_/g, ''));
+  });
+
+  if (teamOdds.length === 0) return null;
+
+  const best = teamOdds.reduce((a, b) => a.moneyline > b.moneyline ? a : b);
+  return { ml: best.moneyline, book: best.sportsbook };
+}
+
+function getBookAbbrev(book: string): string {
+  const abbrevs: Record<string, string> = {
+    draftkings: 'DK',
+    fanduel: 'FD',
+    betmgm: 'MGM',
+  };
+  return abbrevs[book.toLowerCase()] || book.slice(0, 2).toUpperCase();
+}
+
 export function GameCard({ game, muted = false, oddsOnly = false }: GameCardProps) {
-  // For odds-only games (no predictions), show a card with odds
+  // For odds-only games, use compact card
   if (oddsOnly) {
-    const hasOdds = game.odds && game.odds.length > 0;
-
-    return (
-      <div className="bg-gray-50 rounded-lg shadow-sm p-4 border border-gray-200">
-        <div className="flex justify-between items-start">
-          <div className="flex-1">
-            <div className="flex items-center gap-2">
-              <span className="text-sm text-gray-400">{game.startTime}</span>
-              {hasOdds ? (
-                <span className="px-2 py-0.5 rounded text-xs font-medium bg-blue-100 text-blue-700">
-                  ODDS ONLY
-                </span>
-              ) : (
-                <span className="px-2 py-0.5 rounded text-xs font-medium bg-gray-200 text-gray-600">
-                  NO ODDS
-                </span>
-              )}
-            </div>
-            <h3 className="text-lg font-semibold text-gray-700 mt-1">
-              {formatTeamName(game.teamA, game.teamARank)} @{' '}
-              {formatTeamName(game.teamB, game.teamBRank)}
-            </h3>
-            {game.venue && (
-              <p className="text-sm text-gray-400 mt-0.5">{game.venue}</p>
-            )}
-          </div>
-          {game.broadcast && (
-            <div className="text-xs text-gray-400 ml-4">{game.broadcast}</div>
-          )}
-        </div>
-
-        {/* Show odds if available */}
-        {hasOdds && (
-          <OddsBadge odds={game.odds!} teamA={game.teamA} teamB={game.teamB} />
-        )}
-      </div>
-    );
+    return <CompactGameCard game={game} />;
   }
 
   // For muted cards, show all edges including PASS
@@ -132,6 +121,147 @@ export function GameCard({ game, muted = false, oddsOnly = false }: GameCardProp
         {visibleEdges.map((edge, idx) => (
           <EdgeBadge key={idx} edge={edge} muted={muted} />
         ))}
+      </div>
+    </div>
+  );
+}
+
+// Compact card for odds-only games - designed for grid layout
+function CompactGameCard({ game }: { game: GameWithEdges }) {
+  const hasOdds = game.odds && game.odds.length > 0;
+  const teamAOdds = hasOdds ? getBestOdds(game.odds!, game.teamA) : null;
+  const teamBOdds = hasOdds ? getBestOdds(game.odds!, game.teamB) : null;
+
+  const teamAIsFavorite = teamAOdds && teamBOdds ? teamAOdds.ml < teamBOdds.ml : false;
+
+  return (
+    <div className="bg-white rounded-lg border border-gray-200 hover:border-gray-300 hover:shadow-md transition-all overflow-hidden">
+      {/* Header with time and broadcast */}
+      <div className="px-3 py-2 bg-gray-50 border-b border-gray-100 flex items-center justify-between">
+        <span className="text-xs font-medium text-gray-500">{game.startTime}</span>
+        {game.broadcast && (
+          <span className="text-xs text-gray-400">{game.broadcast}</span>
+        )}
+      </div>
+
+      {/* Teams and odds */}
+      <div className="p-3">
+        {/* Away team (teamA) */}
+        <div className="flex items-center justify-between mb-2">
+          <div className="flex items-center gap-2 flex-1 min-w-0">
+            {game.teamARank && (
+              <span className="text-xs font-bold text-amber-600">#{game.teamARank}</span>
+            )}
+            <span className="font-semibold text-gray-800 truncate">
+              {formatTeamName(game.teamA)}
+            </span>
+          </div>
+          {teamAOdds ? (
+            <div className={`flex items-center gap-1.5 ${teamAIsFavorite ? 'text-amber-600' : 'text-green-600'}`}>
+              <span className="text-lg font-bold">{formatMoneyline(teamAOdds.ml)}</span>
+              <span className="text-xs text-gray-400">{getBookAbbrev(teamAOdds.book)}</span>
+            </div>
+          ) : (
+            <span className="text-gray-300">—</span>
+          )}
+        </div>
+
+        {/* Home team (teamB) */}
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2 flex-1 min-w-0">
+            {game.teamBRank && (
+              <span className="text-xs font-bold text-amber-600">#{game.teamBRank}</span>
+            )}
+            <span className="font-semibold text-gray-800 truncate">
+              {formatTeamName(game.teamB)}
+            </span>
+            <span className="text-xs text-gray-400">(H)</span>
+          </div>
+          {teamBOdds ? (
+            <div className={`flex items-center gap-1.5 ${!teamAIsFavorite ? 'text-amber-600' : 'text-green-600'}`}>
+              <span className="text-lg font-bold">{formatMoneyline(teamBOdds.ml)}</span>
+              <span className="text-xs text-gray-400">{getBookAbbrev(teamBOdds.book)}</span>
+            </div>
+          ) : (
+            <span className="text-gray-300">—</span>
+          )}
+        </div>
+
+        {/* Venue if available */}
+        {game.venue && (
+          <div className="mt-2 pt-2 border-t border-gray-100">
+            <span className="text-xs text-gray-400 truncate block">{game.venue}</span>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+// Grid wrapper for compact cards
+export function CompactGameGrid({ games }: { games: GameWithEdges[] }) {
+  if (games.length === 0) return null;
+
+  // Split into games with odds and games without
+  const withOdds = games.filter(g => g.odds && g.odds.length > 0);
+  const withoutOdds = games.filter(g => !g.odds || g.odds.length === 0);
+
+  return (
+    <div className="space-y-6">
+      {/* Games with odds */}
+      {withOdds.length > 0 && (
+        <div>
+          <div className="flex items-center gap-2 mb-3">
+            <h3 className="text-sm font-semibold text-gray-600">With Betting Lines</h3>
+            <span className="text-xs text-gray-400">({withOdds.length})</span>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            {withOdds.map(game => (
+              <CompactGameCard key={game.id} game={game} />
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Games without odds */}
+      {withoutOdds.length > 0 && (
+        <div>
+          <div className="flex items-center gap-2 mb-3">
+            <h3 className="text-sm font-semibold text-gray-500">Schedule Only</h3>
+            <span className="text-xs text-gray-400">({withoutOdds.length})</span>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2">
+            {withoutOdds.map(game => (
+              <MiniGameCard key={game.id} game={game} />
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// Even more compact card for games without odds
+function MiniGameCard({ game }: { game: GameWithEdges }) {
+  return (
+    <div className="bg-gray-50 rounded border border-gray-200 px-3 py-2 hover:bg-gray-100 transition-colors">
+      <div className="flex items-center justify-between gap-2">
+        <div className="flex-1 min-w-0">
+          <div className="text-sm font-medium text-gray-700 truncate">
+            {game.teamARank && <span className="text-amber-600">#{game.teamARank} </span>}
+            {formatTeamName(game.teamA)}
+          </div>
+          <div className="text-sm text-gray-500 truncate">
+            @ {game.teamBRank && <span className="text-amber-600">#{game.teamBRank} </span>}
+            {formatTeamName(game.teamB)}
+          </div>
+        </div>
+        <div className="text-right shrink-0">
+          <div className="text-xs text-gray-400">{game.startTime}</div>
+          {game.broadcast && (
+            <div className="text-xs text-gray-300">{game.broadcast}</div>
+          )}
+        </div>
       </div>
     </div>
   );
