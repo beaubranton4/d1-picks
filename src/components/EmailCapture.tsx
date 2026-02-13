@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { track } from '@vercel/analytics';
 
 export function EmailCapture() {
   const [email, setEmail] = useState('');
@@ -22,6 +23,7 @@ export function EmailCapture() {
       });
 
       if (res.ok) {
+        track('email_signup');
         setStatus('success');
         setEmail('');
       } else {
