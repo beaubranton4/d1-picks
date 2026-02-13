@@ -21,8 +21,8 @@ export async function ArticlesSection({ excludeDate }: ArticlesSectionProps) {
   const recentArticles = filteredArticles.slice(0, 3);
 
   return (
-    <section className="mt-10 pt-8 border-t">
-      <h2 className="text-xl font-bold text-gray-800 mb-4">
+    <section className="mt-10 pt-8 border-t border-mlb-border">
+      <h2 className="text-xl font-bold text-mlb-textPrimary mb-4">
         Latest Analysis
       </h2>
       <div className="space-y-4">
@@ -30,15 +30,15 @@ export async function ArticlesSection({ excludeDate }: ArticlesSectionProps) {
           <Link
             key={article.slug}
             href={`/articles/${article.slug}`}
-            className="block bg-white rounded-lg shadow p-4 hover:shadow-md transition-shadow"
+            className="block bg-mlb-card rounded-lg border border-mlb-border p-4 hover:border-mlb-blue/50 hover:shadow-lg hover:shadow-mlb-blue/10 transition-all"
           >
-            <h3 className="font-semibold text-gray-900 mb-1">
+            <h3 className="font-semibold text-mlb-textPrimary mb-1">
               {article.title}
             </h3>
-            <p className="text-sm text-gray-600 line-clamp-2">
+            <p className="text-sm text-mlb-textSecondary line-clamp-2">
               {article.excerpt}
             </p>
-            <div className="flex items-center gap-3 mt-2 text-xs text-gray-500">
+            <div className="flex items-center gap-3 mt-2 text-xs text-mlb-textMuted">
               <time dateTime={article.publishedAt}>
                 {new Date(article.publishedAt).toLocaleDateString('en-US', {
                   month: 'short',

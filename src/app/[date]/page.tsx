@@ -137,100 +137,104 @@ export default async function DailyPicksPage({ params }: PageProps) {
 
   if (totalGames === 0) {
     return (
-      <div className="container mx-auto px-4 py-8 max-w-7xl">
-        <Header date={date} />
-        <DailyArticleBanner date={date} />
-        <NoPicksMessage />
-        <EmailCapture />
-        <ArticlesSection excludeDate={date} />
+      <div className="min-h-screen bg-mlb-dark">
+        <div className="container mx-auto px-4 py-8 max-w-7xl">
+          <Header date={date} />
+          <DailyArticleBanner date={date} />
+          <NoPicksMessage />
+          <EmailCapture />
+          <ArticlesSection excludeDate={date} />
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="container mx-auto px-4 py-8 max-w-7xl">
-      <Header date={date} />
-      <DailyArticleBanner date={date} />
+    <div className="min-h-screen bg-mlb-dark">
+      <div className="container mx-auto px-4 py-8 max-w-7xl">
+        <Header date={date} />
+        <DailyArticleBanner date={date} />
 
-      {/* Stats summary */}
-      <div className="mb-6 text-center">
-        <p className="text-sm text-gray-500">
-          {totalGames} games today &middot; {predictedCount} with predictions &middot;{' '}
-          {gamesWithOdds} with odds
-        </p>
-      </div>
+        {/* Stats summary */}
+        <div className="mb-6 text-center">
+          <p className="text-sm text-mlb-textMuted">
+            {totalGames} games today &middot; {predictedCount} with predictions &middot;{' '}
+            {gamesWithOdds} with odds
+          </p>
+        </div>
 
-      {/* +EV Picks Section */}
-      {picks.length === 0 ? (
-        <NoPicksMessage hasGames={totalGames > 0} />
-      ) : (
-        <>
-          <div className="mb-6 text-center">
-            <p className="text-lg text-gray-700">
-              Found <span className="font-bold text-green-600">{picks.length}</span>{' '}
-              {picks.length === 1 ? 'game' : 'games'} with positive expected value
-            </p>
-            <div className="mt-3">
-              <ShareButton date={date} picksCount={picks.length} />
+        {/* +EV Picks Section */}
+        {picks.length === 0 ? (
+          <NoPicksMessage hasGames={totalGames > 0} />
+        ) : (
+          <>
+            <div className="mb-6 text-center">
+              <p className="text-lg text-mlb-textSecondary">
+                Found <span className="font-bold text-green-400">{picks.length}</span>{' '}
+                {picks.length === 1 ? 'game' : 'games'} with positive expected value
+              </p>
+              <div className="mt-3">
+                <ShareButton date={date} picksCount={picks.length} />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              {picks.map(game => (
+                <GameCard key={game.id} game={game} />
+              ))}
+            </div>
+          </>
+        )}
+
+        {/* Other Predicted Games Section */}
+        {otherPredictedGames.length > 0 && (
+          <div className="mt-10">
+            <div className="mb-4 border-b border-mlb-border pb-3">
+              <h2 className="text-xl font-bold text-mlb-textSecondary">
+                Other Predicted Games{' '}
+                <span className="text-base font-normal text-mlb-textMuted">
+                  ({otherPredictedGames.length})
+                </span>
+              </h2>
+              <p className="text-sm text-mlb-textMuted mt-1">
+                No +EV edge found — showing full analysis
+              </p>
+            </div>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+              {otherPredictedGames.map(game => (
+                <GameCard key={game.id} game={game} muted />
+              ))}
             </div>
           </div>
+        )}
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {picks.map(game => (
-              <GameCard key={game.id} game={game} />
-            ))}
+        {/* All Other Games Section - Compact Grid */}
+        {oddsOnlyGames.length > 0 && (
+          <div className="mt-10">
+            <div className="mb-4 border-b border-mlb-border pb-3">
+              <h2 className="text-xl font-bold text-mlb-textSecondary">
+                All Other Games{' '}
+                <span className="text-base font-normal text-mlb-textMuted">
+                  ({oddsOnlyGames.length})
+                </span>
+              </h2>
+              <p className="text-sm text-mlb-textMuted mt-1">
+                No prediction available — showing schedule and odds
+              </p>
+            </div>
+            <CompactGameGrid games={oddsOnlyGames} />
           </div>
-        </>
-      )}
+        )}
 
-      {/* Other Predicted Games Section */}
-      {otherPredictedGames.length > 0 && (
-        <div className="mt-10">
-          <div className="mb-4 border-b pb-3">
-            <h2 className="text-xl font-bold text-gray-700">
-              Other Predicted Games{' '}
-              <span className="text-base font-normal text-gray-500">
-                ({otherPredictedGames.length})
-              </span>
-            </h2>
-            <p className="text-sm text-gray-500 mt-1">
-              No +EV edge found — showing full analysis
-            </p>
-          </div>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-            {otherPredictedGames.map(game => (
-              <GameCard key={game.id} game={game} muted />
-            ))}
-          </div>
-        </div>
-      )}
+        <EmailCapture />
 
-      {/* All Other Games Section - Compact Grid */}
-      {oddsOnlyGames.length > 0 && (
-        <div className="mt-10">
-          <div className="mb-4 border-b pb-3">
-            <h2 className="text-xl font-bold text-gray-700">
-              All Other Games{' '}
-              <span className="text-base font-normal text-gray-500">
-                ({oddsOnlyGames.length})
-              </span>
-            </h2>
-            <p className="text-sm text-gray-500 mt-1">
-              No prediction available — showing schedule and odds
-            </p>
-          </div>
-          <CompactGameGrid games={oddsOnlyGames} />
-        </div>
-      )}
+        <ArticlesSection excludeDate={date} />
 
-      <EmailCapture />
-
-      <ArticlesSection excludeDate={date} />
-
-      <footer className="mt-8 pt-6 border-t text-center text-sm text-gray-500">
-        <p>Data sources: ESPN &middot; Warren Nolan &middot; The Odds API</p>
-        <p className="mt-2">For entertainment purposes only. Bet responsibly.</p>
-      </footer>
+        <footer className="mt-8 pt-6 border-t border-mlb-border text-center text-sm text-mlb-textMuted">
+          <p>Data sources: ESPN &middot; Warren Nolan &middot; The Odds API</p>
+          <p className="mt-2">For entertainment purposes only. Bet responsibly.</p>
+        </footer>
+      </div>
     </div>
   );
 }

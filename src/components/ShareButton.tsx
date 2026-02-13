@@ -24,7 +24,7 @@ export function ShareButton({ date, picksCount }: ShareButtonProps) {
       href={twitterUrl}
       target="_blank"
       rel="noopener noreferrer"
-      className="inline-flex items-center gap-2 bg-black hover:bg-gray-800 text-white font-medium px-4 py-2 rounded-lg transition-colors"
+      className="inline-flex items-center gap-2 bg-mlb-card hover:bg-mlb-cardHover border border-mlb-border hover:border-mlb-blue text-mlb-textPrimary font-medium px-4 py-2 rounded-lg transition-all"
     >
       <svg
         className="w-4 h-4"

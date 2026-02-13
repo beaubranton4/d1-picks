@@ -33,17 +33,17 @@ export function EmailCapture() {
   };
 
   return (
-    <div className="bg-gradient-to-r from-green-50 to-blue-50 rounded-lg p-6 my-8 border border-green-200">
+    <div className="bg-mlb-card rounded-lg p-6 my-8 border border-mlb-border">
       <div className="text-center">
-        <h3 className="text-xl font-bold text-gray-900 mb-2">
+        <h3 className="text-xl font-bold text-mlb-textPrimary mb-2">
           Get free +EV picks in your inbox daily
         </h3>
-        <p className="text-gray-600 mb-4">
+        <p className="text-mlb-textSecondary mb-4">
           No BS, just data. We find the edges, you make the call.
         </p>
 
         {status === 'success' ? (
-          <div className="bg-green-100 text-green-800 p-4 rounded-lg">
+          <div className="bg-green-900/40 border border-green-500 text-green-100 p-4 rounded-lg">
             You're in! Check your inbox to confirm.
           </div>
         ) : (
@@ -54,12 +54,12 @@ export function EmailCapture() {
               onChange={(e) => setEmail(e.target.value)}
               placeholder="your@email.com"
               required
-              className="flex-1 px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none"
+              className="flex-1 px-4 py-3 rounded-lg bg-mlb-darker border border-mlb-border text-mlb-textPrimary placeholder-mlb-textMuted focus:ring-2 focus:ring-mlb-blue focus:border-transparent outline-none"
             />
             <button
               type="submit"
               disabled={status === 'loading'}
-              className="bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-3 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="bg-mlb-blue hover:bg-mlb-blueHover text-white font-semibold px-6 py-3 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {status === 'loading' ? 'Subscribing...' : 'Subscribe'}
             </button>
@@ -67,12 +67,12 @@ export function EmailCapture() {
         )}
 
         {status === 'error' && (
-          <p className="text-red-600 mt-2 text-sm">
+          <p className="text-red-400 mt-2 text-sm">
             Something went wrong. Try again or email us directly.
           </p>
         )}
 
-        <p className="text-xs text-gray-500 mt-3">
+        <p className="text-xs text-mlb-textMuted mt-3">
           Free forever. Unsubscribe anytime. We hate spam too.
         </p>
       </div>

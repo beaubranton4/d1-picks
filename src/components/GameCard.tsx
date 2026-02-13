@@ -60,49 +60,49 @@ export function GameCard({ game, muted = false, oddsOnly = false }: GameCardProp
   const getVenueText = () => {
     if (game.venueType === 'home_a') {
       return (
-        <span className={muted ? 'text-gray-500' : 'text-blue-600'}>
+        <span className={muted ? 'text-mlb-textMuted' : 'text-mlb-blue'}>
           @ {formatTeamName(game.teamA)}
         </span>
       );
     } else if (game.venueType === 'home_b') {
       return (
-        <span className={muted ? 'text-gray-500' : 'text-blue-600'}>
+        <span className={muted ? 'text-mlb-textMuted' : 'text-mlb-blue'}>
           @ {formatTeamName(game.teamB)}
         </span>
       );
     } else {
-      return <span className={muted ? 'text-gray-500' : 'text-purple-600'}>Neutral Site</span>;
+      return <span className={muted ? 'text-mlb-textMuted' : 'text-purple-400'}>Neutral Site</span>;
     }
   };
 
   const cardClasses = muted
-    ? 'bg-gray-50 rounded-lg shadow p-6 border border-gray-200'
-    : 'bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow';
+    ? 'bg-mlb-card rounded-lg p-6 border border-mlb-border'
+    : 'bg-mlb-card rounded-lg p-6 border border-mlb-border hover:border-mlb-blue/50 hover:shadow-lg hover:shadow-mlb-blue/10 transition-all';
 
   return (
     <div className={cardClasses}>
-      <div className="flex justify-between items-start mb-4 border-b pb-3">
+      <div className="flex justify-between items-start mb-4 border-b border-mlb-border pb-3">
         <div>
           <div className="flex items-center gap-2">
-            <span className={`text-sm ${muted ? 'text-gray-400' : 'text-gray-500'}`}>
+            <span className={`text-sm ${muted ? 'text-mlb-textMuted' : 'text-mlb-textSecondary'}`}>
               {game.startTime}
             </span>
             {muted && (
-              <span className="px-2 py-0.5 rounded text-xs font-semibold bg-gray-300 text-gray-700">
+              <span className="px-2 py-0.5 rounded text-xs font-semibold bg-mlb-textMuted text-mlb-darker">
                 NO BET
               </span>
             )}
             {game.predictionSource === 'warren_nolan' && !muted && (
-              <span className="px-2 py-0.5 rounded text-xs font-medium bg-blue-100 text-blue-700">
+              <span className="px-2 py-0.5 rounded text-xs font-medium bg-mlb-blue/20 text-mlb-blue">
                 WN
               </span>
             )}
           </div>
-          <h3 className={`text-2xl font-bold ${muted ? 'text-gray-600' : ''}`}>
+          <h3 className={`text-2xl font-bold ${muted ? 'text-mlb-textMuted' : 'text-mlb-textPrimary'}`}>
             {formatTeamName(game.teamA, game.teamARank)} vs{' '}
             {formatTeamName(game.teamB, game.teamBRank)}
           </h3>
-          <div className={`text-sm mt-1 ${muted ? 'text-gray-500' : 'text-gray-600'}`}>
+          <div className={`text-sm mt-1 ${muted ? 'text-mlb-textMuted' : 'text-mlb-textSecondary'}`}>
             {game.venue ? (
               <span>
                 {getVenueText()} &middot; {game.venue}
@@ -113,7 +113,7 @@ export function GameCard({ game, muted = false, oddsOnly = false }: GameCardProp
           </div>
         </div>
         {game.broadcast && (
-          <div className="text-xs text-gray-400">{game.broadcast}</div>
+          <div className="text-xs text-mlb-textMuted">{game.broadcast}</div>
         )}
       </div>
 
@@ -135,12 +135,12 @@ function CompactGameCard({ game }: { game: GameWithEdges }) {
   const teamAIsFavorite = teamAOdds && teamBOdds ? teamAOdds.ml < teamBOdds.ml : false;
 
   return (
-    <div className="bg-white rounded-lg border border-gray-200 hover:border-gray-300 hover:shadow-md transition-all overflow-hidden">
+    <div className="bg-mlb-card rounded-lg border border-mlb-border hover:border-mlb-blue/50 hover:shadow-lg hover:shadow-mlb-blue/10 transition-all overflow-hidden">
       {/* Header with time and broadcast */}
-      <div className="px-3 py-2 bg-gray-50 border-b border-gray-100 flex items-center justify-between">
-        <span className="text-xs font-medium text-gray-500">{game.startTime}</span>
+      <div className="px-3 py-2 bg-mlb-darker border-b border-mlb-border flex items-center justify-between">
+        <span className="text-xs font-medium text-mlb-textSecondary">{game.startTime}</span>
         {game.broadcast && (
-          <span className="text-xs text-gray-400">{game.broadcast}</span>
+          <span className="text-xs text-mlb-textMuted">{game.broadcast}</span>
         )}
       </div>
 
@@ -150,19 +150,19 @@ function CompactGameCard({ game }: { game: GameWithEdges }) {
         <div className="flex items-center justify-between mb-2">
           <div className="flex items-center gap-2 flex-1 min-w-0">
             {game.teamARank && (
-              <span className="text-xs font-bold text-amber-600">#{game.teamARank}</span>
+              <span className="text-xs font-bold text-amber-400">#{game.teamARank}</span>
             )}
-            <span className="font-semibold text-gray-800 truncate">
+            <span className="font-semibold text-mlb-textPrimary truncate">
               {formatTeamName(game.teamA)}
             </span>
           </div>
           {teamAOdds ? (
-            <div className={`flex items-center gap-1.5 ${teamAIsFavorite ? 'text-amber-600' : 'text-green-600'}`}>
+            <div className={`flex items-center gap-1.5 ${teamAIsFavorite ? 'text-amber-400' : 'text-green-400'}`}>
               <span className="text-lg font-bold">{formatMoneyline(teamAOdds.ml)}</span>
-              <span className="text-xs text-gray-400">{getBookAbbrev(teamAOdds.book)}</span>
+              <span className="text-xs text-mlb-textMuted">{getBookAbbrev(teamAOdds.book)}</span>
             </div>
           ) : (
-            <span className="text-gray-300">—</span>
+            <span className="text-mlb-textMuted">—</span>
           )}
         </div>
 
@@ -170,27 +170,27 @@ function CompactGameCard({ game }: { game: GameWithEdges }) {
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2 flex-1 min-w-0">
             {game.teamBRank && (
-              <span className="text-xs font-bold text-amber-600">#{game.teamBRank}</span>
+              <span className="text-xs font-bold text-amber-400">#{game.teamBRank}</span>
             )}
-            <span className="font-semibold text-gray-800 truncate">
+            <span className="font-semibold text-mlb-textPrimary truncate">
               {formatTeamName(game.teamB)}
             </span>
-            <span className="text-xs text-gray-400">(H)</span>
+            <span className="text-xs text-mlb-textMuted">(H)</span>
           </div>
           {teamBOdds ? (
-            <div className={`flex items-center gap-1.5 ${!teamAIsFavorite ? 'text-amber-600' : 'text-green-600'}`}>
+            <div className={`flex items-center gap-1.5 ${!teamAIsFavorite ? 'text-amber-400' : 'text-green-400'}`}>
               <span className="text-lg font-bold">{formatMoneyline(teamBOdds.ml)}</span>
-              <span className="text-xs text-gray-400">{getBookAbbrev(teamBOdds.book)}</span>
+              <span className="text-xs text-mlb-textMuted">{getBookAbbrev(teamBOdds.book)}</span>
             </div>
           ) : (
-            <span className="text-gray-300">—</span>
+            <span className="text-mlb-textMuted">—</span>
           )}
         </div>
 
         {/* Venue if available */}
         {game.venue && (
-          <div className="mt-2 pt-2 border-t border-gray-100">
-            <span className="text-xs text-gray-400 truncate block">{game.venue}</span>
+          <div className="mt-2 pt-2 border-t border-mlb-border">
+            <span className="text-xs text-mlb-textMuted truncate block">{game.venue}</span>
           </div>
         )}
       </div>
@@ -212,8 +212,8 @@ export function CompactGameGrid({ games }: { games: GameWithEdges[] }) {
       {withOdds.length > 0 && (
         <div>
           <div className="flex items-center gap-2 mb-3">
-            <h3 className="text-sm font-semibold text-gray-600">With Betting Lines</h3>
-            <span className="text-xs text-gray-400">({withOdds.length})</span>
+            <h3 className="text-sm font-semibold text-mlb-textSecondary">With Betting Lines</h3>
+            <span className="text-xs text-mlb-textMuted">({withOdds.length})</span>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
             {withOdds.map(game => (
@@ -227,8 +227,8 @@ export function CompactGameGrid({ games }: { games: GameWithEdges[] }) {
       {withoutOdds.length > 0 && (
         <div>
           <div className="flex items-center gap-2 mb-3">
-            <h3 className="text-sm font-semibold text-gray-500">Schedule Only</h3>
-            <span className="text-xs text-gray-400">({withoutOdds.length})</span>
+            <h3 className="text-sm font-semibold text-mlb-textMuted">Schedule Only</h3>
+            <span className="text-xs text-mlb-textMuted">({withoutOdds.length})</span>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2">
             {withoutOdds.map(game => (
@@ -244,22 +244,22 @@ export function CompactGameGrid({ games }: { games: GameWithEdges[] }) {
 // Even more compact card for games without odds
 function MiniGameCard({ game }: { game: GameWithEdges }) {
   return (
-    <div className="bg-gray-50 rounded border border-gray-200 px-3 py-2 hover:bg-gray-100 transition-colors">
+    <div className="bg-mlb-card rounded border border-mlb-border px-3 py-2 hover:border-mlb-blue/30 transition-colors">
       <div className="flex items-center justify-between gap-2">
         <div className="flex-1 min-w-0">
-          <div className="text-sm font-medium text-gray-700 truncate">
-            {game.teamARank && <span className="text-amber-600">#{game.teamARank} </span>}
+          <div className="text-sm font-medium text-mlb-textSecondary truncate">
+            {game.teamARank && <span className="text-amber-400">#{game.teamARank} </span>}
             {formatTeamName(game.teamA)}
           </div>
-          <div className="text-sm text-gray-500 truncate">
-            @ {game.teamBRank && <span className="text-amber-600">#{game.teamBRank} </span>}
+          <div className="text-sm text-mlb-textMuted truncate">
+            @ {game.teamBRank && <span className="text-amber-400">#{game.teamBRank} </span>}
             {formatTeamName(game.teamB)}
           </div>
         </div>
         <div className="text-right shrink-0">
-          <div className="text-xs text-gray-400">{game.startTime}</div>
+          <div className="text-xs text-mlb-textMuted">{game.startTime}</div>
           {game.broadcast && (
-            <div className="text-xs text-gray-300">{game.broadcast}</div>
+            <div className="text-xs text-mlb-textMuted">{game.broadcast}</div>
           )}
         </div>
       </div>

@@ -8,33 +8,33 @@ interface EdgeBadgeProps {
 export function EdgeBadge({ edge, muted = false }: EdgeBadgeProps) {
   const getClassificationColor = (classification: string, isMuted: boolean) => {
     if (isMuted) {
-      return 'bg-gray-100 border-gray-300 text-gray-600';
+      return 'bg-mlb-card border-mlb-border text-mlb-textMuted';
     }
     switch (classification) {
       case 'STRONG BET':
-        return 'bg-green-100 border-green-500 text-green-900';
+        return 'bg-green-900/40 border-green-500 text-green-100';
       case 'GOOD BET':
-        return 'bg-blue-100 border-blue-500 text-blue-900';
+        return 'bg-mlb-blue/20 border-mlb-blue text-blue-100';
       case 'WEAK BET':
-        return 'bg-yellow-100 border-yellow-500 text-yellow-900';
+        return 'bg-yellow-900/40 border-yellow-500 text-yellow-100';
       default:
-        return 'bg-gray-100 border-gray-500 text-gray-900';
+        return 'bg-mlb-card border-mlb-border text-mlb-textSecondary';
     }
   };
 
   const getBadgeColor = (classification: string, isMuted: boolean) => {
     if (isMuted) {
-      return 'bg-gray-400 text-white';
+      return 'bg-mlb-textMuted text-mlb-darker';
     }
     switch (classification) {
       case 'STRONG BET':
         return 'bg-green-500 text-white';
       case 'GOOD BET':
-        return 'bg-blue-500 text-white';
+        return 'bg-mlb-blue text-white';
       case 'WEAK BET':
-        return 'bg-yellow-500 text-white';
+        return 'bg-yellow-500 text-mlb-darker';
       default:
-        return 'bg-gray-500 text-white';
+        return 'bg-mlb-textMuted text-mlb-darker';
     }
   };
 
@@ -48,10 +48,10 @@ export function EdgeBadge({ edge, muted = false }: EdgeBadgeProps) {
   const edgePercent = edge.adjustedEdge * 100;
   const edgeDisplay = edgePercent >= 0 ? `+${edgePercent.toFixed(1)}%` : `${edgePercent.toFixed(1)}%`;
   const edgeColor = muted
-    ? 'text-gray-500'
+    ? 'text-mlb-textMuted'
     : edgePercent >= 0
-      ? 'text-green-700'
-      : 'text-red-600';
+      ? 'text-green-400'
+      : 'text-red-400';
 
   const badgeLabel = muted ? 'PASS' : edge.classification;
 
@@ -66,15 +66,15 @@ export function EdgeBadge({ edge, muted = false }: EdgeBadgeProps) {
           >
             {badgeLabel}
           </span>
-          <span className={`text-lg font-bold capitalize ${muted ? 'text-gray-600' : ''}`}>
+          <span className={`text-lg font-bold capitalize ${muted ? 'text-mlb-textMuted' : 'text-mlb-textPrimary'}`}>
             {edge.team}
           </span>
         </div>
         <div className="text-right">
-          <div className={`text-2xl font-bold ${muted ? 'text-gray-600' : ''}`}>
+          <div className={`text-2xl font-bold ${muted ? 'text-mlb-textMuted' : 'text-mlb-textPrimary'}`}>
             {formatMoneyline(edge.moneyline)}
           </div>
-          <div className={`text-xs capitalize ${muted ? 'text-gray-400' : 'text-gray-600'}`}>
+          <div className={`text-xs capitalize ${muted ? 'text-mlb-textMuted' : 'text-mlb-textSecondary'}`}>
             {edge.sportsbook}
           </div>
         </div>
@@ -82,19 +82,19 @@ export function EdgeBadge({ edge, muted = false }: EdgeBadgeProps) {
 
       <div className="grid grid-cols-3 gap-4 text-sm mt-3">
         <div>
-          <div className={`text-xs ${muted ? 'text-gray-400' : 'text-gray-600'}`}>Model Win %</div>
-          <div className={`font-semibold ${muted ? 'text-gray-500' : ''}`}>
+          <div className={`text-xs ${muted ? 'text-mlb-textMuted' : 'text-mlb-textSecondary'}`}>Model Win %</div>
+          <div className={`font-semibold ${muted ? 'text-mlb-textMuted' : 'text-mlb-textPrimary'}`}>
             {(edge.modelProb * 100).toFixed(1)}%
           </div>
         </div>
         <div>
-          <div className={`text-xs ${muted ? 'text-gray-400' : 'text-gray-600'}`}>Implied Prob</div>
-          <div className={`font-semibold ${muted ? 'text-gray-500' : ''}`}>
+          <div className={`text-xs ${muted ? 'text-mlb-textMuted' : 'text-mlb-textSecondary'}`}>Implied Prob</div>
+          <div className={`font-semibold ${muted ? 'text-mlb-textMuted' : 'text-mlb-textPrimary'}`}>
             {(edge.impliedProb * 100).toFixed(1)}%
           </div>
         </div>
         <div>
-          <div className={`text-xs ${muted ? 'text-gray-400' : 'text-gray-600'}`}>Edge</div>
+          <div className={`text-xs ${muted ? 'text-mlb-textMuted' : 'text-mlb-textSecondary'}`}>Edge</div>
           <div className={`font-semibold ${edgeColor}`}>
             {edgeDisplay}
           </div>
@@ -102,7 +102,7 @@ export function EdgeBadge({ edge, muted = false }: EdgeBadgeProps) {
       </div>
 
       {edge.modifierReason && (
-        <div className={`mt-2 text-xs italic ${muted ? 'text-gray-400' : 'text-gray-600'}`}>
+        <div className={`mt-2 text-xs italic ${muted ? 'text-mlb-textMuted' : 'text-mlb-textSecondary'}`}>
           {edge.modifierReason}
         </div>
       )}

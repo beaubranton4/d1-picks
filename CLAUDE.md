@@ -50,15 +50,35 @@ Combine sharp quantitative analysis with casual, conversational sports betting c
 
 ## Design Aesthetic
 
-- **Colors**:
-  - Strong bet: Green (money, confidence)
-  - Good bet: Blue (solid, trustworthy)
-  - Weak bet: Yellow (caution, marginal)
-  - Background: Light gray (clean, professional)
+**Theme**: MLB.com-inspired dark mode
+
+### Color Palette (Tailwind `mlb-*` classes)
+
+| Token | Hex | Usage |
+|-------|-----|-------|
+| `mlb-dark` | `#1a1a1a` | Primary background |
+| `mlb-darker` | `#0f0f0f` | Navbar, input fields |
+| `mlb-card` | `#282828` | Card backgrounds |
+| `mlb-cardHover` | `#333333` | Card hover state |
+| `mlb-border` | `#444d58` | Subtle borders |
+| `mlb-blue` | `#0062e3` | Primary accent, CTAs |
+| `mlb-blueHover` | `#2c7df8` | Blue hover state |
+| `mlb-textPrimary` | `#ffffff` | Main text |
+| `mlb-textSecondary` | `#acb3bc` | Secondary text |
+| `mlb-textMuted` | `#8a8a8a` | Muted/disabled text |
+
+### Bet Classification Colors (on dark backgrounds)
+- **STRONG BET**: Green (`bg-green-900/40 border-green-500`)
+- **GOOD BET**: Blue (`bg-mlb-blue/20 border-mlb-blue`)
+- **WEAK BET**: Yellow (`bg-yellow-900/40 border-yellow-500`)
+
+### Design Principles
+- **Dark-first**: Dark backgrounds with light text
 - **Typography**: Sans-serif, readable, modern
-- **Cards**: Elevated (shadow), clean borders
+- **Cards**: Dark cards with subtle borders, blue glow on hover
 - **Spacing**: Generous whitespace, easy to scan
 - **Mobile-first**: Optimized for checking picks on phone
+- **Blue accents**: Interactive elements use MLB blue
 
 ## Content Hierarchy
 

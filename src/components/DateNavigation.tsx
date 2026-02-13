@@ -20,21 +20,23 @@ export function DateNavigation({ currentDate }: DateNavigationProps) {
   const currentLabel = current.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
 
   return (
-    <div className="flex items-center justify-center gap-4 text-sm">
+    <div className="flex items-center gap-2 text-sm">
       <Link
         href={`/${prevStr}`}
-        className="text-gray-600 hover:text-green-600 transition-colors flex items-center gap-1"
+        className="flex items-center gap-1 px-3 py-2 rounded-lg text-mlb-textSecondary hover:text-mlb-blue hover:bg-mlb-card transition-colors"
       >
-        <span className="text-lg">&larr;</span> {prevLabel}
+        <span className="text-lg">&larr;</span>
+        <span className="hidden sm:inline">{prevLabel}</span>
       </Link>
-      <span className="font-semibold text-gray-900 px-3 py-1 bg-gray-100 rounded">
+      <span className="font-semibold text-mlb-textPrimary px-4 py-2 bg-mlb-card rounded-lg border border-mlb-border">
         {currentLabel}
       </span>
       <Link
         href={`/${nextStr}`}
-        className="text-gray-600 hover:text-green-600 transition-colors flex items-center gap-1"
+        className="flex items-center gap-1 px-3 py-2 rounded-lg text-mlb-textSecondary hover:text-mlb-blue hover:bg-mlb-card transition-colors"
       >
-        {nextLabel} <span className="text-lg">&rarr;</span>
+        <span className="hidden sm:inline">{nextLabel}</span>
+        <span className="text-lg">&rarr;</span>
       </Link>
     </div>
   );
