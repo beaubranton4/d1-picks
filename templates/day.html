@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D1 Baseball Picks - {{ date }}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <meta property="og:title" content="D1 Baseball Picks - {{ date }}">
+    <meta property="og:description" content="Best +EV college baseball bets for {{ date }}">
+    <meta name="description" content="Best +EV college baseball betting picks for {{ date }}. Ranked by expected value.">
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <div class="container mx-auto px-4 py-8 max-w-4xl">
+        <header class="mb-12 text-center">
+            <img src="../d1-picks-logo.png" alt="D1 Baseball Picks" class="mx-auto mb-6 h-24 md:h-32 w-auto">
+            <h1 class="text-5xl md:text-6xl font-bold text-gray-800 mb-2">D1 Baseball Picks</h1>
+            <p class="text-2xl text-gray-600 mb-1">{{ date }}</p>
+            <p class="text-sm text-gray-500">Generated {{ generated_at }}</p>
+        </header>
+
+        {% if games|length == 0 %}
+        <div class="bg-yellow-50 border-2 border-yellow-200 rounded-lg p-8 text-center">
+            <p class="text-xl text-gray-700 mb-2">No +EV picks found for today</p>
+            <p class="text-gray-600">Check back tomorrow for new opportunities!</p>
+        </div>
+        {% else %}
+        <div class="mb-6 text-center">
+            <p class="text-gray-700">
+                <span class="font-bold text-2xl">{{ games|length }}</span>
+                <span class="text-lg">+EV opportunities found</span>
+            </p>
+        </div>
+
+        <div class="space-y-6">
+            {% for game in games %}
+            <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow">
+                <div class="flex justify-between items-start mb-4 border-b pb-3">
+                    <div>
+                        <div class="text-sm text-gray-500 mb-1">{{ game.start_time }}</div>
+                        <h3 class="text-2xl font-bold capitalize text-gray-800">
+                            {{ game.team_a }} vs {{ game.team_b }}
+                        </h3>
+                        <div class="text-sm text-gray-600 mt-1">
+                            {% if game.venue_type == 'home_a' %}
+                                <span class="text-blue-600">@ {{ game.team_a }}</span>
+                            {% elif game.venue_type == 'home_b' %}
+                                <span class="text-blue-600">@ {{ game.team_b }}</span>
+                            {% else %}
+                                <span class="text-purple-600">Neutral Site</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-3">
+                    {% for edge in game.edges %}
+                    <div class="
+                        {% if edge.classification == 'STRONG_BET' %}
+                            bg-green-100 border-l-4 border-green-600
+                        {% elif edge.classification == 'BET' %}
+                            bg-green-50 border-l-4 border-green-500
+                        {% elif edge.classification == 'LEAN' %}
+                            bg-yellow-50 border-l-4 border-yellow-500
+                        {% endif %}
+                        p-4 rounded-r transition-all hover:scale-[1.01]
+                    ">
+                        <div class="flex justify-between items-center">
+                            <div class="flex-1">
+                                <span class="text-lg font-bold capitalize">
+                                    {% if edge.classification == 'STRONG_BET' %}🔥{% elif edge.classification == 'BET' %}✅{% elif edge.classification == 'LEAN' %}🟡{% endif %}
+                                    {{ edge.team }}
+                                </span>
+                                <span class="ml-3 font-bold text-xl
+                                    {% if edge.classification == 'STRONG_BET' or edge.classification == 'BET' %}
+                                        text-green-800
+                                    {% else %}
+                                        text-yellow-800
+                                    {% endif %}
+                                ">
+                                    {{ "%.2f"|format(edge.adjusted_edge * 100) }}% edge
+                                </span>
+                                <span class="ml-2 text-xs px-2 py-1 rounded
+                                    {% if edge.classification == 'STRONG_BET' %}
+                                        bg-green-600 text-white
+                                    {% elif edge.classification == 'BET' %}
+                                        bg-green-500 text-white
+                                    {% else %}
+                                        bg-yellow-500 text-white
+                                    {% endif %}
+                                ">
+                                    {{ edge.classification.replace('_', ' ') }}
+                                </span>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-3xl font-bold text-gray-800">
+                                    {% if edge.best_odds > 0 %}+{% endif %}{{ edge.best_odds }}
+                                </div>
+                                <div class="text-sm text-gray-600 capitalize">{{ edge.best_sportsbook }}</div>
+                            </div>
+                        </div>
+                        <div class="text-sm text-gray-600 mt-2 flex flex-wrap gap-x-4">
+                            <span>Model: <strong>{{ "%.1f"|format(edge.model_prob * 100) }}%</strong></span>
+                            <span>Implied: <strong>{{ "%.1f"|format(edge.implied_prob * 100) }}%</strong></span>
+                            {% if edge.modifier_reason %}
+                                <span class="text-blue-600">{{ edge.modifier_reason }}</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <footer class="mt-16 text-center border-t pt-8">
+            <div class="text-sm text-gray-600 space-y-2">
+                <p class="font-semibold">For informational and educational purposes only.</p>
+                <p>Always bet responsibly. Past performance does not guarantee future results.</p>
+                <p class="text-xs text-gray-500 mt-4">
+                    Data sources: Warren Nolan predictions, The Odds API
+                </p>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
