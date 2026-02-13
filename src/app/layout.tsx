@@ -3,7 +3,7 @@ import { Analytics } from '@vercel/analytics/react';
 import './globals.css';
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://d1baseballpicks.com'),
+  metadataBase: new URL('https://d1picks.com'),
   title: 'D1 Baseball Picks | Free +EV College Baseball Betting Picks',
   description: 'Free daily +EV college baseball betting picks based on Warren Nolan predictions. No paywall, no signup required. Data-driven picks for D1 baseball.',
   keywords: ['college baseball', 'betting picks', 'EV betting', 'Warren Nolan', 'D1 baseball', 'sports betting', 'positive expected value'],
@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'D1 Baseball Picks | Free +EV Picks Daily',
     description: 'Free daily +EV college baseball betting picks. No paywall, just data-driven picks based on Warren Nolan predictions.',
-    url: 'https://d1baseballpicks.com',
+    url: 'https://d1picks.com',
     siteName: 'D1 Baseball Picks',
     type: 'website',
     locale: 'en_US',

@@ -16,7 +16,7 @@ export function ShareButton({ date, picksCount }: ShareButtonProps) {
     `Found ${picksCount} +EV college baseball pick${picksCount !== 1 ? 's' : ''} for ${formattedDate}. Free picks, no paywall, just data.\n\nCheck them out:`
   );
 
-  const siteUrl = encodeURIComponent(`https://d1baseballpicks.com/${date}`);
+  const siteUrl = encodeURIComponent(`https://d1picks.com/${date}`);
   const twitterUrl = `https://twitter.com/intent/tweet?text=${tweetText}&url=${siteUrl}`;
 
   return (
