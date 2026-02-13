@@ -1,74 +1,148 @@
-# D1 Baseball Picks
+# D1 Baseball Picks - Project Guidelines
 
-## Project Overview
+## Project Vision
 
-A free D1 college baseball picks site showing +EV betting opportunities. Built to provide genuine value that competitors charge $10-250/month for.
+**Vibe**: Nerdy analytical Barstool Sports
 
-## Brand Voice
+Combine sharp quantitative analysis with casual, conversational sports betting content. Think: data-driven picks with personality.
 
-**Nerdy analytical Barstool Sports vibe:**
-- Data-driven, not gut picks
-- Casual/fun but backed by math
-- Self-aware, not taking itself too seriously
-- "Here's the edge, here's why, you decide"
+## Tone & Style
 
-## Core Philosophy
+### Voice
+- **Analytical**: Show the math, explain the edge
+- **Nerdy**: Reference advanced stats, models, probability theory
+- **Conversational**: Write like you're talking to a buddy at the bar
+- **Confident but honest**: "This is a good bet" not "This is a lock!"
+- **Data-first**: Let the numbers do the talking
 
-Give ALL value away for free. No paywalls, no premium tiers (for now). Build an audience by providing genuine value to college baseball bettors, then expand to other D1 sports.
+### Content Guidelines
+- Lead with the edge percentage (the money stat)
+- Explain *why* the model likes it
+- Call out key factors (home field, matchup, trends)
+- Use sports betting lingo naturally (juice, dog, chalk, fade, hammer)
+- Be transparent about methodology
+- No hype, just edges
 
-## Goals
+### Examples
 
-1. Launch and start building traffic
-2. Provide real value that competitors charge $10-250/month for
-3. Build an email list / audience you own
-4. Eventually expand to D1 basketball, football, etc.
+**Good**:
+> **LSU (+130) @ Alabama - STRONG BET**
+> +7.2% edge | Model: 43% win prob vs 35% implied
+> The model loves this dog. Warren Nolan gives LSU a 43% shot, but FanDuel is pricing them at just 35%. That's a meaty 7.2% edge after the +0.5% home field adjustment for Bama. Fade the chalk, ride the value.
 
-## Tech Stack
+**Bad**:
+> LSU is definitely going to win this game!
 
-- **Framework**: Next.js 15 + TypeScript
-- **Styling**: Tailwind CSS
-- **Deployment**: Vercel (SSG)
-- **Data Sources**: Warren Nolan predictions + The Odds API
-- **Email**: Buttondown
-- **Analytics**: Vercel Analytics
+### UI/UX Principles
+- Numbers front and center (edge %, probabilities)
+- Clean, scannable layout (cards not walls of text)
+- Color-coded by strength (green = strong, blue = good, yellow = lean)
+- Quick reference stats (moneyline, book, edge)
+- Expandable details for the nerds
 
-## Architecture
+## Technical Philosophy
+
+- **Data quality over quantity**: Better to show 3 strong bets than 20 weak ones
+- **Transparency**: Show the model probability, implied probability, and edge calculation
+- **Conservative thresholds**: Only show +EV picks that actually have edge
+- **Modifiers**: Apply home field and neutral site adjustments
+- **Best odds**: Always show the best available line
+
+## Design Aesthetic
+
+- **Colors**:
+  - Strong bet: Green (money, confidence)
+  - Good bet: Blue (solid, trustworthy)
+  - Weak bet: Yellow (caution, marginal)
+  - Background: Light gray (clean, professional)
+- **Typography**: Sans-serif, readable, modern
+- **Cards**: Elevated (shadow), clean borders
+- **Spacing**: Generous whitespace, easy to scan
+- **Mobile-first**: Optimized for checking picks on phone
+
+## Content Hierarchy
+
+### Primary (always visible)
+1. Team matchup
+2. Bet classification (STRONG/GOOD/WEAK)
+3. Edge percentage
+4. Moneyline & sportsbook
+5. Game time & venue
+
+### Secondary (expandable or smaller)
+- Model probability
+- Implied probability
+- Raw vs adjusted edge
+- Modifier explanation (home/neutral)
+
+## Brand Personality
+
+- **Smart but accessible**: Advanced analytics explained simply
+- **Confident but realistic**: "This is a good bet" not "guaranteed winner"
+- **Sports-focused**: Baseball lingo, stats, matchup context
+- **Community-oriented**: Share the picks, track performance, learn together
+- **Anti-tout**: No BS, no selling picks, just math and edges
+
+## Future Enhancements (stay on brand)
+
+- **Performance tracking**: Show historical ROI, win rate, edge calibration
+- **Bet logs**: Let users track their actual bets
+- **Discord/Twitter integration**: Share picks automatically
+- **Push notifications**: "New strong bet: LSU +130 @ Alabama"
+- **Historical trends**: "LSU as road dogs in SEC play"
+- **Line movement tracking**: "This line moved from +125 to +130"
+- **Model explanations**: Deep dives on how Warren Nolan works
+- **EV calculator**: Let users input their own model probabilities
+
+## Don'ts
+
+- ❌ No hype ("LOCK OF THE CENTURY!")
+- ❌ No guarantees ("100% winning system")
+- ❌ No selling picks (this is free, always)
+- ❌ No hiding methodology (show the math)
+- ❌ No cherry-picking (show all +EV bets above threshold)
+- ❌ No ignoring variance (betting is probabilistic)
+- ❌ No pretending to be experts (we trust the model)
+
+## Example Pick Card
 
 ```
-Data Flow:
-Warren Nolan Scraper → Odds API → EV Calculator → Classification → GameCard UI
+┌─────────────────────────────────────────────────┐
+│ 🟢 STRONG BET                                   │
+│                                                 │
+│ LSU Tigers @ Alabama Crimson Tide               │
+│ 3:00 PM ET • Tuscaloosa (home: Alabama)         │
+│                                                 │
+│ ┌───────────────────────────────────────────┐  │
+│ │ LSU +130 (FanDuel)            +7.2% edge │  │
+│ │ Model: 43% | Implied: 35%                │  │
+│ │ Home adjustment: +0.5% for Bama          │  │
+│ └───────────────────────────────────────────┘  │
+│                                                 │
+│ Why we like it: Warren Nolan gives LSU a 43%   │
+│ win probability, but the books are only         │
+│ pricing them at 35%. That's a fat +7.2% edge.  │
+│ The Tigers are live in Tuscaloosa.              │
+└─────────────────────────────────────────────────┘
 ```
 
-Key directories:
-- `src/app/[date]/page.tsx` - Daily picks page (SSG)
-- `src/components/` - React components (Header, GameCard, EdgeBadge, etc.)
-- `src/lib/scrapers/` - Warren Nolan and Odds API scrapers
-- `src/lib/calculators/` - EV calculator and edge classifier
+## Tech Stack Alignment
 
-## Key Decisions
+The Next.js/TypeScript/Tailwind stack supports this vision:
+- Fast loading = better UX for checking picks
+- TypeScript = fewer bugs in edge calculations
+- Tailwind = quick iteration on design/colors
+- React = component reuse for consistent UI
+- Static generation = reliable, fast, cheap hosting
 
-- **Free forever**: Core picks are always free. Build trust before monetizing.
-- **Niche focus**: D1 college baseball is underserved by major competitors
-- **Simple UX**: No account needed, no signup walls, just picks
-- **SSG**: Static generation for speed and cost efficiency
+## Measuring Success
 
-## Environment Variables
+- **Edge accuracy**: Do the picks actually have edge?
+- **User engagement**: Are people checking daily?
+- **Performance**: Are we beating the closing line?
+- **Trust**: Are users confident in the methodology?
+- **Accessibility**: Can anyone understand the picks?
 
-- `ODDS_API_KEY` - Required for fetching live odds from The Odds API
+---
 
-## Commands
-
-```bash
-npm run dev     # Local development
-npm run build   # Production build
-npm run start   # Production server
-vercel --prod   # Deploy to production
-```
-
-## Competitive Advantage
-
-1. **100% Free** - Competitors charge $10-249/month
-2. **Niche Focus** - D1 college baseball is underserved
-3. **Simplicity** - No account needed, no signup walls
-4. **Credible Source** - Warren Nolan is a respected model
-5. **Community-First** - Build trust before monetizing
+**Remember**: The vibe is sharp analysis meets sports bar conversation. Data-driven betting with personality. No BS, just edges.

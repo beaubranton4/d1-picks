@@ -40,9 +40,17 @@ def scrape_predictions(date_str: str) -> List[Dict]:
     Returns:
         List of game dictionaries with predictions
     """
-    url = f"https://www.warrennolan.com/baseball/2024/schedules-date/{date_str}"
+    # Extract year from date string
+    year = date_str.split('-')[0]
+    url = f"https://www.warrennolan.com/baseball/{year}/schedules-date/{date_str}"
     headers = {
-        "User-Agent": "D1BaseballPicks/1.0 (Educational Use)"
+        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+        "Accept-Language": "en-US,en;q=0.5",
+        "Accept-Encoding": "gzip, deflate, br",
+        "DNT": "1",
+        "Connection": "keep-alive",
+        "Upgrade-Insecure-Requests": "1"
     }
 
     print(f"   Fetching from: {url}")
