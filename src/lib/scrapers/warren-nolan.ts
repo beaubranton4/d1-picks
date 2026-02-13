@@ -166,6 +166,8 @@ export async function scrapeWarrenNolan(dateStr: string): Promise<Game[]> {
           venueType,
           modelProbA,
           modelProbB,
+          hasPrediction: true,
+          predictionSource: 'warren_nolan',
         };
 
         games.push(game);

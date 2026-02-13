@@ -26,6 +26,11 @@ export async function getArticleBySlug(slug: string) {
   };
 }
 
+export async function getArticleByDate(date: string): Promise<ArticleMetadata | null> {
+  const articles = await getAllArticles();
+  return articles.find(article => article.date === date) || null;
+}
+
 export async function getAllArticles(): Promise<ArticleMetadata[]> {
   if (!fs.existsSync(articlesDirectory)) {
     return [];

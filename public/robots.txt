@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://d1baseballpicks.com/sitemap.xml
+Sitemap: https://d1picks.com/sitemap.xml

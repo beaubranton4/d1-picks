@@ -9,6 +9,14 @@ export interface Game {
   venueType: 'home_a' | 'home_b' | 'neutral';
   modelProbA: number;
   modelProbB: number;
+  // New fields for ESPN integration
+  hasPrediction: boolean;
+  predictionSource: 'warren_nolan' | 'espn' | 'none';
+  venue?: string;
+  broadcast?: string;
+  teamARank?: number;
+  teamBRank?: number;
+  espnGameId?: string;
 }
 
 export interface OddsEntry {
