@@ -1,6 +1,19 @@
+# Python
 venv/
-.env
-output/
 *.pyc
 __pycache__/
+output/
+
+# Environment
+.env
+.env.local
+.env*.local
+
+# Node/Next.js
+node_modules/
+.next/
+out/
+*.log
+
+# System
 .DS_Store
