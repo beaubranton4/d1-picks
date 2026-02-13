@@ -35,6 +35,8 @@ export interface EdgeCalculation {
   modifierReason: string | null;
 }
 
+export type PickLabel = 'D1 PICK' | 'SMART BET' | 'LEAN' | 'PASS';
+
 export interface BetEdge {
   team: string;
   sportsbook: string;
@@ -43,7 +45,9 @@ export interface BetEdge {
   impliedProb: number;
   rawEdge: number;
   adjustedEdge: number;
-  classification: 'STRONG BET' | 'GOOD BET' | 'WEAK BET' | 'PASS';
+  aiScore: number;
+  pickLabel: PickLabel;
+  classification: 'STRONG BET' | 'GOOD BET' | 'WEAK BET' | 'PASS'; // deprecated, kept for compatibility
   modifierReason: string | null;
 }
 
@@ -53,3 +57,19 @@ export interface GameWithEdges extends Game {
 }
 
 export type TeamMappings = Record<string, string[]>;
+
+export interface ManualPick {
+  id: string;
+  team: string;
+  opponent: string;
+  moneyline: number;
+  sportsbook: string;
+  pickLabel: PickLabel;
+  units: number;
+  analysis: string;
+}
+
+export interface DailyPicks {
+  date: string;
+  picks: ManualPick[];
+}

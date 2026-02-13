@@ -1,0 +1,26 @@
+{
+  "name": "d1-tiktok-system",
+  "version": "1.0.0",
+  "description": "TikTok slideshow generation system for D1 Picks",
+  "type": "module",
+  "scripts": {
+    "generate": "npx tsx scripts/create-slideshow.ts",
+    "generate-images": "npx tsx scripts/generate-images.ts",
+    "add-text": "npx tsx scripts/add-text-overlay.ts",
+    "screenshot": "npx tsx scripts/screenshot-site.ts",
+    "post": "npx tsx scripts/post-to-tiktok.ts"
+  },
+  "dependencies": {
+    "openai": "^4.77.0",
+    "canvas": "^2.11.2",
+    "puppeteer": "^22.0.0",
+    "sharp": "^0.33.2",
+    "axios": "^1.6.7",
+    "dotenv": "^16.4.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.5",
+    "tsx": "^4.7.0",
+    "typescript": "^5.7.2"
+  }
+}

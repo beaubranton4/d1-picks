@@ -6,9 +6,11 @@ import { ShareButton } from '@/components/ShareButton';
 import { ArticlesSection } from '@/components/ArticlesSection';
 import { DailyArticleBanner } from '@/components/DailyArticleBanner';
 import { SEOContent } from '@/components/SEOContent';
+import { ExpertPicks } from '@/components/ExpertPicks';
 import { fetchESPNGames } from '@/lib/scrapers/espn';
 import { scrapeWarrenNolan } from '@/lib/scrapers/warren-nolan';
 import { fetchOdds } from '@/lib/scrapers/odds-api';
+import { getPicksForDate } from '@/lib/content/picks';
 import {
   convertESPNGames,
   mergeWarrenNolanPredictions,
@@ -33,16 +35,16 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   return {
     title: `D1 Baseball Picks for ${displayDate} - Best College Baseball Bets`,
-    description: `Data-driven college baseball picks for ${displayDate}. Find +EV bets with our Warren Nolan model predictions vs live odds from DraftKings, FanDuel, and BetMGM.`,
+    description: `AI-powered college baseball picks for ${displayDate}. Smart picks rated 1-10 using our prediction model vs live odds from DraftKings, FanDuel, and BetMGM.`,
     openGraph: {
       title: `D1 Baseball Picks for ${displayDate}`,
-      description: `Today's best college baseball bets with positive expected value. Data-driven picks you can trust.`,
+      description: `Today's best college baseball picks. AI-scored ratings you can trust.`,
       type: 'website',
     },
     twitter: {
       card: 'summary_large_image',
       title: `D1 Baseball Picks - ${displayDate}`,
-      description: `Today's +EV college baseball picks. Data-driven betting analysis.`,
+      description: `Today's AI-scored college baseball picks. Smart betting made simple.`,
     },
     alternates: {
       canonical: `https://d1picks.com/${date}`,
@@ -54,6 +56,10 @@ export default async function DailyPicksPage({ params }: PageProps) {
   const { date } = await params;
 
   console.log(`\n⚾ Generating picks for ${date}...\n`);
+
+  // Fetch expert picks (manual picks from our team)
+  const expertPicks = await getPicksForDate(date);
+  console.log(`📝 Found ${expertPicks.length} expert picks for ${date}\n`);
 
   // 1. Fetch ALL games from ESPN (primary source)
   console.log('📺 Step 1: Fetching all games from ESPN...');
@@ -83,8 +89,8 @@ export default async function DailyPicksPage({ params }: PageProps) {
   const gamesWithOdds = matchedGames.filter(m => m.odds.length > 0).length;
   console.log(`   ${gamesWithOdds} games have odds\n`);
 
-  // 6. Calculate edges for each game
-  console.log('📈 Step 6: Calculating EV edges...');
+  // 6. Calculate edges and AI scores for each game
+  console.log('📈 Step 6: Calculating AI scores...');
   const gamesWithEdges: GameWithEdges[] = matchedGames.map(({ game, odds }) => {
     // Only calculate edges for games with predictions
     const edges = game.hasPrediction ? calculateGameEdges(game, odds) : [];
@@ -93,14 +99,14 @@ export default async function DailyPicksPage({ params }: PageProps) {
   });
 
   // 7. Split into categories
-  // +EV picks: games with prediction AND positive edge
+  // Picks: games with prediction AND at least one pick that's not PASS
   const picks = gamesWithEdges.filter(
-    game => game.hasPrediction && game.edges.some(e => e.classification !== 'PASS')
+    game => game.hasPrediction && game.edges.some(e => e.pickLabel !== 'PASS')
   );
 
-  // Other games with predictions but no +EV edge
+  // Other games with predictions but no value
   const otherPredictedGames = gamesWithEdges.filter(
-    game => game.hasPrediction && game.edges.every(e => e.classification === 'PASS')
+    game => game.hasPrediction && game.edges.every(e => e.pickLabel === 'PASS')
   );
 
   // Games without predictions (odds only)
@@ -108,22 +114,22 @@ export default async function DailyPicksPage({ params }: PageProps) {
     game => !game.hasPrediction && game.edges.length === 0
   );
 
-  console.log(`   Found ${picks.length} games with +EV picks`);
+  console.log(`   Found ${picks.length} games with value picks`);
   console.log(`   Found ${otherPredictedGames.length} other predicted games`);
   console.log(`   Found ${oddsOnlyGames.length} odds-only games\n`);
 
-  // Sort picks by best edge
+  // Sort picks by best AI Score
   picks.sort((a, b) => {
-    const maxEdgeA = Math.max(...a.edges.map(e => e.adjustedEdge), 0);
-    const maxEdgeB = Math.max(...b.edges.map(e => e.adjustedEdge), 0);
-    return maxEdgeB - maxEdgeA;
+    const maxScoreA = Math.max(...a.edges.map(e => e.aiScore), 0);
+    const maxScoreB = Math.max(...b.edges.map(e => e.aiScore), 0);
+    return maxScoreB - maxScoreA;
   });
 
-  // Sort other predicted games by best edge (closest to threshold)
+  // Sort other predicted games by AI Score
   otherPredictedGames.sort((a, b) => {
-    const maxEdgeA = Math.max(...a.edges.map(e => e.adjustedEdge), 0);
-    const maxEdgeB = Math.max(...b.edges.map(e => e.adjustedEdge), 0);
-    return maxEdgeB - maxEdgeA;
+    const maxScoreA = Math.max(...a.edges.map(e => e.aiScore), 0);
+    const maxScoreB = Math.max(...b.edges.map(e => e.aiScore), 0);
+    return maxScoreB - maxScoreA;
   });
 
   // Sort odds-only games by start time
@@ -142,6 +148,7 @@ export default async function DailyPicksPage({ params }: PageProps) {
         <div className="container mx-auto px-4 py-8 max-w-7xl">
           <Header date={date} />
           <DailyArticleBanner date={date} />
+          <ExpertPicks picks={expertPicks} />
           <NoPicksMessage />
           <EmailCapture />
           <ArticlesSection excludeDate={date} />
@@ -156,6 +163,7 @@ export default async function DailyPicksPage({ params }: PageProps) {
       <div className="container mx-auto px-4 py-8 max-w-7xl">
         <Header date={date} />
         <DailyArticleBanner date={date} />
+        <ExpertPicks picks={expertPicks} />
 
         {/* Stats summary */}
         <div className="mb-6 text-center">
@@ -165,7 +173,7 @@ export default async function DailyPicksPage({ params }: PageProps) {
           </p>
         </div>
 
-        {/* +EV Picks Section */}
+        {/* Today's Picks Section */}
         {picks.length === 0 ? (
           <NoPicksMessage hasGames={totalGames > 0} />
         ) : (
@@ -173,7 +181,7 @@ export default async function DailyPicksPage({ params }: PageProps) {
             <div className="mb-6 text-center">
               <p className="text-lg text-mlb-textSecondary">
                 Found <span className="font-bold text-green-400">{picks.length}</span>{' '}
-                {picks.length === 1 ? 'game' : 'games'} with positive expected value
+                {picks.length === 1 ? 'game' : 'games'} with value
               </p>
               <div className="mt-3">
                 <ShareButton date={date} picksCount={picks.length} />
@@ -193,13 +201,13 @@ export default async function DailyPicksPage({ params }: PageProps) {
           <div className="mt-10">
             <div className="mb-4 border-b border-mlb-border pb-3">
               <h2 className="text-xl font-bold text-mlb-textSecondary">
-                Other Predicted Games{' '}
+                Other Games{' '}
                 <span className="text-base font-normal text-mlb-textMuted">
                   ({otherPredictedGames.length})
                 </span>
               </h2>
               <p className="text-sm text-mlb-textMuted mt-1">
-                No +EV edge found — showing full analysis
+                No value found — AI Score below 5
               </p>
             </div>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">

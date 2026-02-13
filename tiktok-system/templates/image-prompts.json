@@ -1,0 +1,145 @@
+{
+  "scenes": {
+    "couch-discovery": {
+      "name": "Couch Discovery",
+      "description": "Person discovers something exciting on phone while on couch",
+      "prompt": "iPhone photo of a young man in his mid-20s sitting on a worn leather couch in a small apartment living room. He's holding his phone, eyes wide with surprise and excitement, slight smirk forming. Natural afternoon light from a window to the left. TV showing college baseball game blurred in background. Beer bottle and laptop on coffee table. Casual clothes - plain t-shirt and joggers. Authentic, candid moment captured mid-reaction. Portrait orientation. Realistic phone camera quality, slight grain, natural skin tones.",
+      "variations": [
+        "excited expression, leaning forward",
+        "skeptical at first, starting to smile",
+        "showing phone to someone off-camera",
+        "texting someone with excited expression"
+      ]
+    },
+    "sports-bar": {
+      "name": "Sports Bar",
+      "description": "Two friends at a sports bar, one showing phone to the other",
+      "prompt": "iPhone photo inside a casual sports bar, booth seating. Two friends in their 20s, one showing his phone to the other who looks skeptical but intrigued. Multiple TVs showing sports in blurred background. Dim warm lighting, wood paneling, beer glasses on table. Candid moment, not posed. One friend pointing at phone screen enthusiastically. Portrait orientation. Realistic phone camera quality, natural lighting.",
+      "variations": [
+        "skeptical friend starting to lean in",
+        "both laughing at something on screen",
+        "second friend pulling out their own phone",
+        "high-five moment after showing something"
+      ]
+    },
+    "kitchen-morning": {
+      "name": "Kitchen Morning",
+      "description": "Morning kitchen scene showing phone to partner",
+      "prompt": "iPhone photo of a young woman showing her phone to her boyfriend at a kitchen counter. He looks impressed and surprised. Casual home setting, morning light from window. Coffee cups visible on counter. She has a knowing smile, confident posture. Candid energy, not posed. Modern apartment kitchen. Portrait orientation. Realistic phone camera quality.",
+      "variations": [
+        "boyfriend reaching for phone to look closer",
+        "her explaining something animatedly",
+        "him nodding with impressed expression",
+        "both looking at phone together"
+      ]
+    },
+    "bankroll-shot": {
+      "name": "Bankroll Shot",
+      "description": "Close-up of phone showing positive betting balance",
+      "prompt": "iPhone photo of a phone screen showing a sports betting app with positive balance highlighted in green, held by a hand with casual background - desk with keyboard and monitor visible. Natural indoor lighting from window. Focus on the phone screen showing profit numbers. Portrait orientation. Realistic, not staged looking.",
+      "variations": [
+        "multiple winning bets visible on screen",
+        "notification showing bet won",
+        "balance page with green profit number",
+        "bet slip showing recent wins"
+      ]
+    },
+    "desk-working": {
+      "name": "Desk Setup",
+      "description": "Person at desk looking at laptop/phone with betting content",
+      "prompt": "iPhone photo of a young person at a home desk setup, looking at their phone with interested expression. Laptop open in background showing sports website. Natural lighting from nearby window. Coffee cup on desk. Casual home office vibes - not too clean, realistic mess. Portrait orientation. Realistic phone camera quality, candid feeling.",
+      "variations": [
+        "switching between phone and laptop",
+        "typing something while looking at phone",
+        "leaning back satisfied after seeing something",
+        "taking notes while looking at screen"
+      ]
+    },
+    "celebration": {
+      "name": "Celebration Moment",
+      "description": "Person celebrating a win",
+      "prompt": "iPhone photo of a young man in casual clothes pumping his fist in celebration while looking at his phone. Living room setting with couch visible. Natural lighting. Expression of genuine excitement - not over the top, just satisfied victory. Beer bottle or can nearby. Portrait orientation. Realistic phone camera quality, slight motion blur acceptable.",
+      "variations": [
+        "both fists up in victory",
+        "showing phone to camera triumphantly",
+        "texting excitedly after win",
+        "calling someone to share news"
+      ]
+    },
+    "skeptic-face": {
+      "name": "Skeptical Expression",
+      "description": "Person looking skeptical before being convinced",
+      "prompt": "iPhone photo of a young person with a skeptical, raised-eyebrow expression while looking at a phone being shown to them by someone's hand entering the frame. Indoor setting, casual lighting. Slightly amused but doubtful expression. Natural skin tones, realistic lighting. Portrait orientation. Realistic phone camera quality.",
+      "variations": [
+        "arms crossed skeptically",
+        "one eyebrow raised",
+        "starting to lean in despite skepticism",
+        "smirking like 'prove it'"
+      ]
+    },
+    "laptop-research": {
+      "name": "Research Mode",
+      "description": "Person deep in research on laptop",
+      "prompt": "iPhone photo of a young person intensely focused on a laptop screen, chin resting on hand. Multiple browser tabs visible on screen (blurred). Desk with notebook and pen nearby. Coffee cup. Natural indoor lighting. The 'figuring something out' moment. Portrait orientation. Realistic phone camera quality.",
+      "variations": [
+        "taking notes by hand",
+        "comparing phone to laptop",
+        "scrolling through data",
+        "having 'aha moment' expression"
+      ]
+    }
+  },
+  "textOverlay": {
+    "style": {
+      "fontFamily": "Impact, Arial Black, sans-serif",
+      "fontSizePercent": 6.5,
+      "fontWeight": "bold",
+      "fillColor": "#FFFFFF",
+      "strokeColor": "#000000",
+      "strokeWidth": 3,
+      "lineHeight": 1.2,
+      "maxWidthPercent": 85,
+      "topSafeZone": 100,
+      "bottomSafeZone": 100
+    },
+    "positions": {
+      "top": {
+        "y": 150,
+        "description": "Below status bar safe zone"
+      },
+      "center": {
+        "y": "center",
+        "description": "Vertically centered"
+      },
+      "bottom": {
+        "y": -200,
+        "description": "Above bottom safe zone, negative = from bottom"
+      }
+    }
+  },
+  "imageDimensions": {
+    "width": 1024,
+    "height": 1536,
+    "aspectRatio": "2:3",
+    "note": "TikTok portrait orientation"
+  },
+  "promptModifiers": {
+    "realism": [
+      "iPhone photo",
+      "realistic lighting",
+      "natural skin tones",
+      "slight grain",
+      "candid moment",
+      "not posed"
+    ],
+    "orientation": [
+      "portrait orientation",
+      "vertical composition"
+    ],
+    "quality": [
+      "realistic phone camera quality",
+      "authentic feel",
+      "natural imperfections"
+    ]
+  }
+}

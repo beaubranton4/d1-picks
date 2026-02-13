@@ -51,7 +51,7 @@ export function GameCard({ game, muted = false, oddsOnly = false }: GameCardProp
   // For normal cards, only show edges that aren't PASS
   const visibleEdges = muted
     ? game.edges
-    : game.edges.filter(e => e.classification !== 'PASS');
+    : game.edges.filter(e => e.pickLabel !== 'PASS');
 
   if (visibleEdges.length === 0 && !oddsOnly) {
     return null;

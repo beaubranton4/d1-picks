@@ -1,5 +1,5 @@
 import type { Game, OddsEntry, BetEdge, EdgeCalculation } from '../types';
-import { classifyBet } from './classifier';
+import { classifyBet, calculateAIScore, getPickLabel } from './classifier';
 
 export function moneylineToProb(moneyline: number): number {
   if (moneyline > 0) {
@@ -75,8 +75,10 @@ export function calculateGameEdges(
     // Calculate edge
     const edgeCalc = calculateEdge(modelProb, bestMoneyline, isHome, isNeutral);
 
-    // Classify bet
-    const classification = classifyBet(edgeCalc.adjustedEdge);
+    // Calculate AI Score and labels
+    const aiScore = calculateAIScore(edgeCalc.adjustedEdge);
+    const pickLabel = getPickLabel(aiScore);
+    const classification = classifyBet(edgeCalc.adjustedEdge); // deprecated
 
     const edge: BetEdge = {
       team: teamName,
@@ -86,6 +88,8 @@ export function calculateGameEdges(
       impliedProb: edgeCalc.impliedProb,
       rawEdge: edgeCalc.rawEdge,
       adjustedEdge: edgeCalc.adjustedEdge,
+      aiScore,
+      pickLabel,
       classification,
       modifierReason: edgeCalc.modifierReason,
     };

@@ -1,0 +1,35 @@
+{
+  "date": "2026-02-14",
+  "picks": [
+    {
+      "id": "pick-1",
+      "team": "Oregon State",
+      "opponent": "Stanford",
+      "moneyline": -145,
+      "sportsbook": "DraftKings",
+      "classification": "STRONG BET",
+      "units": 2,
+      "analysis": "The Beavers are legit at Goss Stadium. Their rotation depth is elite, and Stanford's bats went cold in their last series. Lay the juice here - this line should be closer to -180."
+    },
+    {
+      "id": "pick-2",
+      "team": "LSU",
+      "opponent": "Alabama",
+      "moneyline": 130,
+      "sportsbook": "FanDuel",
+      "classification": "GOOD BET",
+      "units": 1,
+      "analysis": "Tigers getting plus money in Tuscaloosa is juicy. Bama's bullpen has been shaky, and LSU's lineup can mash. We're taking the value on the road dog."
+    },
+    {
+      "id": "pick-3",
+      "team": "Vanderbilt",
+      "opponent": "Florida",
+      "moneyline": -120,
+      "sportsbook": "BetMGM",
+      "classification": "LEAN",
+      "units": 1,
+      "analysis": "Vandy at home against a Florida squad that looked flat last weekend. Not our strongest conviction, but the Commodores' pitching matchup gives them a slight edge."
+    }
+  ]
+}

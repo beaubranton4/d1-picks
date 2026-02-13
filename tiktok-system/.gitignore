@@ -1,0 +1,20 @@
+# Environment variables (contains API keys)
+config/.env
+.env
+
+# Generated output (large image files)
+output/
+
+# Node modules
+node_modules/
+
+# Build artifacts
+dist/
+*.tsbuildinfo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
