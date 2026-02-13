@@ -5,6 +5,7 @@ import { EmailCapture } from '@/components/EmailCapture';
 import { ShareButton } from '@/components/ShareButton';
 import { ArticlesSection } from '@/components/ArticlesSection';
 import { DailyArticleBanner } from '@/components/DailyArticleBanner';
+import { SEOContent } from '@/components/SEOContent';
 import { fetchESPNGames } from '@/lib/scrapers/espn';
 import { scrapeWarrenNolan } from '@/lib/scrapers/warren-nolan';
 import { fetchOdds } from '@/lib/scrapers/odds-api';
@@ -144,6 +145,7 @@ export default async function DailyPicksPage({ params }: PageProps) {
           <NoPicksMessage />
           <EmailCapture />
           <ArticlesSection excludeDate={date} />
+          <SEOContent />
         </div>
       </div>
     );
@@ -229,6 +231,8 @@ export default async function DailyPicksPage({ params }: PageProps) {
         <EmailCapture />
 
         <ArticlesSection excludeDate={date} />
+
+        <SEOContent />
 
         <footer className="mt-8 pt-6 border-t border-mlb-border text-center text-sm text-mlb-textMuted">
           <p>Data sources: ESPN &middot; Warren Nolan &middot; The Odds API</p>
