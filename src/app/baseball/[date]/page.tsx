@@ -150,6 +150,14 @@ export default async function BaseballScoreboardPage({ params }: PageProps) {
       <div className="container mx-auto px-4 py-8 max-w-7xl">
         <Header date={date} performanceStats={performanceStats} />
 
+        {/* Sport-specific intro */}
+        <div className="mb-6 text-center max-w-2xl mx-auto">
+          <p className="text-mlb-textSecondary">
+            Your daily college baseball scoreboard. Games marked with{' '}
+            <span className="text-green-400 font-semibold">D1 Pick</span> are our best bets for the day.
+          </p>
+        </div>
+
         {/* Daily Article Banner */}
         <DailyArticleBanner date={date} />
 
@@ -167,7 +175,7 @@ export default async function BaseballScoreboardPage({ params }: PageProps) {
         </div>
 
         {/* D1 Picks Section */}
-        {picks.length > 0 && (
+        {picks.length > 0 ? (
           <section className="mb-10">
             <div className="mb-4 border-b border-green-500/30 pb-3">
               <h2 className="text-xl font-bold text-green-400">
@@ -214,7 +222,18 @@ export default async function BaseballScoreboardPage({ params }: PageProps) {
               ))}
             </div>
           </section>
-        )}
+        ) : gamesWithPicks.length > 0 ? (
+          <section className="mb-10">
+            <div className="bg-mlb-card border border-mlb-border rounded-lg p-6 text-center">
+              <h2 className="text-xl font-bold text-mlb-textSecondary mb-2">
+                No Picks Yet
+              </h2>
+              <p className="text-mlb-textMuted">
+                Picks for this day haven&apos;t been released yet. Check back later or browse the full scoreboard below.
+              </p>
+            </div>
+          </section>
+        ) : null}
 
         <EmailCapture />
 
@@ -281,25 +300,24 @@ export default async function BaseballScoreboardPage({ params }: PageProps) {
   );
 }
 
-// Generate static pages for upcoming dates
+// Generate static pages for all dates from season start to today + 7 days
 export async function generateStaticParams() {
   const dates: Array<{ date: string }> = [];
+
+  // Season start date
+  const seasonStart = new Date('2026-02-13');
+
+  // Today + 7 days
   const today = new Date();
+  const endDate = new Date(today);
+  endDate.setDate(endDate.getDate() + 7);
 
-  // Generate pages for next 7 days
-  for (let i = 0; i < 7; i++) {
-    const date = new Date(today);
-    date.setDate(date.getDate() + i);
-    const dateStr = date.toISOString().split('T')[0];
+  // Generate all dates from season start to end date
+  const current = new Date(seasonStart);
+  while (current <= endDate) {
+    const dateStr = current.toISOString().split('T')[0];
     dates.push({ date: dateStr });
-  }
-
-  // Always include hardcoded pick dates
-  const hardcodedDates = ['2026-02-13', '2026-02-14'];
-  for (const dateStr of hardcodedDates) {
-    if (!dates.some(d => d.date === dateStr)) {
-      dates.push({ date: dateStr });
-    }
+    current.setDate(current.getDate() + 1);
   }
 
   return dates;

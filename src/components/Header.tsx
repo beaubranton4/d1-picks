@@ -48,10 +48,7 @@ export function Header({ date, performanceStats }: HeaderProps) {
 
       {/* Date display */}
       <div className="text-center">
-        <p className="text-xl text-mlb-textSecondary mb-2">{formattedDate}</p>
-        <p className="text-sm text-mlb-textMuted">
-          +EV picks based on Warren Nolan predictions
-        </p>
+        <p className="text-xl text-mlb-textSecondary">{formattedDate}</p>
       </div>
     </header>
   );

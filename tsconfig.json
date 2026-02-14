@@ -36,6 +36,7 @@
   ],
   "exclude": [
     "node_modules",
-    "tiktok-system"
+    "tiktok-system",
+    "remotion"
   ]
 }

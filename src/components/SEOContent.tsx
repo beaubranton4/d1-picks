@@ -32,9 +32,8 @@ export function SEOContent() {
           </h2>
           <div className="space-y-4 text-mlb-textSecondary leading-relaxed">
             <p>
-              Here&apos;s how it works. We pull win probability predictions from Warren Nolan, one
-              of the most respected college baseball analytics sources out there. Then we grab live
-              moneyline odds from DraftKings, FanDuel, and BetMGM.
+              Here&apos;s how it works. We analyze win probabilities using predictive models and
+              compare them against live moneyline odds from DraftKings, FanDuel, and BetMGM.
             </p>
             <p>
               When the model says a team has a 45% chance to win, but the sportsbook is pricing
@@ -72,7 +71,7 @@ export function SEOContent() {
               <div>
                 <h3 className="font-semibold text-mlb-textPrimary">Model Win %</h3>
                 <p className="text-sm">
-                  What Warren Nolan&apos;s model predicts as the team&apos;s actual win probability.
+                  What our predictive model estimates as the team&apos;s actual win probability.
                 </p>
               </div>
 

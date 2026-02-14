@@ -10,25 +10,24 @@ export default async function LegacyDateRedirect({ params }: PageProps) {
   redirect(`/baseball/${date}`);
 }
 
-// Generate static redirects for upcoming dates
+// Generate static redirects for all dates from season start to today + 7 days
 export async function generateStaticParams() {
   const dates: Array<{ date: string }> = [];
+
+  // Season start date
+  const seasonStart = new Date('2026-02-13');
+
+  // Today + 7 days
   const today = new Date();
+  const endDate = new Date(today);
+  endDate.setDate(endDate.getDate() + 7);
 
-  // Generate redirects for next 7 days
-  for (let i = 0; i < 7; i++) {
-    const date = new Date(today);
-    date.setDate(date.getDate() + i);
-    const dateStr = date.toISOString().split('T')[0];
+  // Generate all dates from season start to end date
+  const current = new Date(seasonStart);
+  while (current <= endDate) {
+    const dateStr = current.toISOString().split('T')[0];
     dates.push({ date: dateStr });
-  }
-
-  // Always include hardcoded pick dates
-  const hardcodedDates = ['2026-02-13', '2026-02-14'];
-  for (const dateStr of hardcodedDates) {
-    if (!dates.some(d => d.date === dateStr)) {
-      dates.push({ date: dateStr });
-    }
+    current.setDate(current.getDate() + 1);
   }
 
   return dates;

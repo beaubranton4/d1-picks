@@ -38,7 +38,7 @@ export function EmailCapture() {
     <div className="bg-mlb-card rounded-lg p-6 my-8 border border-mlb-border">
       <div className="text-center">
         <h3 className="text-xl font-bold text-mlb-textPrimary mb-2">
-          Get free +EV picks in your inbox daily
+          Get notified when we make a new D1 Pick
         </h3>
         <p className="text-mlb-textSecondary mb-4">
           No BS, just data. We find the edges, you make the call.

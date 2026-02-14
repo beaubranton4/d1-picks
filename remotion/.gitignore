@@ -1,0 +1,13 @@
+# Dependencies
+node_modules/
+
+# Output videos
+output/
+
+# Build artifacts
+dist/
+.remotion/
+
+# Environment
+.env
+.env.local

@@ -20,8 +20,7 @@ export function NoPicksMessage({ hasGames = false }: NoPicksMessageProps) {
         </p>
         <ul className="list-disc list-inside text-sm text-mlb-textMuted mt-1 ml-2">
           <li>No games scheduled for this date</li>
-          <li>No odds available yet from sportsbooks</li>
-          <li>Games haven&apos;t been added to Warren Nolan yet</li>
+          <li>Off-season or break in schedule</li>
         </ul>
       </div>
     );
