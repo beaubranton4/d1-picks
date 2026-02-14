@@ -10,7 +10,7 @@ import { bundle } from '@remotion/bundler';
 import { renderMedia, selectComposition } from '@remotion/renderer';
 import path from 'path';
 import fs from 'fs';
-import { loadDailyPicks, getPick, getTodayDate } from '../src/lib/data';
+import { loadDailyPicks, getPick, getTodayDate } from './data-loader';
 
 const OUTPUT_DIR = path.resolve(__dirname, '../output');
 const ENTRY_POINT = path.resolve(__dirname, '../src/index.tsx');

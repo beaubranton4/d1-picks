@@ -182,7 +182,7 @@ export const SinglePickVideo: React.FC<SinglePickVideoProps> = ({ pick, date }) 
             style={{ marginBottom: 16 }}
           />
           <AnimatedText
-            text="@d1picks"
+            text="@d1sportpicks"
             delay={8}
             fontSize={52}
             color={colors.blue}

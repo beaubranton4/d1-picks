@@ -26,6 +26,41 @@ interface ScoreboardCardProps {
   writeUp?: string;
   moneyline?: number;
   sportsbook?: string;
+  stars?: 1 | 2 | 3 | 4 | 5;
+  aiScore?: number;
+}
+
+function StarRating({ stars }: { stars: 1 | 2 | 3 | 4 | 5 }) {
+  return (
+    <div className="flex items-center gap-0.5">
+      {[1, 2, 3, 4, 5].map((i) => (
+        <span
+          key={i}
+          className={`text-sm ${i <= stars ? 'text-yellow-400' : 'text-mlb-textMuted/30'}`}
+        >
+          ★
+        </span>
+      ))}
+    </div>
+  );
+}
+
+function AIScoreBadge({ score }: { score: number }) {
+  const getScoreColor = (s: number) => {
+    if (s >= 8.5) return 'text-green-400';
+    if (s >= 7) return 'text-mlb-blue';
+    if (s >= 5) return 'text-yellow-400';
+    return 'text-mlb-textMuted';
+  };
+
+  return (
+    <div className="flex items-center gap-1.5">
+      <span className="text-[10px] text-mlb-textMuted uppercase tracking-wide">AI Profit Score</span>
+      <span className={`text-sm font-bold ${getScoreColor(score)}`}>
+        {score.toFixed(1)}
+      </span>
+    </div>
+  );
 }
 
 export function ScoreboardCard({
@@ -41,6 +76,8 @@ export function ScoreboardCard({
   writeUp,
   moneyline,
   sportsbook,
+  stars,
+  aiScore,
 }: ScoreboardCardProps) {
   const isLive = status === 'in_progress';
   const isFinal = status === 'final';
@@ -63,20 +100,24 @@ export function ScoreboardCard({
     >
       {/* Header */}
       <div className="flex items-center justify-between px-4 py-2 bg-mlb-darker/50">
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-3">
           {isPick && <D1PickBadge />}
+          {isPick && stars && <StarRating stars={stars} />}
+          {isPick && aiScore !== undefined && <AIScoreBadge score={aiScore} />}
           {!isPick && venue && (
             <span className="text-xs text-mlb-textMuted truncate max-w-[150px]">{venue}</span>
           )}
         </div>
-        <div className="flex items-center gap-2 text-xs text-mlb-textMuted">
-          {broadcast && <span>{broadcast}</span>}
-          {broadcast && <span>·</span>}
-          <span
-            className={`font-medium ${isLive ? 'text-red-500 animate-pulse' : ''} ${isFinal ? 'text-mlb-textMuted' : ''}`}
-          >
-            {getStatusDisplay()}
-          </span>
+        <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 text-xs text-mlb-textMuted">
+            {broadcast && <span>{broadcast}</span>}
+            {broadcast && <span>·</span>}
+            <span
+              className={`font-medium ${isLive ? 'text-red-500 animate-pulse' : ''} ${isFinal ? 'text-mlb-textMuted' : ''}`}
+            >
+              {getStatusDisplay()}
+            </span>
+          </div>
         </div>
       </div>
 

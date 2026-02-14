@@ -1,0 +1,132 @@
+{
+  "generated_at": "2026-02-13T00:00:00.000Z",
+  "model_info": {
+    "total_models": 2,
+    "teams_with_models": 0,
+    "offense_features": [
+      "day_of_week",
+      "is_home",
+      "is_neutral",
+      "team_ba",
+      "team_slg",
+      "team_ops",
+      "team_obp",
+      "opp_era",
+      "opp_whip",
+      "recent_runs_scored_avg",
+      "recent_runs_allowed_avg",
+      "opp_recent_runs_allowed_avg",
+      "recent_win_rate"
+    ],
+    "defense_features": [
+      "day_of_week",
+      "is_home",
+      "is_neutral",
+      "team_era",
+      "team_whip",
+      "opp_ba",
+      "opp_slg",
+      "opp_ops",
+      "recent_runs_scored_avg",
+      "recent_runs_allowed_avg",
+      "opp_recent_runs_scored_avg",
+      "recent_win_rate"
+    ]
+  },
+  "global": {
+    "offense": {
+      "intercept": 5.5,
+      "features": {
+        "day_of_week": 0.02,
+        "is_home": 0.35,
+        "is_neutral": 0.0,
+        "team_ba": 2.5,
+        "team_slg": 1.8,
+        "team_ops": 1.2,
+        "team_obp": 1.5,
+        "opp_era": 0.15,
+        "opp_whip": 0.25,
+        "recent_runs_scored_avg": 0.4,
+        "recent_runs_allowed_avg": -0.1,
+        "opp_recent_runs_allowed_avg": 0.2,
+        "recent_win_rate": 0.8
+      },
+      "scaler_means": {
+        "day_of_week": 3.0,
+        "is_home": 0.5,
+        "is_neutral": 0.1,
+        "team_ba": 0.265,
+        "team_slg": 0.390,
+        "team_ops": 0.730,
+        "team_obp": 0.340,
+        "opp_era": 4.50,
+        "opp_whip": 1.35,
+        "recent_runs_scored_avg": 5.5,
+        "recent_runs_allowed_avg": 5.5,
+        "opp_recent_runs_allowed_avg": 5.5,
+        "recent_win_rate": 0.50
+      },
+      "scaler_stds": {
+        "day_of_week": 2.0,
+        "is_home": 0.5,
+        "is_neutral": 0.3,
+        "team_ba": 0.025,
+        "team_slg": 0.050,
+        "team_ops": 0.080,
+        "team_obp": 0.035,
+        "opp_era": 1.2,
+        "opp_whip": 0.25,
+        "recent_runs_scored_avg": 2.5,
+        "recent_runs_allowed_avg": 2.5,
+        "opp_recent_runs_allowed_avg": 2.5,
+        "recent_win_rate": 0.20
+      }
+    },
+    "defense": {
+      "intercept": 5.5,
+      "features": {
+        "day_of_week": 0.01,
+        "is_home": -0.25,
+        "is_neutral": 0.0,
+        "team_era": 0.20,
+        "team_whip": 0.30,
+        "opp_ba": 2.2,
+        "opp_slg": 1.5,
+        "opp_ops": 1.0,
+        "recent_runs_scored_avg": -0.05,
+        "recent_runs_allowed_avg": 0.35,
+        "opp_recent_runs_scored_avg": 0.25,
+        "recent_win_rate": -0.5
+      },
+      "scaler_means": {
+        "day_of_week": 3.0,
+        "is_home": 0.5,
+        "is_neutral": 0.1,
+        "team_era": 4.50,
+        "team_whip": 1.35,
+        "opp_ba": 0.265,
+        "opp_slg": 0.390,
+        "opp_ops": 0.730,
+        "recent_runs_scored_avg": 5.5,
+        "recent_runs_allowed_avg": 5.5,
+        "opp_recent_runs_scored_avg": 5.5,
+        "recent_win_rate": 0.50
+      },
+      "scaler_stds": {
+        "day_of_week": 2.0,
+        "is_home": 0.5,
+        "is_neutral": 0.3,
+        "team_era": 1.2,
+        "team_whip": 0.25,
+        "opp_ba": 0.025,
+        "opp_slg": 0.050,
+        "opp_ops": 0.080,
+        "recent_runs_scored_avg": 2.5,
+        "recent_runs_allowed_avg": 2.5,
+        "opp_recent_runs_scored_avg": 2.5,
+        "recent_win_rate": 0.20
+      }
+    }
+  },
+  "teams": {}
+}

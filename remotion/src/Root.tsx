@@ -2,6 +2,8 @@ import React from 'react';
 import { Composition } from 'remotion';
 import { DailyPicksVideo } from './compositions/DailyPicksVideo';
 import { SinglePickVideo } from './compositions/SinglePickVideo';
+import { HypeVideo } from './compositions/HypeVideo';
+import { CleanVideo } from './compositions/CleanVideo';
 import type { ManualPick } from './lib/types';
 
 // TikTok vertical format
@@ -46,6 +48,43 @@ const defaultPicks: ManualPick[] = [
 export const RemotionRoot: React.FC = () => {
   return (
     <>
+      {/* CLEAN VIDEO - Minimal, authentic TikTok style */}
+      <Composition
+        id="CleanVideo"
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        component={CleanVideo as React.FC<any>}
+        durationInFrames={FPS * 16} // ~16 seconds
+        fps={FPS}
+        width={WIDTH}
+        height={HEIGHT}
+        defaultProps={{
+          picks: defaultPicks,
+          date: '2026-02-14',
+          screenshotPath: undefined,
+        }}
+      />
+
+      {/* HYPE VIDEO - Flashy TikTok format */}
+      <Composition
+        id="HypeVideo"
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        component={HypeVideo as React.FC<any>}
+        durationInFrames={FPS * 18} // ~18 seconds
+        fps={FPS}
+        width={WIDTH}
+        height={HEIGHT}
+        defaultProps={{
+          picks: defaultPicks,
+          date: '2026-02-14',
+          hook: {
+            text: 'STOP SCROLLING',
+            subtext: 'You need to see these picks',
+          },
+          screenshotPath: undefined,
+        }}
+      />
+
+      {/* Original daily picks video */}
       <Composition
         id="DailyPicksVideo"
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -59,6 +98,8 @@ export const RemotionRoot: React.FC = () => {
           date: '2026-02-14',
         }}
       />
+
+      {/* Single pick highlight */}
       <Composition
         id="SinglePickVideo"
         // eslint-disable-next-line @typescript-eslint/no-explicit-any

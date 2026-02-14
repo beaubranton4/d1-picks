@@ -4,8 +4,11 @@
   "description": "Remotion video generation for D1 Picks",
   "scripts": {
     "studio": "remotion studio",
+    "screenshot": "npx tsx scripts/capture-screenshot.ts",
     "render:daily": "npx tsx scripts/render-daily.ts",
     "render:pick": "npx tsx scripts/render-pick.ts",
+    "render:hype": "npx tsx scripts/render-hype.ts",
+    "render:clean": "npx tsx scripts/render-clean.ts",
     "post": "npx tsx scripts/post-video.ts",
     "pipeline": "npx tsx scripts/pipeline.ts",
     "pipeline:render": "npx tsx scripts/pipeline.ts --no-post"
@@ -17,6 +20,7 @@
     "axios": "^1.6.0",
     "dotenv": "^16.3.0",
     "form-data": "^4.0.0",
+    "puppeteer": "^22.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "remotion": "^4.0.0"

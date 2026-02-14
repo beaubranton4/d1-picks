@@ -50,6 +50,8 @@ interface GameWithPick extends ESPNGame {
   writeUp?: string;
   moneyline?: number;
   sportsbook?: string;
+  stars?: 1 | 2 | 3 | 4 | 5;
+  aiScore?: number;
 }
 
 export default async function BaseballScoreboardPage({ params }: PageProps) {
@@ -77,7 +79,7 @@ export default async function BaseballScoreboardPage({ params }: PageProps) {
 
   // Enrich games with pick data and write-ups
   const gamesWithPicks: GameWithPick[] = espnGames.map(game => {
-    const { isPick, pickedTeam } = isPickedGame(
+    const { isPick, pickedTeam, pickData: hardcodedPickData } = isPickedGame(
       date,
       game.homeTeam.displayName,
       game.awayTeam.displayName
@@ -86,6 +88,8 @@ export default async function BaseballScoreboardPage({ params }: PageProps) {
     let writeUp: string | undefined;
     let moneyline: number | undefined;
     let sportsbook: string | undefined;
+    let stars: 1 | 2 | 3 | 4 | 5 | undefined;
+    let aiScore: number | undefined;
 
     if (isPick && pickedTeam) {
       const isHome = pickedTeam === game.homeTeam.displayName;
@@ -93,12 +97,21 @@ export default async function BaseballScoreboardPage({ params }: PageProps) {
       const pickedRank = isHome ? game.homeTeam.rank : game.awayTeam.rank;
       const opponentRank = isHome ? game.awayTeam.rank : game.homeTeam.rank;
 
-      // Try to find the pick data from JSON
-      const pickData = findPickForTeam(pickedTeam);
-      if (pickData) {
-        writeUp = pickData.analysis;
-        moneyline = pickData.moneyline;
-        sportsbook = pickData.sportsbook;
+      // Use hardcoded pick data for stars, aiScore, moneyline, sportsbook
+      if (hardcodedPickData) {
+        stars = hardcodedPickData.stars;
+        aiScore = hardcodedPickData.aiScore;
+        moneyline = hardcodedPickData.moneyline;
+        sportsbook = hardcodedPickData.sportsbook;
+      }
+
+      // Try to find the pick data from JSON for write-up
+      const jsonPickData = findPickForTeam(pickedTeam);
+      if (jsonPickData) {
+        writeUp = jsonPickData.analysis;
+        // JSON data can override hardcoded moneyline/sportsbook if present
+        if (jsonPickData.moneyline) moneyline = jsonPickData.moneyline;
+        if (jsonPickData.sportsbook) sportsbook = jsonPickData.sportsbook;
       } else {
         // Fall back to generated write-up
         writeUp = generateConsistentWriteUp({
@@ -119,16 +132,23 @@ export default async function BaseballScoreboardPage({ params }: PageProps) {
       writeUp,
       moneyline,
       sportsbook,
+      stars,
+      aiScore,
     };
   });
 
-  // Sort: D1 Picks first, then by start time
+  // Sort: D1 Picks first (by AI score), then other games by start time
   gamesWithPicks.sort((a, b) => {
     // Picks first
     if (a.isPick && !b.isPick) return -1;
     if (!a.isPick && b.isPick) return 1;
 
-    // Then by start time
+    // Both are picks - sort by AI score (highest first)
+    if (a.isPick && b.isPick) {
+      return (b.aiScore || 0) - (a.aiScore || 0);
+    }
+
+    // Neither are picks - sort by start time
     if (a.startTime === 'TBD') return 1;
     if (b.startTime === 'TBD') return -1;
     return a.startTime.localeCompare(b.startTime);
@@ -218,6 +238,8 @@ export default async function BaseballScoreboardPage({ params }: PageProps) {
                   writeUp={game.writeUp}
                   moneyline={game.moneyline}
                   sportsbook={game.sportsbook}
+                  stars={game.stars}
+                  aiScore={game.aiScore}
                 />
               ))}
             </div>

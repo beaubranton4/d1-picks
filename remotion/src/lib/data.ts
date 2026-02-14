@@ -1,33 +1,7 @@
-import * as fs from 'fs';
-import * as path from 'path';
-import type { DailyPicks, ManualPick } from './types';
-
 /**
- * Load picks from the content directory
+ * Utility functions for data formatting
+ * Note: File loading happens in scripts/, not in browser components
  */
-export function loadDailyPicks(date: string): DailyPicks | null {
-  const picksDir = path.resolve(__dirname, '../../../src/content/picks');
-  const filePath = path.join(picksDir, `${date}.json`);
-
-  if (!fs.existsSync(filePath)) {
-    console.error(`No picks found for ${date} at ${filePath}`);
-    return null;
-  }
-
-  const content = fs.readFileSync(filePath, 'utf-8');
-  return JSON.parse(content) as DailyPicks;
-}
-
-/**
- * Get a specific pick by index
- */
-export function getPick(date: string, index: number): ManualPick | null {
-  const daily = loadDailyPicks(date);
-  if (!daily || index < 0 || index >= daily.picks.length) {
-    return null;
-  }
-  return daily.picks[index];
-}
 
 /**
  * Get today's date in YYYY-MM-DD format

@@ -1,9 +1,9 @@
 /**
- * Render Daily Picks Video
+ * Render Clean Video - Minimal, authentic TikTok style
  *
  * Usage:
- *   npm run render:daily           # Today's date
- *   npm run render:daily 2026-02-14  # Specific date
+ *   npm run render:clean           # Today's date
+ *   npm run render:clean 2026-02-14  # Specific date
  */
 
 import { bundle } from '@remotion/bundler';
@@ -16,67 +16,69 @@ const OUTPUT_DIR = path.resolve(__dirname, '../output');
 const ENTRY_POINT = path.resolve(__dirname, '../src/index.tsx');
 
 async function main() {
-  const date = process.argv[2] || getTodayDate();
+  const args = process.argv.slice(2);
+  const date = args.find(arg => /^\d{4}-\d{2}-\d{2}$/.test(arg)) || getTodayDate();
 
-  console.log(`Rendering daily picks video for ${date}...`);
+  console.log('');
+  console.log('Rendering clean video for', date);
+  console.log('');
 
   // Load picks data
   const dailyPicks = loadDailyPicks(date);
-  if (!dailyPicks) {
+  if (!dailyPicks || dailyPicks.picks.length === 0) {
     console.error(`No picks found for ${date}`);
     process.exit(1);
   }
 
-  if (dailyPicks.picks.length === 0) {
-    console.error(`No picks in file for ${date}`);
-    process.exit(1);
-  }
-
-  console.log(`Found ${dailyPicks.picks.length} picks`);
+  console.log(`${dailyPicks.picks.length} picks:`);
+  dailyPicks.picks.forEach((pick, i) => {
+    const ml = pick.moneyline > 0 ? `+${pick.moneyline}` : pick.moneyline;
+    console.log(`  ${pick.team} ${ml}`);
+  });
+  console.log('');
 
   // Ensure output directory exists
   if (!fs.existsSync(OUTPUT_DIR)) {
     fs.mkdirSync(OUTPUT_DIR, { recursive: true });
   }
 
-  const outputPath = path.join(OUTPUT_DIR, `daily-picks-${date}.mp4`);
+  const outputPath = path.join(OUTPUT_DIR, `clean-${date}.mp4`);
 
   console.log('Bundling...');
   const bundled = await bundle({
     entryPoint: ENTRY_POINT,
-    // Enable webpack caching for faster subsequent builds
     onProgress: (progress) => {
-      if (progress % 10 === 0) {
-        process.stdout.write(`\rBundling: ${progress}%`);
+      if (progress % 25 === 0) {
+        process.stdout.write(`\r  ${progress}%`);
       }
     },
   });
-  console.log('\nBundle complete');
+  console.log('\n');
 
-  // Calculate duration based on number of picks
-  // Base: 6 seconds (intro + outro) + 4 seconds per pick
+  // Calculate duration: intro (3s) + picks (3.5s each) + CTA (3s)
   const fps = 30;
-  const duration = Math.max(15, 6 + dailyPicks.picks.length * 4);
-  const durationInFrames = fps * duration;
+  const duration = 3 + (dailyPicks.picks.length * 3.5) + 3;
+  const durationInFrames = Math.ceil(fps * duration);
 
-  console.log(`Video duration: ${duration}s (${durationInFrames} frames)`);
+  console.log(`Duration: ${duration.toFixed(1)}s`);
+  console.log('');
 
   const composition = await selectComposition({
     serveUrl: bundled,
-    id: 'DailyPicksVideo',
+    id: 'CleanVideo',
     inputProps: {
       picks: dailyPicks.picks,
       date: date,
     },
   });
 
-  // Override duration based on pick count
   const adjustedComposition = {
     ...composition,
     durationInFrames,
   };
 
-  console.log('Rendering video...');
+  console.log('Rendering...');
+  const startTime = Date.now();
   await renderMedia({
     composition: adjustedComposition,
     serveUrl: bundled,
@@ -87,17 +89,16 @@ async function main() {
       date: date,
     },
     onProgress: ({ progress }) => {
-      process.stdout.write(`\rRendering: ${Math.round(progress * 100)}%`);
+      process.stdout.write(`\r  ${Math.round(progress * 100)}%`);
     },
   });
 
-  console.log(`\n\nVideo rendered successfully!`);
+  const renderTime = ((Date.now() - startTime) / 1000).toFixed(1);
+  console.log(`\n\nDone in ${renderTime}s`);
   console.log(`Output: ${outputPath}`);
-
-  return outputPath;
 }
 
 main().catch((err) => {
-  console.error('Render failed:', err);
+  console.error('Failed:', err);
   process.exit(1);
 });

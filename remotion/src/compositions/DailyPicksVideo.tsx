@@ -143,7 +143,7 @@ export const DailyPicksVideo: React.FC<DailyPicksVideoProps> = ({ picks, date })
             style={{ marginBottom: 20 }}
           />
           <AnimatedText
-            text="@d1picks"
+            text="@d1sportpicks"
             delay={10}
             fontSize={56}
             color={colors.blue}
