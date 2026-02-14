@@ -3,7 +3,7 @@
 
 export const HARDCODED_PICKS: Record<string, string[]> = {
   '2026-02-13': ['ucla', 'arkansas', 'stanford', 'hawaii'],
-  '2026-02-14': ['texas tech', 'oklahoma', 'tcu'],
+  '2026-02-14': ['texas tech', 'oklahoma', 'tcu', 'georgia'],
 };
 
 export function isHardcodedPick(date: string, teamName: string): boolean {
