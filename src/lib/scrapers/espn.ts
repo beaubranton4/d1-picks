@@ -25,6 +25,9 @@ export interface ESPNGame {
   neutralSite: boolean;
   status: 'scheduled' | 'in_progress' | 'final' | 'postponed' | 'canceled';
   broadcast?: string;
+  homeScore?: number;
+  awayScore?: number;
+  period?: string;
 }
 
 interface ESPNAPIResponse {
@@ -36,6 +39,7 @@ interface ESPNAPIResponse {
       type: {
         name: string;
         state: string;
+        shortDetail?: string;
       };
     };
     competitions: Array<{
@@ -63,6 +67,7 @@ interface ESPNAPIResponse {
         curatedRank?: {
           current: number;
         };
+        score?: string;
       }>;
       broadcasts?: Array<{
         names: string[];
@@ -168,6 +173,13 @@ export async function fetchESPNGames(dateStr: string): Promise<ESPNGame[]> {
 
       const broadcast = competition.broadcasts?.[0]?.names?.[0];
 
+      // Extract scores (if game is in progress or final)
+      const homeScore = homeCompetitor.score ? parseInt(homeCompetitor.score, 10) : undefined;
+      const awayScore = awayCompetitor.score ? parseInt(awayCompetitor.score, 10) : undefined;
+
+      // Extract period/inning info (e.g., "Top 5th", "Final")
+      const period = event.status?.type?.shortDetail;
+
       const game: ESPNGame = {
         id: event.id,
         date: dateStr,
@@ -178,6 +190,9 @@ export async function fetchESPNGames(dateStr: string): Promise<ESPNGame[]> {
         neutralSite: competition.neutralSite || false,
         status: parseStatus(event.status?.type?.name || 'scheduled'),
         broadcast,
+        homeScore: isNaN(homeScore as number) ? undefined : homeScore,
+        awayScore: isNaN(awayScore as number) ? undefined : awayScore,
+        period,
       };
 
       games.push(game);

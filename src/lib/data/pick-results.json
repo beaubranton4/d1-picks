@@ -1,0 +1,92 @@
+{
+  "results": [
+    {
+      "date": "2026-02-10",
+      "gameId": "espn-401595842",
+      "team": "LSU",
+      "opponent": "Alabama",
+      "classification": "D1 PICK",
+      "odds": 130,
+      "aiScore": 8.7,
+      "result": "win",
+      "profit": 1.30
+    },
+    {
+      "date": "2026-02-10",
+      "gameId": "espn-401595843",
+      "team": "Texas",
+      "opponent": "Oklahoma",
+      "classification": "SMART BET",
+      "odds": -115,
+      "aiScore": 7.2,
+      "result": "win",
+      "profit": 0.87
+    },
+    {
+      "date": "2026-02-10",
+      "gameId": "espn-401595844",
+      "team": "Florida",
+      "opponent": "Georgia",
+      "classification": "LEAN",
+      "odds": 145,
+      "aiScore": 5.8,
+      "result": "loss",
+      "profit": -1.00
+    },
+    {
+      "date": "2026-02-11",
+      "gameId": "espn-401595850",
+      "team": "Tennessee",
+      "opponent": "Vanderbilt",
+      "classification": "D1 PICK",
+      "odds": -120,
+      "aiScore": 9.1,
+      "result": "win",
+      "profit": 0.83
+    },
+    {
+      "date": "2026-02-11",
+      "gameId": "espn-401595851",
+      "team": "Arkansas",
+      "opponent": "Mississippi State",
+      "classification": "SMART BET",
+      "odds": 110,
+      "aiScore": 6.9,
+      "result": "loss",
+      "profit": -1.00
+    },
+    {
+      "date": "2026-02-12",
+      "gameId": "espn-401595860",
+      "team": "Oregon State",
+      "opponent": "Arizona State",
+      "classification": "D1 PICK",
+      "odds": 105,
+      "aiScore": 8.4,
+      "result": "win",
+      "profit": 1.05
+    },
+    {
+      "date": "2026-02-12",
+      "gameId": "espn-401595861",
+      "team": "Wake Forest",
+      "opponent": "Duke",
+      "classification": "SMART BET",
+      "odds": -105,
+      "aiScore": 7.5,
+      "result": "win",
+      "profit": 0.95
+    },
+    {
+      "date": "2026-02-12",
+      "gameId": "espn-401595862",
+      "team": "UCLA",
+      "opponent": "Stanford",
+      "classification": "LEAN",
+      "odds": 180,
+      "aiScore": 5.3,
+      "result": "loss",
+      "profit": -1.00
+    }
+  ]
+}

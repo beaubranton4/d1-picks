@@ -22,7 +22,7 @@ export function DateNavigation({ currentDate }: DateNavigationProps) {
   return (
     <div className="flex items-center gap-2 text-sm">
       <Link
-        href={`/${prevStr}`}
+        href={`/baseball/${prevStr}`}
         className="flex items-center gap-1 px-3 py-2 rounded-lg text-mlb-textSecondary hover:text-mlb-blue hover:bg-mlb-card transition-colors"
       >
         <span className="text-lg">&larr;</span>
@@ -32,7 +32,7 @@ export function DateNavigation({ currentDate }: DateNavigationProps) {
         {currentLabel}
       </span>
       <Link
-        href={`/${nextStr}`}
+        href={`/baseball/${nextStr}`}
         className="flex items-center gap-1 px-3 py-2 rounded-lg text-mlb-textSecondary hover:text-mlb-blue hover:bg-mlb-card transition-colors"
       >
         <span className="hidden sm:inline">{nextLabel}</span>

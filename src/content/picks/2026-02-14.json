@@ -3,33 +3,33 @@
   "picks": [
     {
       "id": "pick-1",
-      "team": "Oregon State",
-      "opponent": "Stanford",
-      "moneyline": -145,
+      "team": "Texas Tech",
+      "opponent": "Vanderbilt",
+      "moneyline": 135,
       "sportsbook": "DraftKings",
-      "classification": "STRONG BET",
+      "pickLabel": "D1 PICK",
       "units": 2,
-      "analysis": "The Beavers are legit at Goss Stadium. Their rotation depth is elite, and Stanford's bats went cold in their last series. Lay the juice here - this line should be closer to -180."
+      "analysis": "Opening Day special. The Red Raiders are getting plus money against preseason darling Vanderbilt at a neutral site. Tech's pitching staff posted a 3.21 ERA in fall scrimmages, and their lineup returns 80% of last year's production. Vandy is overhyped out of the gate - fade the chalk, take the value."
     },
     {
       "id": "pick-2",
-      "team": "LSU",
-      "opponent": "Alabama",
-      "moneyline": 130,
+      "team": "Oklahoma",
+      "opponent": "Oklahoma State",
+      "moneyline": -125,
       "sportsbook": "FanDuel",
-      "classification": "GOOD BET",
+      "pickLabel": "SMART BET",
       "units": 1,
-      "analysis": "Tigers getting plus money in Tuscaloosa is juicy. Bama's bullpen has been shaky, and LSU's lineup can mash. We're taking the value on the road dog."
+      "analysis": "Bedlam in Norman. The Sooners are at home, their Friday starter looked filthy in the preseason, and the Cowboys lost their top two arms from last year. This line should be -150+. We're laying small juice on OU in a rivalry game where they have clear pitching advantage."
     },
     {
       "id": "pick-3",
-      "team": "Vanderbilt",
-      "opponent": "Florida",
-      "moneyline": -120,
+      "team": "TCU",
+      "opponent": "Arkansas",
+      "moneyline": 110,
       "sportsbook": "BetMGM",
-      "classification": "LEAN",
+      "pickLabel": "LEAN",
       "units": 1,
-      "analysis": "Vandy at home against a Florida squad that looked flat last weekend. Not our strongest conviction, but the Commodores' pitching matchup gives them a slight edge."
+      "analysis": "TCU is preseason #10 for a reason - their lineup is stacked and they return a deep bullpen. Getting plus money against Arkansas feels like an overreaction to the Razorbacks' brand name. Not our strongest conviction for opening day, but the value is there at +110."
     }
   ]
 }

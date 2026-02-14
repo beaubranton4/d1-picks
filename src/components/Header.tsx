@@ -1,10 +1,13 @@
 import { DateNavigation } from './DateNavigation';
+import { PerformanceBadge } from './PerformanceTracker';
+import type { PerformanceStats } from '@/lib/calculators/performance';
 
 interface HeaderProps {
   date: string;
+  performanceStats?: PerformanceStats;
 }
 
-export function Header({ date }: HeaderProps) {
+export function Header({ date, performanceStats }: HeaderProps) {
   const dateObj = new Date(date + 'T00:00:00');
   const formattedDate = dateObj.toLocaleDateString('en-US', {
     weekday: 'long',
@@ -35,8 +38,11 @@ export function Header({ date }: HeaderProps) {
             </div>
           </div>
 
-          {/* Date Navigation */}
-          <DateNavigation currentDate={date} />
+          {/* Performance Badge + Date Navigation */}
+          <div className="flex items-center gap-4">
+            {performanceStats && <PerformanceBadge stats={performanceStats} />}
+            <DateNavigation currentDate={date} />
+          </div>
         </div>
       </div>
 
