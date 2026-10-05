@@ -1,0 +1,104 @@
+{
+  "$comment": "Volleyball model and data settings. Changing anything under model means a new model version: bump model.version and say why in the commit.",
+  "sport": "volleyball",
+  "label": "D1 women's volleyball",
+  "season": 2026,
+  "season_start": "2026-08-20",
+  "season_end": "2026-12-20",
+  "timezone": "America/New_York",
+  "source": {
+    "name": "NCAA.com scoreboard",
+    "page": "https://www.ncaa.com/scoreboard/volleyball-women/d1",
+    "feed": "https://sdataprod.ncaa.com/ (GetContests_web, the JSON the scoreboard page loads)",
+    "sport_code": "WVB",
+    "sport_url": "volleyball-women",
+    "poll": "AVCA Coaches Poll rank, as NCAA.com shows it on the scoreboard",
+    "poll_page": "https://www.ncaa.com/rankings/volleyball-women/d1"
+  },
+  "d1_conferences": {
+    "acc": "ACC",
+    "america-east": "America East",
+    "american": "American",
+    "asun": "ASUN",
+    "atlantic-10": "Atlantic 10",
+    "big-12": "Big 12",
+    "big-east": "Big East",
+    "big-sky": "Big Sky",
+    "big-south": "Big South",
+    "big-ten": "Big Ten",
+    "big-west": "Big West",
+    "caa": "CAA",
+    "cusa": "CUSA",
+    "horizon": "Horizon",
+    "ivy-league": "Ivy League",
+    "mac": "MAC",
+    "meac": "MEAC",
+    "metro": "MAAC",
+    "mountain-west": "Mountain West",
+    "mvc": "MVC",
+    "nec": "NEC",
+    "ovc": "OVC",
+    "pac-12": "Pac-12",
+    "patriot": "Patriot",
+    "sec": "SEC",
+    "socon": "SoCon",
+    "southland": "Southland",
+    "summit-league": "Summit League",
+    "sun-belt": "Sun Belt",
+    "swac": "SWAC",
+    "uac-": "UAC",
+    "wcc": "WCC"
+  },
+  "model": {
+    "version": "vb-bt-1",
+    "name": "Bradley-Terry on sets",
+    "prior_precision": 0.25,
+    "home_prior_precision": 0.1,
+    "prior_precision_grid": [
+      0.0625,
+      0.125,
+      0.25,
+      0.5,
+      1.0,
+      2.0
+    ],
+    "backtest_min_median_matches": 4
+  },
+  "predictions": {
+    "window_days": 3,
+    "min_d1_matches": 6
+  },
+  "game_pages": {
+    "min_d1_matches": 6,
+    "our_top_n": 40,
+    "keyword_matchups": {
+      "$comment": "Matchups with measured search demand in docs/research/keyword-map.csv (Google Ads, US, 12-month average). Pairs are NCAA.com team ids, order ignored.",
+      "pairs": [
+        {
+          "teams": [
+            "nebraska",
+            "penn-st"
+          ],
+          "keyword": "nebraska vs penn state volleyball",
+          "volume": 1900
+        },
+        {
+          "teams": [
+            "texas",
+            "nebraska"
+          ],
+          "keyword": "texas vs nebraska volleyball",
+          "volume": 1600
+        },
+        {
+          "teams": [
+            "nebraska",
+            "wisconsin"
+          ],
+          "keyword": "nebraska vs wisconsin volleyball",
+          "volume": 880
+        }
+      ]
+    }
+  }
+}

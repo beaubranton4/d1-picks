@@ -1,0 +1,27 @@
+{
+  "$comment": "Site-owned. Tunes the GSC/GA4 scripts in scripts/kit for D1 Picks' URL structure and search intent (docs/seo-strategy.md sections 2 and 5). Patterns are JavaScript regex source strings, matched case-insensitively.",
+  "sections": [
+    { "name": "home", "pattern": "^/$" },
+    { "name": "predictions hubs", "pattern": "^/(volleyball|hockey)/predictions$" },
+    { "name": "game pages", "pattern": "^/(volleyball|hockey)/predictions/.+" },
+    { "name": "ratings", "pattern": "^/(volleyball|hockey)/ratings$" },
+    { "name": "results", "pattern": "^/results(/|$)" },
+    { "name": "methodology", "pattern": "^/methodology(/|$)" },
+    { "name": "about & policy", "pattern": "^/(about|editorial-policy|responsible-gambling|authors)(/|$)" }
+  ],
+  "genericPaths": ["^/$", "^/about", "^/editorial-policy", "^/responsible-gambling", "^/authors(/|$)"],
+  "excludePaths": [],
+  "intentTiers": [
+    { "tier": "T0", "label": "not our reader", "patterns": ["\\bjobs?\\b", "\\bcamps?\\b", "\\btickets?\\b", "\\broster\\b", "\\bhighlights?\\b", "\\bstream(ing)?\\b"] },
+    { "tier": "T1", "label": "wants a number for a match now", "patterns": ["\\bvs\\.?\\b", "\\bprediction(s)?\\b", "\\bpicks?\\b", "\\bodds\\b", "\\bspread\\b"] },
+    { "tier": "T2", "label": "wants ratings or the tournament picture", "patterns": ["\\brankings?\\b", "\\bratings?\\b", "\\brpi\\b", "\\bbracketology\\b", "\\bbracket\\b", "\\bpairwise\\b"] },
+    { "tier": "T3", "label": "adjacent, weak signal", "patterns": ["\\bvolleyball\\b", "\\bhockey\\b", "\\bncaa\\b", "\\bcollege\\b"] }
+  ],
+  "defaultTier": "T3",
+  "builtThings": [
+    { "pattern": "volleyball (prediction|predictions|picks|odds)", "tool": "/volleyball/predictions", "built": "Today's slate with model win probabilities and set-score odds" },
+    { "pattern": "volleyball (rankings|ratings|power)", "tool": "/volleyball/ratings", "built": "Model ratings for every D1 team, updated daily" },
+    { "pattern": "(record|results|track record|accuracy)", "tool": "/results", "built": "The graded prediction ledger" }
+  ],
+  "stopwords": []
+}

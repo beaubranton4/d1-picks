@@ -1,0 +1,11 @@
+{
+  "$comment": "Auto-publish guardrails (see CLAUDE.md, 'Auto-publish exception'). The pipeline reads this before it creates any game page. game_pages_enabled is the kill switch: set it to false when Search Console shows fewer than half of the submitted game pages indexed after 4 weeks, and keep it false until that recovers.",
+  "game_pages_enabled": true,
+  "max_game_pages_per_sport_per_day": 5,
+  "max_game_pages_site_per_day": 12,
+  "kill_switch_review": {
+    "min_indexed_share": 0.5,
+    "review_after_days": 28,
+    "how": "node scripts/kit/gsc/inspect.mjs on every /volleyball/predictions/<slug> URL older than review_after_days, or the Search Console Pages report filtered to /volleyball/predictions/."
+  }
+}
