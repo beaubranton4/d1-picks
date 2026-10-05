@@ -1,33 +1,28 @@
 import Link from 'next/link';
-
-// College baseball season bounds
-const SEASON_START = '2026-02-13';
-const SEASON_END = '2026-06-30'; // CWS typically ends late June
+import { PICK_DATES } from '@/lib/hardcoded-picks';
 
 interface DateNavigationProps {
   currentDate: string;
 }
 
+function shortLabel(date: string): string {
+  return new Date(date + 'T00:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+}
+
+// Navigates between dates that have real picks; no other date has a page.
 export function DateNavigation({ currentDate }: DateNavigationProps) {
   const current = new Date(currentDate + 'T00:00:00');
-  const seasonStart = new Date(SEASON_START + 'T00:00:00');
-  const seasonEnd = new Date(SEASON_END + 'T00:00:00');
 
-  const prev = new Date(current);
-  prev.setDate(prev.getDate() - 1);
-  const prevStr = prev.toISOString().split('T')[0];
-  const prevLabel = prev.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-
-  const next = new Date(current);
-  next.setDate(next.getDate() + 1);
-  const nextStr = next.toISOString().split('T')[0];
-  const nextLabel = next.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+  const prevStr = [...PICK_DATES].reverse().find(d => d < currentDate);
+  const nextStr = PICK_DATES.find(d => d > currentDate);
+  const prevLabel = prevStr ? shortLabel(prevStr) : '';
+  const nextLabel = nextStr ? shortLabel(nextStr) : '';
 
   const currentLabel = current.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
 
   // Check if navigation is allowed
-  const canGoPrev = prev >= seasonStart;
-  const canGoNext = next <= seasonEnd;
+  const canGoPrev = Boolean(prevStr);
+  const canGoNext = Boolean(nextStr);
 
   return (
     <div className="flex items-center gap-2 text-sm">

@@ -1,7 +1,7 @@
 import { redirect } from 'next/navigation';
+import { PICK_DATES } from '@/lib/hardcoded-picks';
 
 export default function HomePage() {
-  // Redirect to today's baseball scoreboard
-  const today = new Date().toISOString().split('T')[0];
-  redirect(`/baseball/${today}`);
+  // Redirect to the most recent date that has real picks
+  redirect(`/baseball/${PICK_DATES[PICK_DATES.length - 1]}`);
 }

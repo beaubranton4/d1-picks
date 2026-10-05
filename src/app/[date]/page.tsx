@@ -1,34 +1,19 @@
-import { redirect } from 'next/navigation';
+import { permanentRedirect } from 'next/navigation';
+import { PICK_DATES } from '@/lib/hardcoded-picks';
 
 interface PageProps {
   params: Promise<{ date: string }>;
 }
 
+// Only legacy URLs for dates with real picks redirect. Anything else 404s.
+export const dynamicParams = false;
+
 // Redirect old /{date} URLs to /baseball/{date}
 export default async function LegacyDateRedirect({ params }: PageProps) {
   const { date } = await params;
-  redirect(`/baseball/${date}`);
+  permanentRedirect(`/baseball/${date}`);
 }
 
-// Generate static redirects for all dates from season start to today + 7 days
 export async function generateStaticParams() {
-  const dates: Array<{ date: string }> = [];
-
-  // Season start date
-  const seasonStart = new Date('2026-02-13');
-
-  // Today + 7 days
-  const today = new Date();
-  const endDate = new Date(today);
-  endDate.setDate(endDate.getDate() + 7);
-
-  // Generate all dates from season start to end date
-  const current = new Date(seasonStart);
-  while (current <= endDate) {
-    const dateStr = current.toISOString().split('T')[0];
-    dates.push({ date: dateStr });
-    current.setDate(current.getDate() + 1);
-  }
-
-  return dates;
+  return PICK_DATES.map(date => ({ date }));
 }

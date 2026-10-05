@@ -3,7 +3,7 @@ import { ScoreboardCard } from '@/components/ScoreboardCard';
 import { EmailCapture } from '@/components/EmailCapture';
 import { DailyArticleBanner } from '@/components/DailyArticleBanner';
 import { fetchESPNGames, type ESPNGame } from '@/lib/scrapers/espn';
-import { isPickedGame } from '@/lib/hardcoded-picks';
+import { isPickedGame, normalizeTeam, PICK_DATES, type HardcodedPick } from '@/lib/hardcoded-picks';
 import { getPicksForDate } from '@/lib/content/picks';
 import { generateConsistentWriteUp } from '@/lib/writeup-generator';
 import { getPerformanceStats } from '@/lib/calculators/performance';
@@ -15,6 +15,9 @@ import pickResultsData from '@/lib/data/pick-results.json';
 interface PageProps {
   params: Promise<{ date: string }>;
 }
+
+// Only dates with real picks get a page. Any other date or path segment 404s.
+export const dynamicParams = false;
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { date } = await params;
@@ -39,7 +42,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       description: `College baseball scoreboard and picks.`,
     },
     alternates: {
-      canonical: `https://d1picks.com/baseball/${date}`,
+      canonical: `https://www.d1picks.com/baseball/${date}`,
     },
   };
 }
@@ -69,20 +72,18 @@ export default async function BaseballScoreboardPage({ params }: PageProps) {
   // Load picks from JSON for this date
   const dailyPicks = await getPicksForDate(date);
 
-  // Helper to find matching pick for a team
-  const findPickForTeam = (teamName: string): ManualPick | undefined => {
-    const normalized = teamName.toLowerCase().replace(/\s+/g, '');
-    return dailyPicks.find(pick =>
-      normalized.includes(pick.team.toLowerCase().replace(/\s+/g, ''))
-    );
+  // Helper to find the write-up for a pick: exact school-name match, never substring
+  const findPickForTeam = (pick: HardcodedPick): ManualPick | undefined => {
+    const school = normalizeTeam(pick.team);
+    return dailyPicks.find(p => normalizeTeam(p.team) === school);
   };
 
   // Enrich games with pick data and write-ups
   const gamesWithPicks: GameWithPick[] = espnGames.map(game => {
     const { isPick, pickedTeam, pickData: hardcodedPickData } = isPickedGame(
       date,
-      game.homeTeam.displayName,
-      game.awayTeam.displayName
+      game.homeTeam,
+      game.awayTeam
     );
 
     let writeUp: string | undefined;
@@ -106,7 +107,7 @@ export default async function BaseballScoreboardPage({ params }: PageProps) {
       }
 
       // Try to find the pick data from JSON for write-up
-      const jsonPickData = findPickForTeam(pickedTeam);
+      const jsonPickData = hardcodedPickData ? findPickForTeam(hardcodedPickData) : undefined;
       if (jsonPickData) {
         writeUp = jsonPickData.analysis;
         // JSON data can override hardcoded moneyline/sportsbook if present
@@ -322,25 +323,7 @@ export default async function BaseballScoreboardPage({ params }: PageProps) {
   );
 }
 
-// Generate static pages for all dates from season start to today + 7 days
+// Generate static pages only for dates that carry real picks
 export async function generateStaticParams() {
-  const dates: Array<{ date: string }> = [];
-
-  // Season start date
-  const seasonStart = new Date('2026-02-13');
-
-  // Today + 7 days
-  const today = new Date();
-  const endDate = new Date(today);
-  endDate.setDate(endDate.getDate() + 7);
-
-  // Generate all dates from season start to end date
-  const current = new Date(seasonStart);
-  while (current <= endDate) {
-    const dateStr = current.toISOString().split('T')[0];
-    dates.push({ date: dateStr });
-    current.setDate(current.getDate() + 1);
-  }
-
-  return dates;
+  return PICK_DATES.map(date => ({ date }));
 }
