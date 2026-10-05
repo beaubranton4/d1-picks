@@ -1,0 +1,54 @@
+{
+  "$comment": "Site-owned. The single source of truth for site identity. src/kit/config.ts and every script in scripts/kit read this file; nothing site-specific is hardcoded anywhere else. canonicalHost is www by Beau's decision (2026-10-04), an explicit exception to the kit's apex default; the apex must 308 to www in Vercel.",
+  "domain": "d1picks.com",
+  "canonicalHost": "www.d1picks.com",
+  "name": "D1 Picks",
+  "tagline": "College sports predictions from a model that shows its work, graded in public.",
+  "description": "Win probabilities, set-score odds and team ratings for D1 college sports, from a published model. Every prediction is logged before first serve and graded.",
+  "locale": "en_US",
+  "language": "en",
+  "contactEmail": "",
+  "gscProperty": "sc-domain:d1picks.com",
+  "ga4MeasurementId": "",
+  "ga4PropertyId": "",
+  "brandRegex": "d1\\s*picks",
+  "organization": {
+    "logo": "/logo.png",
+    "sameAs": []
+  },
+  "authors": [
+    {
+      "slug": "beau-branton",
+      "name": "Beau Branton",
+      "bio": "Beau Branton is a data analyst and founder who builds models and reference sites from public data. He studied at Stanford University and played professional baseball in the Seattle Mariners organization.",
+      "credentials": [
+        "Stanford University alumnus",
+        "Data analyst",
+        "Former professional baseball player, Seattle Mariners organization"
+      ],
+      "photo": "",
+      "sameAs": []
+    }
+  ],
+  "affiliateTags": {},
+  "releaseCadence": {
+    "maxEditorialPerWeek": 3,
+    "exemptPaths": [
+      "^/(volleyball|hockey)/(predictions|ratings)$",
+      "^/volleyball/predictions/[a-z0-9-]+-vs-[a-z0-9-]+-\\d{4}-\\d{2}-\\d{2}$",
+      "^/results$"
+    ]
+  },
+  "collections": {
+    "volleyballGames": {
+      "dir": "content/volleyball-games",
+      "basePath": "/volleyball/predictions",
+      "label": "Volleyball match predictions"
+    }
+  },
+  "verifiedData": [],
+  "contentRules": {
+    "bannedPhrases": ["lock", "guarantee", "can't lose", "cannot lose", "back up the truck", "sure thing", "free money", "max bet"]
+  },
+  "competitors": ["dimers.com", "warrennolan.com", "signalodds.com"]
+}

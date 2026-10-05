@@ -1,0 +1,95 @@
+name: Daily volleyball
+
+# The daily job (README, "The daily job"): pull results from NCAA.com, refit
+# the ratings, grade finished predictions, log new ones before first serve,
+# write gated match previews, run every auto-publish guardrail, commit the
+# data to main and deploy.
+#
+# NOT SCHEDULED. To switch it on, after this file is on main:
+#   1. Uncomment the schedule block below and merge.
+#   2. Optional: add a Vercel Deploy Hook URL as the VERCEL_DEPLOY_HOOK secret
+#      if pushes from github-actions[bot] do not trigger a production deploy.
+# Run it once by hand first: Actions, Daily volleyball, Run workflow.
+
+on:
+  workflow_dispatch:
+  # schedule:
+  #   # 10:15 UTC = 6:15 a.m. Eastern in daylight time (5:15 a.m. in standard
+  #   # time), before the earliest first serve, after last night's finals.
+  #   - cron: '15 10 * * *'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-pipeline
+  cancel-in-progress: false
+
+jobs:
+  daily:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      VERCEL_ENV: production
+      NEXT_TELEMETRY_DISABLED: '1'
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: pipeline/requirements.txt
+
+      - run: pip install -r pipeline/requirements.txt
+
+      - name: Pipeline unit tests
+        run: python -m unittest discover -s pipeline/tests -t .
+
+      - name: Run the pipeline
+        run: python -m pipeline.run daily --sport volleyball
+
+      - name: Guardrails (ledger append-only against the last commit, number trace, caps)
+        run: python -m pipeline.run check --sport volleyball --base HEAD
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+
+      - run: npm ci
+
+      - name: Content lint (generated previews included)
+        run: npm run lint:content
+
+      - name: Unit tests (registry, caps, number trace)
+        run: npm test
+
+      - name: Build
+        run: npm run build
+
+      - name: Commit the day's data
+        id: commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data content
+          if git diff --cached --quiet; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "No new data."
+          else
+            git commit -m "data(volleyball): daily run $(TZ=America/New_York date +%F)"
+            git push
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Deploy
+        if: steps.commit.outputs.changed == 'true'
+        env:
+          HOOK: ${{ secrets.VERCEL_DEPLOY_HOOK }}
+        run: |
+          # The push above deploys through Vercel's Git integration. A deploy
+          # hook is only a fallback for when bot pushes are not built.
+          if [ -n "$HOOK" ]; then curl -fsS -X POST "$HOOK" > /dev/null && echo "Deploy hook called."; else echo "Deploying via the Git push."; fi

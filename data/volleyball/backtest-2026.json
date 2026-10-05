@@ -1,0 +1,114 @@
+{
+ "sport": "volleyball",
+ "season": 2026,
+ "model": "vb-bt-1",
+ "generated_at": "2026-10-05T00:38:25Z",
+ "label": "Walk-forward backtest. Not part of the live record.",
+ "min_median_matches": 4,
+ "prior_precision": 0.25,
+ "first_day": "2026-09-05",
+ "last_day": "2026-10-04",
+ "result": {
+  "matches": 1853,
+  "favorites_won": 1390,
+  "accuracy": 0.7501,
+  "brier": 0.1652,
+  "log_loss": 0.5028,
+  "home_team_won": 0.5623,
+  "calibration": [
+   {
+    "bucket": "50-60",
+    "matches": 411,
+    "avg_predicted": 0.5489,
+    "favorite_won": 0.528
+   },
+   {
+    "bucket": "60-70",
+    "matches": 397,
+    "avg_predicted": 0.6495,
+    "favorite_won": 0.6574
+   },
+   {
+    "bucket": "70-80",
+    "matches": 353,
+    "avg_predicted": 0.7509,
+    "favorite_won": 0.7989
+   },
+   {
+    "bucket": "80-90",
+    "matches": 330,
+    "avg_predicted": 0.8463,
+    "favorite_won": 0.8848
+   },
+   {
+    "bucket": "90-100",
+    "matches": 362,
+    "avg_predicted": 0.9511,
+    "favorite_won": 0.9337
+   }
+  ]
+ },
+ "uncalibrated": {
+  "matches": 1853,
+  "favorites_won": 1390,
+  "accuracy": 0.7501,
+  "brier": 0.1693,
+  "log_loss": 0.5228,
+  "home_team_won": 0.5623
+ },
+ "calibration_scale": 0.6287,
+ "calibration_rows": 1853,
+ "baselines": {
+  "coin_flip": {
+   "brier": 0.25,
+   "log_loss": 0.6931
+  },
+  "home_team": {
+   "accuracy": 0.5623
+  }
+ },
+ "prior_precision_grid": [
+  {
+   "prior_precision": 0.0625,
+   "matches": 1853,
+   "log_loss": 5.4463,
+   "brier": 0.2769,
+   "accuracy": 0.6859
+  },
+  {
+   "prior_precision": 0.125,
+   "matches": 1853,
+   "log_loss": 0.5038,
+   "brier": 0.1644,
+   "accuracy": 0.7528
+  },
+  {
+   "prior_precision": 0.25,
+   "matches": 1853,
+   "log_loss": 0.5028,
+   "brier": 0.1652,
+   "accuracy": 0.7501
+  },
+  {
+   "prior_precision": 0.5,
+   "matches": 1853,
+   "log_loss": 0.5061,
+   "brier": 0.1676,
+   "accuracy": 0.7447
+  },
+  {
+   "prior_precision": 1.0,
+   "matches": 1853,
+   "log_loss": 0.5148,
+   "brier": 0.172,
+   "accuracy": 0.7329
+  },
+  {
+   "prior_precision": 2.0,
+   "matches": 1853,
+   "log_loss": 0.5292,
+   "brier": 0.1784,
+   "accuracy": 0.721
+  }
+ ]
+}

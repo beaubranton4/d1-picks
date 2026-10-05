@@ -1,0 +1,149 @@
+name: GSC Monthly Audit
+
+# Monthly Search Console indexing audit with a Claude review pass. Pushes a
+# dated branch (gsc-audit-YYYY-MM-DD) for a human to review; opens no PR and
+# merges nothing.
+#
+# DISABLED BY DEFAULT: every step no-ops until the repo has the secret below.
+#
+# Setup (once per site):
+#   1. Add the service account as a user on the GSC property (Restricted is
+#      enough for the audit).
+#   2. base64 -i ~/.config/gcloud/dugout-edge-sa.json | gh secret set GSC_SA_KEY_BASE64
+#   3. CLAUDE_CODE_OAUTH_TOKEN: run `claude setup-token` and
+#      gh secret set CLAUDE_CODE_OAUTH_TOKEN (uses your Claude subscription).
+#
+# Pass 1 is deterministic (scripts/kit/gsc/audit.mjs, no LLM). Pass 2 runs
+# only when the report has buckets that need judgement.
+
+on:
+  schedule:
+    - cron: '0 14 15 * *' # 15th of each month, 14:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  id-token: write
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - name: Gate on GSC_SA_KEY_BASE64
+        id: gate
+        env:
+          KEY: ${{ secrets.GSC_SA_KEY_BASE64 }}
+        run: |
+          if [ -n "$KEY" ]; then echo "enabled=true" >> "$GITHUB_OUTPUT"
+          else echo "::notice::GSC_SA_KEY_BASE64 is not set; GSC audit disabled for this repo."; echo "enabled=false" >> "$GITHUB_OUTPUT"; fi
+
+      - uses: actions/checkout@v7
+        if: steps.gate.outputs.enabled == 'true'
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v7
+        if: steps.gate.outputs.enabled == 'true'
+        with:
+          node-version: 24
+          cache: npm
+
+      - if: steps.gate.outputs.enabled == 'true'
+        run: npm ci
+
+      - name: Decode service-account key
+        if: steps.gate.outputs.enabled == 'true'
+        env:
+          GSC_SA_KEY_BASE64: ${{ secrets.GSC_SA_KEY_BASE64 }}
+        run: |
+          mkdir -p "$RUNNER_TEMP/gcloud"
+          echo "$GSC_SA_KEY_BASE64" | base64 -d > "$RUNNER_TEMP/gcloud/sa.json"
+          echo "GSA_KEY_PATH=$RUNNER_TEMP/gcloud/sa.json" >> "$GITHUB_ENV"
+
+      - name: Pass 1, deterministic audit
+        if: steps.gate.outputs.enabled == 'true'
+        # Exit 0 = clean, 1 = issues found (Pass 2 handles them). Anything else
+        # means the audit itself broke; fail loudly rather than report "clean".
+        run: |
+          set +e
+          node scripts/kit/gsc/audit.mjs
+          code=$?
+          set -e
+          if [ "$code" -gt 1 ]; then
+            echo "::error::GSC audit failed (exit $code). Check GSC_SA_KEY_BASE64, the service account's access to the property, and gscProperty."
+            exit "$code"
+          fi
+          test -f "docs/gsc-audits/$(date -u +%Y-%m).md" || { echo "::error::GSC audit wrote no report"; exit 1; }
+
+      - name: Audit metadata
+        id: meta
+        if: steps.gate.outputs.enabled == 'true'
+        run: |
+          echo "ymd=$(date -u +%Y-%m-%d)" >> "$GITHUB_OUTPUT"
+          echo "ym=$(date -u +%Y-%m)" >> "$GITHUB_OUTPUT"
+          echo "branch=gsc-audit-$(date -u +%Y-%m-%d)" >> "$GITHUB_OUTPUT"
+          echo "report=docs/gsc-audits/$(date -u +%Y-%m).md" >> "$GITHUB_OUTPUT"
+
+      - name: Do any buckets need judgement?
+        id: needs_claude
+        if: steps.gate.outputs.enabled == 'true'
+        run: |
+          if [ -f "${{ steps.meta.outputs.report }}" ] && grep -E '^## (404|5XX|CANONICAL_MISMATCH|DUPLICATE_CHOSEN_DIFFERENT|REDIRECT|NOT_INDEXED_OTHER|NOT_DISCOVERED):' "${{ steps.meta.outputs.report }}" > /dev/null; then
+            echo "needed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "needed=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Pass 2, Claude judgement-call fixes
+        if: steps.gate.outputs.enabled == 'true' && steps.needs_claude.outputs.needed == 'true'
+        continue-on-error: true
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          claude_args: '--model opus --max-turns 60 --allowed-tools Read,Edit,Write,Bash,Grep,Glob'
+          prompt: |
+            Review the GSC indexing audit at `${{ steps.meta.outputs.report }}`
+            (run ${{ steps.meta.outputs.ymd }}). Read `CLAUDE.md` and
+            `.claude/commands/kit-gsc-audit.md` first; the fix playbook there
+            is authoritative.
+
+            For each bucket:
+            - 404: add a 301 in `next.config.ts` `redirects()` to the closest
+              parent page, only when you are confident of the target.
+            - CANONICAL_MISMATCH: route the page's metadata through
+              `buildMetadata()` from `src/kit/seo/metadata.ts`.
+            - DUPLICATE_CHOSEN_DIFFERENT: canonical to Google's choice if the
+              content is identical; 301 if one URL is obsolete. Explain.
+            - 5XX: do not change code; document what you find.
+            - REDIRECT / NOT_INDEXED_OTHER / NOT_DISCOVERED: verify and note.
+
+            Hard constraints:
+            - Only modify `next.config.ts`, `src/app/**`, `src/site/**`,
+              `content/**` and `${{ steps.meta.outputs.report }}`.
+            - Never touch `src/kit/**`, `scripts/**`, `.github/**`, `.env*`,
+              `package.json` or `package-lock.json`.
+            - Never change a publishDate or the release schedule.
+            - If you changed any .ts/.tsx, run `npx tsc --noEmit` and undo
+              changes that fail.
+            - Append a `## Claude's notes` section to the report explaining
+              every decision, including what you skipped and why.
+
+      - name: Commit and push review branch
+        if: steps.gate.outputs.enabled == 'true'
+        env:
+          BRANCH: ${{ steps.meta.outputs.branch }}
+          YMD: ${{ steps.meta.outputs.ymd }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if [ -z "$(git status --porcelain -uall)" ]; then echo "Audit clean; nothing to push."; exit 0; fi
+          UNEXPECTED=$(git status --porcelain -uall | awk '{print $2}' | grep -vE '^(docs/gsc-audits/|src/app/|src/site/|content/|next\.config\.ts$)' || true)
+          if [ -n "$UNEXPECTED" ]; then echo "Refusing to commit; unexpected files changed:"; echo "$UNEXPECTED"; exit 1; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git checkout -B "$BRANCH"
+          git add -A docs/gsc-audits src/app src/site content next.config.ts
+          git commit -m "GSC: monthly audit + review ($YMD)"
+          git push -f "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "HEAD:refs/heads/${BRANCH}"
+          echo "Review: https://github.com/${GITHUB_REPOSITORY}/compare/main...${BRANCH}"

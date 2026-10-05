@@ -1,15 +1,102 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss' source('../');
+
+/*
+ * D1 Picks design tokens.
+ * Palette: the volleyball itself (cobalt and ball yellow) on cool court-white,
+ * with deep navy ink. One family, Archivo, used at two widths: condensed and
+ * heavy for headlines and big numbers (the loud part), normal width for
+ * reading. The signature element is the net bar: a split bar with a net at
+ * 50%, away share in cobalt from the left, home share in yellow from the right.
+ */
+@theme {
+  --font-sans: var(--font-archivo), ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+  --color-paper: #f3f5f9;
+  --color-card: #ffffff;
+  --color-ink: #121c33;
+  --color-muted: #55617d;
+  --color-line: #d3dae6;
+  --color-cobalt: #1e48d6;
+  --color-cobalt-deep: #1636a3;
+  --color-ball: #ffc93c;
+  --color-ball-soft: #fff1c7;
+  --color-hit: #0e7a4e;
+  --color-miss: #c22f3a;
+  --color-brand: #1e48d6;
+}
 
 html {
-  scroll-behavior: smooth;
+  color-scheme: light;
 }
 
 body {
-  @apply bg-mlb-dark text-mlb-textPrimary;
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-variation-settings: 'wdth' 100;
 }
 
-::selection {
-  @apply bg-mlb-blue text-white;
+/* Condensed heavy display type: headlines, wordmark, big numbers. */
+.display {
+  font-variation-settings: 'wdth' 64;
+  font-weight: 800;
+  letter-spacing: -0.005em;
+  line-height: 0.95;
+}
+.cond {
+  font-variation-settings: 'wdth' 78;
+}
+.num {
+  font-variant-numeric: tabular-nums;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-cobalt);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+a {
+  text-underline-offset: 3px;
+}
+
+/* Long-form content (methodology, policies, generated analysis). No typography plugin. */
+.prose {
+  max-width: 42rem;
+  font-size: 1.0625rem;
+  line-height: 1.65;
+}
+.prose > * + * { margin-top: 1rem; }
+.prose h2 {
+  margin-top: 2.25rem;
+  font-size: 1.75rem;
+  line-height: 1.05;
+  font-variation-settings: 'wdth' 72;
+  font-weight: 800;
+}
+.prose h3 { margin-top: 1.5rem; font-size: 1.2rem; font-weight: 700; }
+.prose a { color: var(--color-cobalt-deep); text-decoration: underline; }
+.prose ul { list-style: disc; padding-left: 1.5rem; }
+.prose ol { list-style: decimal; padding-left: 1.5rem; }
+.prose li + li { margin-top: 0.4rem; }
+.prose strong { font-weight: 700; }
+.prose code { font-size: 0.92em; background: var(--color-card); border: 1px solid var(--color-line); border-radius: 3px; padding: 0 0.25em; }
+
+/* Data tables: ruled rows, tabular figures, header that stays put. */
+.data-table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+.data-table th {
+  position: sticky;
+  top: 0;
+  background: var(--color-ink);
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.8rem;
+  text-align: left;
+  padding: 0.55rem 0.6rem;
+  white-space: nowrap;
+}
+.data-table td { padding: 0.5rem 0.6rem; border-bottom: 1px solid var(--color-line); vertical-align: middle; }
+.data-table tbody tr:hover td { background: #eef2fb; }
+.data-table .r { text-align: right; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
 }

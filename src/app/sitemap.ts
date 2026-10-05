@@ -1,14 +1,10 @@
 import type { MetadataRoute } from 'next';
-import { PICK_DATES } from '@/lib/hardcoded-picks';
+import { buildSitemap } from '@/kit/seo/sitemap';
+import { getAllPages } from '@/site/pages';
 
-const SITE_URL = 'https://www.d1picks.com';
+// Released pages only; regenerated hourly so scheduled pages join on their date.
+export const revalidate = 3600;
 
-// Only pages that render real picks belong here. No redirects, no empty dates.
 export default function sitemap(): MetadataRoute.Sitemap {
-  return PICK_DATES.map(date => ({
-    url: `${SITE_URL}/baseball/${date}`,
-    lastModified: date,
-    changeFrequency: 'yearly',
-    priority: 0.8,
-  }));
+  return buildSitemap(getAllPages());
 }

@@ -1,0 +1,15 @@
+{
+ "$comment": "Written by the pipeline. The site reads the newest files through this manifest.",
+ "sport": "volleyball",
+ "season": 2026,
+ "model": "vb-bt-1",
+ "updated_at": "2026-10-05T00:38:25Z",
+ "results": "results-2026.json",
+ "ratings": "ratings/2026-10-04.json",
+ "backtest": "backtest-2026.json",
+ "predictions": [
+  "predictions/2026-10.jsonl"
+ ],
+ "grades": [],
+ "game_pages": "game-pages.json"
+}

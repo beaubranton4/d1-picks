@@ -1,0 +1,40 @@
+{"ts": "2026-10-04", "endpoint": "appendix/user_data", "params": "-", "cost": 0, "balance_before": 49.971688}
+{"ts": "2026-10-04", "endpoint": "dataforseo_labs/google/ranked_keywords/live", "params": "target=d1picks.com limit=100", "cost": 0.01212}
+{"ts": "2026-10-04", "endpoint": "dataforseo_labs/google/keyword_suggestions/live", "params": "seed=college baseball picks", "cost": 0.01212, "file": "02-suggest-college-baseball-picks.json"}
+{"ts": "2026-10-04", "endpoint": "dataforseo_labs/google/keyword_suggestions/live", "params": "seed=college football picks +clickstream", "cost": 0.027, "file": "03-suggest-college-football-picks.json"}
+{"ts": "2026-10-04", "endpoint": "dataforseo_labs/google/keyword_suggestions/live", "params": "seed=college football predictions", "cost": 0.01524, "file": "04-suggest-college-football-predictions.json"}
+{"ts": "2026-10-04", "endpoint": "keywords_data/google_ads/search_volume/live", "params": "250 curated keywords, date_from 2024-09-01", "cost": 0.09, "file": "05-google-ads-search-volume-250kw.json"}
+{"ts": "2026-10-04", "endpoint": "keywords_data/google_ads/search_volume/live", "params": "re-query of 105 null keywords from 05", "cost": 0.09, "file": "06-google-ads-search-volume-105-requery.json"}
+{"ts": "2026-10-04", "endpoint": "dataforseo_labs/google/keyword_overview/live", "params": "250 curated keywords, clickstream+serp_info", "cost": 0.05028, "file": "07-labs-keyword-overview-250kw.json"}
+{"ts": "2026-10-04", "endpoint": "serp/google/organic/live/advanced", "params": "serp depth20 async-aio", "cost": 0.0055, "file": "serp-college-softball-picks.json"}
+{"ts": "2026-10-04", "endpoint": "serp/google/organic/live/advanced", "params": "serp depth20 async-aio", "cost": 0.0055, "file": "serp-womens-college-basketball-picks.json"}
+{"ts": "2026-10-04", "endpoint": "serp/google/organic/live/advanced", "params": "serp depth20 async-aio", "cost": 0.0035, "file": "serp-college-world-series-odds.json"}
+{"ts": "2026-10-04", "endpoint": "serp/google/organic/live/advanced", "params": "serp depth20 async-aio", "cost": 0.0035, "file": "serp-march-madness-predictions.json"}
+{"ts": "2026-10-04", "endpoint": "serp/google/organic/live/advanced", "params": "serp depth20 async-aio", "cost": 0.0035, "file": "serp-college-baseball-rankings.json"}
+{"ts": "2026-10-04", "endpoint": "serp/google/organic/live/advanced", "params": "nebraska vs penn state volleyball prediction depth30 -> 40101 Internal SE Server Error (charged)", "cost": 0.002, "file": null}
+{"ts": "2026-10-04", "endpoint": "serp/google/organic/live/advanced", "params": "serp depth30 async-aio", "cost": 0.007, "file": "serp-alabama-vs-tennessee-prediction.json"}
+{"ts": "2026-10-04", "endpoint": "serp/google/organic/live/advanced", "params": "serp depth30 async-aio", "cost": 0.007, "file": "serp-michigan-vs-michigan-state-hockey-prediction.json"}
+{"ts": "2026-10-04", "endpoint": "serp/google/organic/live/advanced", "params": "serp depth30 async-aio", "cost": 0.007, "file": "serp-duke-vs-unc-prediction.json"}
+{"ts": "2026-10-04", "endpoint": "serp/google/organic/live/advanced", "params": "serp depth30 async-aio", "cost": 0.007, "file": "serp-lsu-vs-tennessee-baseball-prediction.json"}
+{"ts": "2026-10-04", "endpoint": "serp/google/organic/live/advanced", "params": "serp depth30 async-aio", "cost": 0.007, "file": "serp-south-carolina-vs-uconn-prediction.json"}
+{"ts": "2026-10-04", "endpoint": "serp/google/organic/live/advanced", "params": "serp depth30 async-aio", "cost": 0.007, "file": "serp-nebraska-vs-penn-state-volleyball-prediction.json"}
+{"ts": "2026-10-04", "endpoint": "serp/google/organic/live/advanced", "params": "serp depth30 async-aio", "cost": 0.005, "file": "serp-ncaa-volleyball-rpi.json"}
+{"ts": "2026-10-04", "endpoint": "serp/google/organic/live/advanced", "params": "serp depth30 async-aio", "cost": 0.005, "file": "serp-college-football-predictions.json"}
+{"ts": "2026-10-04", "endpoint": "serp/google/organic/live/advanced", "params": "serp depth30 async-aio", "cost": 0.007, "file": "serp-how-to-bet-on-college-baseball.json"}
+{"ts": "2026-10-04", "endpoint": "serp/google/organic/live/advanced", "params": "serp depth30 async-aio", "cost": 0.005, "file": "serp-texas-vs-oklahoma-prediction.json"}
+{"ts": "2026-10-04", "endpoint": "serp/google/organic/live/advanced", "params": "serp depth30 async-aio", "cost": 0.007, "file": "serp-college-baseball-picks.json"}
+{"ts": "2026-10-04", "endpoint": "serp/google/organic/live/advanced", "params": "serp depth30 async-aio (re-run of depth10 inline call for raw)", "cost": 0.007, "file": "serp-college-volleyball-predictions.json"}
+{"ts": "2026-10-04", "endpoint": "serp/google/organic/live/advanced", "params": "serp depth30 async-aio (re-run of depth10 inline call for raw)", "cost": 0.005, "file": "serp-college-hockey-picks.json"}
+{"ts": "2026-10-04", "endpoint": "serp/google/organic/live/advanced", "params": "serp depth30 async-aio (re-run of depth10 inline call for raw)", "cost": 0.005, "file": "serp-college-lacrosse-picks.json"}
+{"ts": "2026-10-04", "endpoint": "serp/google/organic/live/advanced", "params": "serp depth30 async-aio (re-run of depth10 inline call for raw)", "cost": 0.005, "file": "serp-college-football-picks.json"}
+{"ts": "2026-10-04", "endpoint": "serp/google/organic/live/advanced", "params": "serp depth30 async-aio (re-run of depth10 inline call for raw)", "cost": 0.005, "file": "serp-college-basketball-picks.json"}
+{"ts": "2026-10-04", "endpoint": "dataforseo_labs/google/ranked_keywords/live", "params": "dimers.com college/ncaa/march madness/bracket filter limit300", "cost": 0.048, "file": "08-ranked_keywords-dimers.com-college.json"}
+{"ts": "2026-10-04", "endpoint": "dataforseo_labs/google/ranked_keywords/live", "params": "warrennolan.com top300 by etv", "cost": 0.048, "file": "09-ranked_keywords-warrennolan.com.json"}
+{"ts": "2026-10-04", "endpoint": "dataforseo_labs/google/ranked_keywords/live", "params": "signalodds.com top100 by etv", "cost": 0.024, "file": "10-ranked_keywords-signalodds.com.json"}
+{"ts": "2026-10-04", "endpoint": "serp/google/organic/live/advanced", "params": "texas vs oklahoma prediction depth10 async-aio (returned inline; item_types=['ai_overview', 'perspectives', 'organic', 'people_also_ask', 'related_searches']; superseded by depth30 re-run file)", "cost": 0.002, "file": null}
+{"ts": "2026-10-04", "endpoint": "serp/google/organic/live/advanced", "params": "college baseball picks depth10 async-aio (returned inline; item_types=['organic', 'related_searches']; superseded by depth30 re-run file)", "cost": 0.002, "file": null}
+{"ts": "2026-10-04", "endpoint": "serp/google/organic/live/advanced", "params": "college football picks depth10 async-aio (returned inline; item_types=['ai_overview', 'organic', 'perspectives', 'people_also_ask', 'related_searches']; superseded by depth30 re-run file)", "cost": 0.002, "file": null}
+{"ts": "2026-10-04", "endpoint": "serp/google/organic/live/advanced", "params": "college basketball picks depth10 async-aio (returned inline; item_types=['ai_overview', 'organic', 'related_searches']; superseded by depth30 re-run file)", "cost": 0.004, "file": null}
+{"ts": "2026-10-04", "endpoint": "serp/google/organic/live/advanced", "params": "college volleyball predictions depth10 async-aio (returned inline; item_types=['ai_overview', 'perspectives', 'organic', 'people_also_ask', 'images']; superseded by depth30 re-run file)", "cost": 0.004, "file": null}
+{"ts": "2026-10-04", "endpoint": "serp/google/organic/live/advanced", "params": "college hockey picks depth10 async-aio (returned inline; item_types=['organic', 'people_also_ask', 'related_searches']; superseded by depth30 re-run file)", "cost": 0.002, "file": null}
+{"ts": "2026-10-04", "endpoint": "serp/google/organic/live/advanced", "params": "college lacrosse picks depth20 async-aio (returned inline; item_types=['organic', 'related_searches']; superseded by depth30 re-run file)", "cost": 0.0035, "file": null}

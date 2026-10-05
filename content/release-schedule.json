@@ -1,0 +1,4 @@
+{
+  "$comment": "Site-owned. Path -> ISO release date (YYYY-MM-DD releases at 00:00 UTC) for pages that are not MDX. MDX entries (game pages) use frontmatter publishDate instead. A page listed here 404s in production and stays out of the sitemap until its date. Never backdate. The hockey hub is a stub: its date is the strategy's planned launch week, and the page stays noindex until data/hockey exists, so the date passing never ships a thin page.",
+  "/hockey/predictions": "2026-11-02"
+}
