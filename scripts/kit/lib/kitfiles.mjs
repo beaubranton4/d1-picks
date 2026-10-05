@@ -12,7 +12,7 @@ export const KIT_COMMANDS_DIR = '.claude/commands';
 export const isKitCommand = (name) => /^kit-.*\.md$/.test(name);
 
 /** npm packages kit code imports; kit-sync warns when a site lacks one. */
-export const KIT_DEPENDENCIES = ['next', 'react', 'react-dom', 'gray-matter', 'next-mdx-remote'];
+export const KIT_DEPENDENCIES = ['next', 'react', 'react-dom', 'gray-matter', 'next-mdx-remote', '@vercel/analytics', '@vercel/speed-insights'];
 export const KIT_DEV_DEPENDENCIES = ['vitest', 'typescript'];
 
 /** Site files kit code reads (the kit <-> site contract). */

@@ -18,6 +18,8 @@
     "kit:stamp": "node scripts/kit/kit-stamp.mjs"
   },
   "dependencies": {
+    "@vercel/analytics": "^2.0.1",
+    "@vercel/speed-insights": "^2.0.0",
     "gray-matter": "^4.0.3",
     "next": "16.3.8",
     "next-mdx-remote": "^6.0.0",
