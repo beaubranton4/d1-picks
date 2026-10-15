@@ -1,4 +1,4 @@
-import { conferenceTables } from '@/site/derived';
+import { AUTO_BID_NOTE, conferenceTables } from '@/site/derived';
 import { csvResponse } from '@/site/download';
 import { ratings } from '@/site/data';
 import { toCsv } from '@/site/sim';
@@ -23,10 +23,11 @@ export function GET() {
         r.pChampion.toFixed(4),
         r.team.avca_rank,
         ratings().as_of,
+        AUTO_BID_NOTE.csv,
       ]),
     );
     return toCsv(
-      ['conference', 'conference_strength_rank', 'team', 'conf_wins', 'conf_losses', 'd1_wins', 'd1_losses', 'model_rank', 'rating', 'conference_title_probability', 'avca_rank', 'ratings_as_of'],
+      ['conference', 'conference_strength_rank', 'team', 'conf_wins', 'conf_losses', 'd1_wins', 'd1_losses', 'model_rank', 'rating', 'conference_title_probability', 'avca_rank', 'ratings_as_of', 'note'],
       rows,
     );
   });

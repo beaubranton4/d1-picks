@@ -1,5 +1,5 @@
 import { ratings } from '@/site/data';
-import { fieldProjection, rpiTable, SIM } from '@/site/derived';
+import { AUTO_BID_NOTE, fieldProjection, rpiTable, SIM } from '@/site/derived';
 import { csvResponse } from '@/site/download';
 import { toCsv } from '@/site/sim';
 
@@ -33,10 +33,11 @@ export function GET() {
           s.as_of,
           SIM.fieldTrials,
           SIM.fieldSeed,
+          AUTO_BID_NOTE.csv,
         ];
       });
     return toCsv(
-      ['team', 'conference', 'projected_seed', 'projected_bid', 'p_win_league', 'p_automatic_bid', 'p_at_large', 'p_make_field', 'model_rank', 'model_rating', 'rpi_rank', 'avca_rank', 'd1_record', 'ratings_as_of', 'simulations', 'seed'],
+      ['team', 'conference', 'projected_seed', 'projected_bid', 'p_win_league', 'p_automatic_bid', 'p_at_large', 'p_make_field', 'model_rank', 'model_rating', 'rpi_rank', 'avca_rank', 'd1_record', 'ratings_as_of', 'simulations', 'seed', 'note'],
       rows,
     );
   });

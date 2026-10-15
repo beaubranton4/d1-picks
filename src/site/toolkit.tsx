@@ -9,6 +9,7 @@ import { JsonLd } from '@/kit/seo/jsonld';
 import { etStamp } from './format';
 import { linkIndex } from './pages';
 import { ratings } from './data';
+import { AUTO_BID_NOTE } from './derived';
 
 export const EDITORIAL = config.authors[0];
 
@@ -114,5 +115,22 @@ export function MoreData({ current }: { current: string }) {
         ))}
       </ul>
     </section>
+  );
+}
+
+/** Visible note on the automatic-bid assumption (Pac-12). Shown near the top of every page that uses it. */
+export function AutoBidNotice({ leagueName = 'Pac-12' }: { leagueName?: string }) {
+  return (
+    <aside aria-label="Automatic bid assumption" className="mt-6 max-w-3xl border-l-4 border-ball bg-card p-4 text-sm">
+      <p>
+        <strong>An assumption you should know about.</strong> The NCAA lists 31 automatic bids for the 2026 tournament (
+        <a href={AUTO_BID_NOTE.ncaaUrl} rel="noopener" target="_blank" className="underline">NCAA.com</a>,{' '}
+        <a href={AUTO_BID_NOTE.bidSpecUrl} rel="noopener" target="_blank" className="underline">bid specifications</a>). Our data has 32 leagues, and we
+        assume the {leagueName} has no automatic bid this year: its first volleyball championship is not until the week of Nov. 23, and a{' '}
+        <a href={AUTO_BID_NOTE.floUrl} rel="noopener" target="_blank" className="underline">projected list of the 31 qualifiers</a> has no {leagueName} entry.
+        That is our assumption, not an NCAA statement. If it proves wrong, the odds for {leagueName} teams (and, slightly, for teams on the bubble) would
+        change. Checked {AUTO_BID_NOTE.checked}.
+      </p>
+    </aside>
   );
 }

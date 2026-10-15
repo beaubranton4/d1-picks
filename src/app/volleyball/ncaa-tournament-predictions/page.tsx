@@ -7,7 +7,7 @@ import { ratings } from '@/site/data';
 import { fieldProjection, NCAA_FIELD, NO_AUTO_BID, rpiTable, SIM } from '@/site/derived';
 import { pct, shortDate } from '@/site/format';
 import { linkIndex } from '@/site/pages';
-import { Assumptions, Byline, DatasetLd, DownloadLink, MoreData } from '@/site/toolkit';
+import { Assumptions, AutoBidNotice, Byline, DatasetLd, DownloadLink, MoreData } from '@/site/toolkit';
 import { RgLine, SourceLink } from '@/site/ui';
 
 const PATH = '/volleyball/ncaa-tournament-predictions';
@@ -81,6 +81,8 @@ export default function TournamentField() {
           </Link>
         </div>
       </header>
+
+      <AutoBidNotice />
 
       <section aria-labelledby="field" className="mt-10">
         <h2 id="field" className="display text-3xl">The projected 64</h2>

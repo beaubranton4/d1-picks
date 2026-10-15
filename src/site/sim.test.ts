@@ -6,7 +6,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { describe, expect, it } from 'vitest';
-import { conferenceTables, defaultBracket, fieldProjection, modelParams, NCAA_FIELD, NO_AUTO_BID, playedMatches, rpiTable, SIM } from './derived';
+import { AUTO_BID_NOTE, conferenceTables, defaultBracket, fieldProjection, modelParams, NCAA_FIELD, NO_AUTO_BID, playedMatches, rpiTable, SIM } from './derived';
 import { predictions, ratings, type Snapshot } from './data';
 import {
   computeRpi,
@@ -109,6 +109,18 @@ describe('field projection', () => {
     expect(proj.field.length).toBe(64);
     expect(new Set(proj.field.map((f) => f.id)).size).toBe(64);
     expect(proj.field.filter((f) => f.kind === 'auto').length).toBe(31);
+  });
+  it('the automatic-bid assumption is one constant, and flipping it changes the league count', () => {
+    expect(NO_AUTO_BID).toEqual(['pac-12']);
+    const teams = ratings().teams.map((t) => ({ ...t }));
+    const withAssumption = projectField(teams, modelParams(), { trials: 20, seed: 1, noAutoBid: NO_AUTO_BID });
+    const withBid = projectField(teams, modelParams(), { trials: 20, seed: 1, noAutoBid: [] });
+    expect(withAssumption.autoLeagues).toBe(NCAA_FIELD.auto);
+    expect(withBid.autoLeagues).toBe(NCAA_FIELD.auto + 1);
+    expect(withBid.autoLeagues + withBid.atLargeSpots).toBe(64);
+    const pac = teams.find((t) => t.conference === 'pac-12')!;
+    expect(withAssumption.rows.get(pac.id)!.pAuto).toBe(0);
+    expect(AUTO_BID_NOTE.csv).toContain('Pac-12');
   });
   it('is repeatable for a fixed seed and differs for another', () => {
     const teams = ratings().teams.map((t) => ({ ...t }));
