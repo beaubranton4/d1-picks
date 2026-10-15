@@ -19,6 +19,7 @@
 from __future__ import annotations
 
 import argparse
+import pathlib
 import sys
 from datetime import date, timedelta
 
@@ -108,6 +109,9 @@ def cmd_regrade(cfg: dict, back_days: int) -> int:
     store = results.refresh(cfg, dates)
     graded = ledger.grade(cfg, store, now)
     print(f"grades: {len(graded)} new")
+    # The site reads grades through the manifest; keep the current ratings snapshot as is.
+    snap_name = pathlib.PurePosixPath(load_json(sport_dir(cfg["sport"]) / "manifest.json")["ratings"]).name
+    write_manifest(cfg, snap_name)
     problems = run_checks(cfg, None)
     for p in problems:
         print(f"CHECK FAILED {p}")
