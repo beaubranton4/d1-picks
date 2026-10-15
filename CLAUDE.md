@@ -121,3 +121,7 @@ The kit's weekly growth loop (`scripts/kit/growth/`, `.github/workflows/growth-l
 - The loop writes `docs/growth/` and `content/guides/` only. It never touches `pipeline/`, `data/volleyball/`, `content/volleyball-games/` or the model-driven routes, and it shares none of their caps.
 - No betting advice, picks, predictions, promotions or anything implying profit; no sport other than women's D1 volleyball (hockey stays gated). A guide that touches odds carries the 21+ line. All enforced by `growth.config.json` and `src/site/pages.test.ts`; never weaken either to get a page out.
 - Loop PRs are future-dated and merged by hand (`autoMerge: false`).
+
+## Derived data pages (wave 2)
+
+`/volleyball/rpi`, `/conference-standings`, `/ncaa-tournament-predictions`, `/bracket-simulator` and `/matchup-calculator` compute from the pipeline's saved ratings and results in `src/site/sim.ts` and `src/site/derived.ts` (seeded, unit-tested in `sim.test.ts`, which also checks the TypeScript match model against every logged prediction). They never write to `data/`. They are hand-scheduled in `content/release-schedule.json` (two a week, shared cap), their CSV downloads 404 until the page's date, and `docs/pages-wave2.md` lists their assumptions (Pac-12 has no automatic bid, bracket layout). If the pipeline's model changes, update `predictMatch` and its test.

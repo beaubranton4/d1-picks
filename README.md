@@ -11,8 +11,9 @@ Two halves:
   match previews, and checks every auto-publish guardrail. It writes only to
   `data/` and `content/volleyball-games/`.
 - **The site** (Next 16 on [site-kit](https://github.com/beaubranton4/site-kit)):
-  server-renders those files. It computes nothing a reader would call a number,
-  except counts and averages over the graded ledger.
+  server-renders those files. It computes nothing a reader would call a number
+  except counts and averages over the graded ledger, plus the seeded simulations behind the RPI, conference, bracketology,
+  simulator and matchup pages (`src/site/sim.ts`, tested against the ledger).
 
 Rules for changes (kit boundary, guardrails, voice) are in `CLAUDE.md`. The
 SEO plan is `docs/seo-strategy.md`.
