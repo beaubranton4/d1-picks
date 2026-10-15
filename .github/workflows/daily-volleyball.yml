@@ -5,18 +5,17 @@ name: Daily volleyball
 # write gated match previews, run every auto-publish guardrail, commit the
 # data to main and deploy.
 #
-# NOT SCHEDULED. To switch it on, after this file is on main:
-#   1. Uncomment the schedule block below and merge.
-#   2. Optional: add a Vercel Deploy Hook URL as the VERCEL_DEPLOY_HOOK secret
-#      if pushes from github-actions[bot] do not trigger a production deploy.
-# Run it once by hand first: Actions, Daily volleyball, Run workflow.
+# SCHEDULED daily at 10:15 UTC (switched on 2026-10-14 after a clean manual run:
+# ledger append-only, no backfill, caps held, bot push deployed to production
+# through Vercel's Git integration, so no VERCEL_DEPLOY_HOOK secret is needed).
+# To switch it off, comment the schedule block out again.
 
 on:
   workflow_dispatch:
-  # schedule:
-  #   # 10:15 UTC = 6:15 a.m. Eastern in daylight time (5:15 a.m. in standard
-  #   # time), before the earliest first serve, after last night's finals.
-  #   - cron: '15 10 * * *'
+  schedule:
+    # 10:15 UTC = 6:15 a.m. Eastern in daylight time (5:15 a.m. in standard
+    # time), before the earliest first serve, after last night's finals.
+    - cron: '15 10 * * *'
 
 permissions:
   contents: write

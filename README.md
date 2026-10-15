@@ -62,7 +62,7 @@ commit). In order: pipeline unit tests, `pipeline.run daily`, `pipeline.run
 check --base HEAD` (ledger append-only, number trace, caps), content lint,
 `npm test`, build, commit `data/` and `content/` to main, deploy.
 
-**It is not scheduled.** To switch it on once this branch is merged to main:
+**It is scheduled (10:15 UTC daily)**, switched on after a clean manual run on 2026-10-14. The rollout steps were:
 
 1. Run it once by hand (Actions, Daily volleyball, Run workflow) and check the commit it makes.
 2. Uncomment the `schedule:` block (10:15 UTC daily) and merge.
