@@ -11,7 +11,7 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 import { getCollection } from '@/kit/content';
 import { createLinkIndex, findOrphans } from '@/kit/links';
 import { validateSeo } from '@/kit/seo/metadata';
-import { FOOTER, NAV, getAllPages } from './pages';
+import { FOOTER, GUIDES_PATH, NAV, getAllPages } from './pages';
 import { PUBLISHING } from './policy';
 
 afterEach(() => vi.unstubAllEnvs());
@@ -89,5 +89,35 @@ describe('auto-publish guardrails', () => {
         expect(allowed.has(n), `${g.slug}: number ${n} does not trace to its facts file`).toBe(true);
       }
     }
+  });
+});
+
+describe('growth-loop guides', () => {
+  const guides = getCollection('guides');
+
+  it('guides live under /guides, apart from every model-driven route', () => {
+    for (const g of guides) {
+      expect(g.path, g.path).toMatch(/^\/guides\/[a-z0-9-]+$/);
+      expect(g.author, `${g.path} author`).toBe('editorial-team');
+    }
+  });
+
+  it('every guide links our ratings and results, cites sources with the date checked, and carries the 21+ line when it touches odds', () => {
+    for (const g of guides) {
+      expect(g.body, `${g.path} ratings link`).toContain('](/volleyball/ratings)');
+      expect(g.body, `${g.path} results link`).toContain('](/results)');
+      expect(g.body, `${g.path} sources`).toMatch(/## Sources and date checked[\s\S]*checked every page below on \d{4}-\d{2}-\d{2}/);
+      if (/\b(odds|bets?|betting|wagers?|sportsbooks?|gambl\w*|moneyline|spreads?|fair lines?|parlays?)\b/i.test(g.body.replace(/## Sources and date checked[\s\S]*$/, ''))) {
+        expect(g.body, `${g.path} 21+ line`).toMatch(/21\+ only/);
+        expect(g.body, `${g.path} rg link`).toContain('](/responsible-gambling)');
+      }
+    }
+  });
+
+  it('the guides hub is registered only when a guide exists, and no guide touches a model-driven path', () => {
+    const pages = getAllPages();
+    expect(pages.some((p) => p.path === GUIDES_PATH)).toBe(guides.length > 0);
+    const modelRoutes = /^\/(volleyball|hockey)\/|^\/results/;
+    expect(pages.filter((p) => p.parent === GUIDES_PATH && modelRoutes.test(p.path))).toEqual([]);
   });
 });

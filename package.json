@@ -15,7 +15,11 @@
     "psi": "node scripts/kit/psi.mjs",
     "release:calendar": "node scripts/kit/release-calendar.mjs",
     "kit:sync": "node scripts/kit/kit-sync.mjs",
-    "kit:stamp": "node scripts/kit/kit-stamp.mjs"
+    "kit:stamp": "node scripts/kit/kit-stamp.mjs",
+    "growth": "node scripts/kit/growth/run.mjs",
+    "growth:dry": "node scripts/kit/growth/run.mjs --dry-run",
+    "growth:verify": "node scripts/kit/growth/verify.mjs",
+    "test:growth": "node --test scripts/kit/growth/test/*.test.mjs"
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",

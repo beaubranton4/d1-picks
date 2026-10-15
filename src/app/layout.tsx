@@ -5,7 +5,7 @@ import type { ReactNode } from 'react';
 import { Analytics } from '@/kit/components/Analytics';
 import { config, siteOrigin } from '@/kit/config';
 import { JsonLd, organization, website } from '@/kit/seo/jsonld';
-import { FOOTER, NAV } from '@/site/pages';
+import { FOOTER, NAV, linkIndex } from '@/site/pages';
 import './globals.css';
 
 // Default for every page: regenerate at most hourly, so a page whose release
@@ -83,7 +83,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             </div>
             <nav aria-label="Footer">
               <ul className="grid grid-cols-2 gap-x-6 gap-y-2 font-semibold text-white">
-                {FOOTER.map((n) => (
+                {FOOTER.filter((n) => linkIndex().has(n.path)).map((n) => (
                   <li key={n.path}>
                     <Link href={n.path} className="hover:underline">
                       {n.name}

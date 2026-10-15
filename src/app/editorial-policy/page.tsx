@@ -56,6 +56,15 @@ export default function EditorialPolicyPage() {
         </li>
       </ul>
 
+      <h2>Guides</h2>
+      <p>
+        A small number of explainers on NCAA volleyball seeding, the RPI and team ratings live under {linkIndex().has('/guides') ? <Link href="/guides">guides</Link> : 'guides'}.
+        They are drafted by an automated process from NCAA and AVCA pages, and a script rejects any draft that cannot be traced to a
+        fetched page. Each guide cites its sources with the date we checked them, links our ratings and results, and carries a live
+        box of our own numbers. No guide makes a prediction, picks a side or gives betting advice, and any guide that mentions odds
+        carries the 21+ line. At most one is published a week, with a future date.
+      </p>
+
       <h2>Sourcing</h2>
       <p>
         Results, schedules and poll ranks come from the NCAA.com scoreboard, and every result we show links to its NCAA.com match

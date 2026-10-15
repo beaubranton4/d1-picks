@@ -9,7 +9,10 @@
 import { config } from '@/kit/config';
 import { getCollection } from '@/kit/content';
 import { createLinkIndex, type PageEntry } from '@/kit/links';
+import { releasedOnly } from '@/kit/release';
 import { hasSport } from './data';
+
+export const GUIDES_PATH = '/guides';
 
 /** Header navigation. Every page links to these. */
 export const NAV = [
@@ -21,6 +24,7 @@ export const NAV = [
 
 export const FOOTER = [
   { name: 'About', path: '/about' },
+  { name: 'Guides', path: GUIDES_PATH },
   { name: 'Editorial policy', path: '/editorial-policy' },
   { name: 'Responsible gambling', path: '/responsible-gambling' },
   { name: 'Methodology', path: '/methodology' },
@@ -38,6 +42,32 @@ export function getAllPages(): PageEntry[] {
     updatedDate: e.updatedDate,
   }));
 
+  // Tournament and ratings explainers written by the growth loop under /guides
+  // (docs/growth/strategy.md). A separate route tree from the model-driven pages.
+  const guides: PageEntry[] = getCollection('guides').map((e) => ({
+    path: e.path,
+    title: e.title,
+    description: e.description,
+    type: 'article',
+    parent: GUIDES_PATH,
+    tags: e.tags,
+    publishDate: e.publishDate,
+    updatedDate: e.updatedDate,
+  }));
+  // The hub only exists once a guide is live: an empty index is a thin page.
+  const guidesHub: PageEntry[] = releasedOnly(guides).length
+    ? [
+        {
+          path: GUIDES_PATH,
+          title: 'NCAA Volleyball Guides: Seeding, RPI and Ratings',
+          label: 'Guides',
+          description: 'Plain-English explainers on NCAA volleyball seeding, the RPI and team ratings, built from NCAA pages and paired with our own ratings.',
+          type: 'hub',
+          parent: '/',
+        },
+      ]
+    : [];
+
   return [
     { path: '/', title: config.name, label: 'Home', description: config.description, type: 'home' },
     {
@@ -49,6 +79,8 @@ export function getAllPages(): PageEntry[] {
       parent: '/',
     },
     ...games,
+    ...guidesHub,
+    ...guides,
     {
       path: '/volleyball/ratings',
       title: 'NCAA Volleyball Ratings',

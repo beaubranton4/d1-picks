@@ -37,6 +37,11 @@
       "dir": "content/volleyball-games",
       "basePath": "/volleyball/predictions",
       "label": "Volleyball match predictions"
+    },
+    "guides": {
+      "dir": "content/guides",
+      "basePath": "/guides",
+      "label": "Guides"
     }
   },
   "verifiedData": [],
