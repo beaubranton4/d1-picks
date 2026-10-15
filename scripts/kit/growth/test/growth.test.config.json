@@ -1,0 +1,105 @@
+{
+  "$comment": "Kit-owned test config for run.test.mjs: independent of any site growth.config.json.",
+  "enabled": false,
+  "site": {
+    "name": "Example Library Guide",
+    "domain": "example.com",
+    "gscProperty": "sc-domain:example.com",
+    "ga4PropertyId": ""
+  },
+  "voiceGuide": "scripts/kit/growth/test/voice.md",
+  "paths": {
+    "dir": "scripts/kit/growth/test/state",
+    "fixtures": "scripts/kit/growth/fixtures"
+  },
+  "content": {
+    "dir": "scripts/kit/growth/test/content",
+    "ext": "mdx",
+    "bodyFormat": "markdown",
+    "urlTemplate": "/guides/{slug}",
+    "categories": [
+      "guides"
+    ],
+    "defaultCategory": "guides",
+    "publishDateField": "publishDate",
+    "dateField": null,
+    "descriptionField": "description",
+    "keywordsField": "tags",
+    "titleMustIncludeYear": false,
+    "author": "test-author",
+    "tools": [],
+    "dataAssets": [],
+    "knownPaths": [
+      "/",
+      "/guides"
+    ],
+    "factPatterns": [
+      "\\b(renew|renewal|replacement|fee|fees|limit|limits|policy|policies|expire|expires|rules?)\\b"
+    ]
+  },
+  "clusters": [
+    {
+      "name": "library-cards",
+      "favor": true,
+      "seeds": [
+        "library card"
+      ]
+    },
+    {
+      "name": "borrowing",
+      "favor": true,
+      "seeds": [
+        "library borrowing limits"
+      ]
+    }
+  ],
+  "skip": {
+    "patterns": [
+      "\\bnear me\\b",
+      "\\bhours\\b"
+    ],
+    "reasons": {
+      "\\bnear me\\b": "local-pack query; a directory page, not an editorial page",
+      "\\bhours\\b": "opening hours are not something we can verify and keep fresh"
+    }
+  },
+  "sources": {
+    "preferDomains": [
+      ".gov",
+      ".edu",
+      ".org"
+    ],
+    "excludeDomains": [
+      "reddit.com",
+      "quora.com",
+      "pinterest.com"
+    ],
+    "extraUrls": []
+  },
+  "caps": {
+    "monthlyUsd": {
+      "dataforseo": 3,
+      "anthropic": 2
+    },
+    "weeklyPages": 3,
+    "perRunPages": 1,
+    "minLeadDays": 3
+  },
+  "release": {
+    "weekdays": [
+      2,
+      4,
+      6
+    ],
+    "maxHorizonDays": 56
+  },
+  "gates": {
+    "minWords": 600,
+    "minInternalLinks": 2,
+    "minVerifiedBlocks": 3,
+    "minSourceDomains": 2,
+    "maxSimilarity": 0.3,
+    "bannedPhrases": []
+  },
+  "autoMerge": true
+}

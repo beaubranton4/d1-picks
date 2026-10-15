@@ -1,0 +1,80 @@
+{
+  "status_code": 20000,
+  "cost": 0.0112,
+  "tasks": [
+    {
+      "status_code": 20000,
+      "result": [
+        {
+          "items": [
+            {
+              "keyword": "how to renew library card online",
+              "keyword_info": {
+                "search_volume": 880,
+                "cpc": 0.4
+              },
+              "keyword_properties": {
+                "keyword_difficulty": 12
+              },
+              "search_intent_info": {
+                "main_intent": "informational"
+              }
+            },
+            {
+              "keyword": "library card replacement fee",
+              "keyword_info": {
+                "search_volume": 320,
+                "cpc": 0.3
+              },
+              "keyword_properties": {
+                "keyword_difficulty": 8
+              },
+              "search_intent_info": {
+                "main_intent": "informational"
+              }
+            },
+            {
+              "keyword": "what is a library card number",
+              "keyword_info": {
+                "search_volume": 1900,
+                "cpc": 0.1
+              },
+              "keyword_properties": {
+                "keyword_difficulty": 20
+              },
+              "search_intent_info": {
+                "main_intent": "informational"
+              }
+            },
+            {
+              "keyword": "how to get a library card online",
+              "keyword_info": {
+                "search_volume": 1300,
+                "cpc": 0.2
+              },
+              "keyword_properties": {
+                "keyword_difficulty": 15
+              },
+              "search_intent_info": {
+                "main_intent": "informational"
+              }
+            },
+            {
+              "keyword": "library hours near me",
+              "keyword_info": {
+                "search_volume": 9000,
+                "cpc": 0.2
+              },
+              "keyword_properties": {
+                "keyword_difficulty": 30
+              },
+              "search_intent_info": {
+                "main_intent": "navigational"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

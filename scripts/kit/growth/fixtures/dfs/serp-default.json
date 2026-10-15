@@ -1,0 +1,39 @@
+{
+  "status_code": 20000,
+  "cost": 0.006,
+  "tasks": [
+    {
+      "status_code": 20000,
+      "result": [
+        {
+          "item_types": [
+            "organic"
+          ],
+          "items": [
+            {
+              "type": "organic",
+              "rank_group": 1,
+              "url": "https://libraries.example/help/renew-your-card",
+              "domain": "libraries.example",
+              "title": "Result 1"
+            },
+            {
+              "type": "organic",
+              "rank_group": 2,
+              "url": "https://cityreads.example/card-policies",
+              "domain": "cityreads.example",
+              "title": "Result 2"
+            },
+            {
+              "type": "organic",
+              "rank_group": 3,
+              "url": "https://ala.example/guides/library-cards",
+              "domain": "ala.example",
+              "title": "Result 3"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -59,8 +59,8 @@ Optional: one `dataforseo_labs/google/ranked_keywords/live` per competitor
 ## Phase 4: brief, then draft as a PR (0 calls)
 
 1. Write the brief to `docs/content-briefs/YYYY-MM-DD-<slug>.md`: target and secondary keywords, search intent, SERP notes, AI-Overview verdict, the built thing (tool/printable/data/listings), outline, internal links (2-3 existing released pages, resolved through the registry), and the sources to cite.
-2. Draft the MDX entry in the right collection with frontmatter `title` (50-60 chars, keyword included), `description` (70-160 chars), `author` (a real author slug), and **`publishDate` in the future, chosen with `/kit-release-plan`**. Never today-or-earlier unless the user explicitly says to publish now.
-3. Body rules: no H1 (the template renders the title), `##` sections, keyword in the first 100 words and one H2, images only through `<Img>`, affiliate links only through `<AffiliateLink id>`. Every statistic links to its source. No invented facts, people, businesses, quotes, ratings or stats. First-hand language only when the named author actually did the thing.
+2. Draft the MDX entry in the right collection with frontmatter `title` (50-60 chars, keyword included), `description` (70-160 chars), `author` (the editorial-team slug from `site.config.json`), and **`publishDate` in the future, chosen with `/kit-release-plan`**. Never today-or-earlier unless the user explicitly says to publish now.
+3. Body rules: no H1 (the template renders the title), `##` sections, keyword in the first 100 words and one H2, images only through `<Img>`, affiliate links only through `<AffiliateLink id>`. Every statistic links to its source. No invented facts, people, businesses, quotes, ratings or stats. First-hand language only when it is literally true of the process as built.
 4. `npm run lint:content` must pass.
 5. Create a branch, commit (brief + entry + any images), push, and open a PR whose description lists the target keyword, the publishDate, and the AI-Overview verdict. **Do not merge. Do not set a past date. Do not publish.** The release date does the publishing after a human merges.
 

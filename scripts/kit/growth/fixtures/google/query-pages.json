@@ -1,0 +1,32 @@
+[
+  {
+    "keys": [
+      "how to get a library card",
+      "/guides/how-to-get-a-library-card"
+    ],
+    "clicks": 12,
+    "impressions": 480,
+    "ctr": 0.025,
+    "position": 11.4
+  },
+  {
+    "keys": [
+      "library card replacement fee",
+      "https://example.com/"
+    ],
+    "clicks": 0,
+    "impressions": 140,
+    "ctr": 0,
+    "position": 52
+  },
+  {
+    "keys": [
+      "library card requirements by state",
+      "/guides/how-to-get-a-library-card"
+    ],
+    "clicks": 1,
+    "impressions": 90,
+    "ctr": 0.01,
+    "position": 24
+  }
+]

@@ -1,0 +1,42 @@
+{
+  "status_code": 20000,
+  "cost": 0.006,
+  "tasks": [
+    {
+      "status_code": 20000,
+      "result": [
+        {
+          "item_types": [
+            "ai_overview",
+            "organic"
+          ],
+          "items": [
+            {
+              "type": "ai_overview",
+              "markdown": "A library card number is the unique identifier printed on your card, usually 14 digits, that you use with a PIN to log in to the catalog, place holds and borrow digital titles. You can find it on the back of the card or in your library account page.",
+              "references": [
+                {
+                  "domain": "ala.example"
+                }
+              ]
+            },
+            {
+              "type": "organic",
+              "rank_group": 1,
+              "url": "https://ala.example/guides/library-cards",
+              "domain": "ala.example",
+              "title": "Result 1"
+            },
+            {
+              "type": "organic",
+              "rank_group": 2,
+              "url": "https://libraries.example/help/renew-your-card",
+              "domain": "libraries.example",
+              "title": "Result 2"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
