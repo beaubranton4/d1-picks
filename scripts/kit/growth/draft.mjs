@@ -7,8 +7,27 @@ import { abs } from './lib/config.mjs';
 import { fetchSources } from './lib/sources.mjs';
 import { runGates } from './gates/index.mjs';
 import { sanitize } from './gates/lint.mjs';
+import { applyRequiredBlocks } from './lib/blocks.mjs';
+import { dataAssetSources, findAsset } from './lib/dataassets.mjs';
 
 const SRC_CHARS = 14000;
+
+export function extraRules(cfg) {
+  const out = [];
+  if (cfg.gates.healthClaims) {
+    out.push('Health content is forbidden. Never say or imply that anything treats, cures, prevents, reduces, relieves, heals or detoxes anything; never write "studies show", "research shows", "experts say" or "clinically proven"; never mention recovery, healing time or when to start after surgery; never advise on symptoms, conditions or medical decisions. Describe only licenses, credentials, prices and logistics, stated as what the cited pages say. A script rejects any of these words.');
+  }
+  if (cfg.content.ext === 'mdx') {
+    out.push('This site renders MDX: no tables (use bulleted lists), no curly braces, and no "<" or ">" characters anywhere in the body.');
+  }
+  if ((cfg.content.requiredBlocks ?? []).length) {
+    out.push(`The script inserts these sections itself (${cfg.content.requiredBlocks.map((b) => b.id).join(', ')}); do not write them, a "Sources" section, or any disclaimer.`);
+  }
+  if ((cfg.content.dataAssets ?? []).length) {
+    out.push('When the SOURCE TEXTS are rows of our own data (one row per line, with a source page URL), cite the row\'s page URL for each number. Quote numbers exactly as the row states them; never compute an average, median, range or total yourself.');
+  }
+  return out.map((t, i) => `${10 + i}. ${t}\n`).join('');
+}
 
 export function buildSystem(cfg, voice) {
   return `You write pages for ${cfg.site.name} (${cfg.site.domain}). Voice guide:\n\n${voice}\n\n` +
@@ -17,12 +36,12 @@ export function buildSystem(cfg, voice) {
 2. Never invent facts, products, specs, prices, people, quotes, ratings or statistics. Product facts come only from the sources.
 3. Never claim first-hand experience ("I tested", "we used", "in my experience"). Write as a reference, not a review.
 4. No em dashes, en dashes, emojis, hype or filler phrases (unlock, seamless, game changer, delve, in conclusion, it's important to note).
-5. No H1 in the body (the template renders the title). Use ## and ### sections. Markdown only; tables allowed (pipe tables).
+5. No H1 in the body (the template renders the title). Use ## and ### sections. Markdown only; pipe tables allowed unless a later rule says otherwise.
 6. Hypothetical illustrations with made-up amounts are allowed only in a paragraph that starts with "Example:" or "For example," and has no link.
 7. No affiliate links, no shop links, no calls to buy.
 8. Link to at least ${cfg.gates.minInternalLinks} of the INTERNAL PAGES listed (markdown links with the exact path). ${'' }
 9. Be useful to someone who already read the top results: lead with the answer, then the specifics, then what to do. Say what the sources do not cover.
-Reply with ONE JSON object and nothing else.`;
+${extraRules(cfg)}Reply with ONE JSON object and nothing else.`;
 }
 
 export function buildUser({ cfg, topic, angle, sources, internal }) {
@@ -51,7 +70,10 @@ JSON shape:
  * @returns {{draft, gates, sources, cost, attempts}} draft is null when dropped.
  */
 export async function draftTopic({ cfg, topic, angle, urls, posts, ctxBase, anthropic, fixturesDir, fetchImpl, voice, fixtureName = 'draft' }) {
-  const sources = await fetchSources([...urls, ...(cfg.sources.extraUrls ?? [])], { fixturesDir, fetchImpl });
+  const toolUrls = angle?.tool ? cfg.content.tools.find((t) => t.path === angle.tool)?.sourceUrls ?? [] : [];
+  const sources = await fetchSources([...new Set([...urls, ...toolUrls, ...(cfg.sources.extraUrls ?? [])])], { fixturesDir, fetchImpl });
+  const asset = angle.type === 'data' ? findAsset(cfg, angle.dataFile) : null;
+  if (asset) sources.push(...dataAssetSources(cfg, asset, topic.keyword));
   const okSources = sources.filter((s) => s.ok);
   const domains = new Set(okSources.map((s) => new URL(s.url).hostname.replace(/^www\./, '')));
   if (domains.size < cfg.gates.minSourceDomains) {
@@ -93,7 +115,9 @@ export async function draftTopic({ cfg, topic, angle, urls, posts, ctxBase, anth
       value: parsed.value,
       sourcesUsed: parsed.sources_used ?? [],
     };
-    const { draft, fixes } = sanitize(raw);
+    const clean = sanitize(raw);
+    const fixes = clean.fixes;
+    const draft = applyRequiredBlocks(clean.draft, cfg, ctxBase.today);
     draft.autofixes = fixes;
     const gates = runGates(draft, { ...ctxBase, sources: okSources });
     last = { draft, gates };

@@ -178,3 +178,35 @@ test('the Anthropic cap stops a call before it is made', async () => {
   const a = makeAnthropic({ cfg: c, ledger: l, env: { ANTHROPIC_API_KEY: 'x' } });
   await assert.rejects(() => a.complete({ system: 's', messages: [] }), CapError);
 });
+
+// --- adapter options for sites that were not built from the kit ---
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import { scanPosts } from '../lib/content.mjs';
+import { renderPost } from '../publish.mjs';
+
+test('extraDirs: other collections are scanned read-only; draft/archived and future dates are not released', () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'growth-extra-'));
+  const rel = path.relative(process.cwd(), root);
+  fs.writeFileSync(path.join(root, 'saas-ideas.md'), '---\ntitle: SaaS Ideas\ntarget_keyword: saas ideas\npublish_date: "2020-01-01"\nstatus: published\n---\nBody');
+  fs.writeFileSync(path.join(root, 'later.md'), '---\ntitle: Later\npublish_date: "2999-01-01"\n---\nBody');
+  fs.writeFileSync(path.join(root, 'old.md'), '---\ntitle: Old\nstatus: draft\n---\nBody');
+  const c = withDefaults({ content: { dir: 'no-such-dir', publishDateField: 'publish_date', extraDirs: [{ dir: rel, urlTemplate: '/ideas/{slug}' }] } });
+  const posts = scanPosts(c);
+  const by = Object.fromEntries(posts.map((p) => [p.slug, p]));
+  assert.equal(by['saas-ideas'].path, '/ideas/saas-ideas');
+  assert.deepEqual(by['saas-ideas'].keywords, ['saas ideas']);
+  assert.equal(by['saas-ideas'].released, true);
+  assert.equal(by.later.released, false);
+  assert.equal(by.old.released, false);
+});
+
+test('renderPost: frontmatterCopy and lastUpdatedField follow the site schema', () => {
+  const c = withDefaults({ content: { publishDateField: 'publish_date', dateField: 'date', lastUpdatedField: false, descriptionField: 'excerpt', keywordsField: 'tags', frontmatterCopy: { metaDescription: 'excerpt' }, frontmatterExtras: { image: '/x/{slug}.png' }, author: 'Team' } });
+  const out = renderPost(c, { frontmatter: { title: 'T', slug: 's', category: 'c', excerpt: 'E', keywords: ['k'] }, body: 'Hello' }, '2026-11-02', '2026-10-14');
+  assert.match(out, /publish_date: '?2026-11-02/);
+  assert.match(out, /metaDescription: E/);
+  assert.match(out, /image: \/x\/s\.png/);
+  assert.doesNotMatch(out, /lastUpdated/);
+});

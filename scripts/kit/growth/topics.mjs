@@ -3,7 +3,7 @@
 // cannibalization check. Pure functions over already-fetched data, so every
 // rule is unit-testable; the network calls live in lib/dfs.mjs and lib/google.mjs.
 import { topicOverlap } from './gates/dupes.mjs';
-import { tokens } from './lib/text.mjs';
+import { domainMatches, tokens } from './lib/text.mjs';
 
 const toPath = (url, cfg) => {
   try {
@@ -19,6 +19,7 @@ export function skipReason(keyword, cfg) {
   for (const p of cfg.skip.patterns) {
     if (new RegExp(p, 'i').test(keyword)) return cfg.skip.reasons[p] ?? `matches skip pattern /${p}/`;
   }
+  if ((cfg.allow?.patterns ?? []).length && !cfg.allow.patterns.some((p) => new RegExp(p, 'i').test(keyword))) return cfg.allow.reasons?.['*'] ?? 'outside the allowed clusters (allow.patterns)';
   if (tokens(keyword).length < 2 || keyword.trim().split(/\s+/).length < 3) return 'fewer than 3 words (too competitive)';
   return null;
 }
@@ -122,7 +123,10 @@ export function angleFor(keyword, cfg) {
 
 /** AI-Overview filter. `serp` comes from parseSerp(). */
 export function aioVerdict(candidate, serp, cfg) {
-  const angle = angleFor(candidate.keyword, cfg);
+  const found = angleFor(candidate.keyword, cfg);
+  const okTypes = cfg.gates.valueTypes ?? ['tool', 'data', 'facts'];
+  const angle = found && okTypes.includes(found.type) ? found : null;
+  if (!angle && !okTypes.includes('facts')) return { verdict: 'skip', aio: serp.hasAio, answered: false, angle: null, reason: `no registered ${okTypes.join(' or ')} matches this query, and this site only ships pages that carry one` };
   const answered = serp.hasAio && (serp.aioText || '').length >= cfg.gates.minAioChars;
   const presentNoText = serp.hasAio && !serp.aioText;
   if (answered || presentNoText) {
@@ -136,7 +140,8 @@ export function aioVerdict(candidate, serp, cfg) {
 export function sourceUrls(serp, cfg, max = 6) {
   const bad = (cfg.sources?.excludeDomains ?? []).map((d) => d.toLowerCase());
   const prefer = (cfg.sources?.preferDomains ?? []).map((d) => d.toLowerCase());
-  const rows = serp.organic.filter((o) => o.url && !bad.some((d) => (o.domain ?? '').toLowerCase().endsWith(d)));
+  const only = (cfg.sources?.requireDomains ?? []).map((d) => d.toLowerCase());
+  const rows = serp.organic.filter((o) => o.url && !bad.some((d) => (o.domain ?? '').toLowerCase().endsWith(d)) && (!only.length || only.some((d) => domainMatches(o.domain, d))));
   const rank = (o) => (prefer.some((d) => (o.domain ?? '').toLowerCase().endsWith(d)) ? 0 : 1);
   return rows.sort((a, b) => rank(a) - rank(b) || a.rank - b.rank).slice(0, max).map((o) => o.url);
 }

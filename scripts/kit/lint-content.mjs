@@ -15,6 +15,8 @@
  *   - no em dash, en dash or spaced double hyphen
  *   - no banned hype/AI-slop phrases or model meta-narration
  *   - no zero-width, tag, variation-selector or exotic-space characters
+ *   - with contentRules.healthClaims: no treats/cures/prevents/reduces/detoxes
+ *     claims, no "studies show", no recovery timelines (lib/health-claims.mjs)
  * Site-wide:
  *   - release cadence: at most releaseCadence.maxEditorialPerWeek gated pages
  *     per ISO week from this week on (verified-directory paths exempt)
@@ -28,6 +30,7 @@ import path from 'node:path';
 import { cli } from './lib/cli.mjs';
 import { ROOT, loadConfig } from './lib/config.mjs';
 import { isCadenceExempt, isoWeek, loadSchedule, releaseItems, scanCollections } from './lib/content.mjs';
+import { describeHealthClaims } from './lib/health-claims.mjs';
 
 const { values, positionals } = cli(
   `
@@ -187,6 +190,8 @@ for (const e of entries) {
     if (!allow.has(p.toLowerCase()) && phraseRe(p).test(copy)) err(f, `banned phrase "${p}" (allow deliberately via frontmatter lintAllow)`);
   }
   for (const [re, why] of META_LEAK) if (re.test(copy)) err(f, `meta-leak: ${why}`);
+  // YMYL sites opt in with contentRules.healthClaims. Not waivable per page (lintAllow does not apply).
+  if (cfg.contentRules?.healthClaims) for (const m of describeHealthClaims(copy)) err(f, m);
   if (/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}]/u.test(copy)) warn(f, 'contains an emoji');
   const words = prose.replace(/<[^>]+>/g, ' ').split(/\s+/).filter(Boolean).length;
   if (words < 300) warn(f, `only ${words} words; is this page useful enough to index?`);

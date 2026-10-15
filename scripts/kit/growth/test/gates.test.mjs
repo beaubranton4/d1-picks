@@ -117,3 +117,23 @@ test('sanity: unused sources import keeps the helpers honest', () => {
   assert.equal(sources.length, 2);
   assert.equal(cfg.gates.minWords, 50);
 });
+
+test('bodyIsMdx: braces and "<" in prose fail lint, code spans are exempt, and sites that do not compile MDX are unaffected', async () => {
+  const { withDefaults } = await import('../lib/config.mjs');
+  const mdx = withDefaults({ ...cfg, content: { ...cfg.content, bodyIsMdx: true } });
+  const risky = mkDraft({ body: `${goodBody}\n\nCosts <$100 and uses {braces}.` });
+  assert.match(lintDraft(risky, ctx({ cfg: mdx })).failures.join(), /MDX/);
+  assert.equal(lintDraft(risky, ctx()).failures.some((x) => /MDX/.test(x)), false);
+  const safe = mkDraft({ body: `${goodBody}\n\nUse \`<b>\` literally.` });
+  assert.equal(lintDraft(safe, ctx({ cfg: mdx })).failures.some((x) => /MDX/.test(x)), false);
+});
+
+test('requiredLinkPrefixes: the body must link a page under each prefix', async () => {
+  const { withDefaults } = await import('../lib/config.mjs');
+  const need = withDefaults({ ...cfg, gates: { ...cfg.gates, requiredLinkPrefixes: ['/guides/'] } });
+  const known = new Set(['/', '/guides', '/guides/a']);
+  const no = runGates(mkDraft(), ctx({ cfg: need, knownPaths: known }));
+  assert.match(no.results.find((r) => r.name === 'size').failures.join(), /under \/guides\//);
+  const yes = runGates(mkDraft({ body: `${goodBody}\n\nSee [A](/guides/a).` }), ctx({ cfg: need, knownPaths: known }));
+  assert.equal(yes.results.find((r) => r.name === 'size').failures.some((x) => /under/.test(x)), false);
+});

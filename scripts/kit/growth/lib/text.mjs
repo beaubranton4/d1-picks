@@ -3,6 +3,13 @@
 
 const STOP = new Set(['the', 'a', 'an', 'and', 'or', 'for', 'to', 'of', 'in', 'on', 'with', 'my', 'your', 'how', 'do', 'does', 'i', 'is', 'are', 'can', 'what', 'when', 'where', 'by', 'it', 'at', 'from', 'as', 'be', 'vs', 'best', 'guide', 'complete']);
 
+/** Domain-suffix match with a label boundary: ".gov" matches tx.gov; "nih.gov" matches www.nih.gov but not notnih.gov. */
+export const domainMatches = (host, rule) => {
+  const h = String(host ?? '').toLowerCase();
+  const d = String(rule).toLowerCase();
+  return d.startsWith('.') ? h.endsWith(d) : h === d || h.endsWith(`.${d}`);
+};
+
 export const slugify = (s) =>
   String(s).toLowerCase().replace(/&/g, ' and ').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 80);
 

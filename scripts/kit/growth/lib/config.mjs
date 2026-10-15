@@ -24,16 +24,25 @@ export const DEFAULTS = {
     titleMustIncludeYear: false,
     author: '',
     noindexField: null,
-    tools: [], // [{ path, file, keywords: [] }]
+    tools: [], // [{ path, file, keywords: [], sourceUrls?: [] }]; sourceUrls are fetched and saved as sources whenever the tool is the page's angle
     dataAssets: [], // [{ file, keywords: [] }]
     knownPaths: ['/'],
     factPatterns: [], // regexes: queries answerable from cited policy/spec pages
+    requiredBlocks: [], // [{ id, position, markdown, test, when? }] boilerplate inserted before gating (see lib/blocks.mjs)
     publishedLog: null, // optional dedupe log to append to
     frontmatterExtras: {}, // static or {slug} templated extra frontmatter
+    frontmatterCopy: {}, // { extraKey: 'title'|'excerpt'|'keywords'|'slug'|'category' }: copy a drafted field under a second name (e.g. metaDescription: 'excerpt')
+    bodyIsMdx: false, // true when the site compiles the body as MDX (e.g. next-mdx-remote): curly braces and < in prose would break the page, so lint rejects them
+    lastUpdatedField: undefined, // frontmatter key set to the release date; defaults to 'lastUpdated' when dateField is 'date'; false to omit
+    extraDirs: [], // [{ dir, ext?, urlTemplate, category? }]: other content collections (hubs, guides) scanned read-only for the overlap, link and weekly-cap checks. Never written.
   },
-  sources: { preferDomains: [], excludeDomains: [], extraUrls: [] },
+  // requireDomains (non-empty): drafts may only be sourced from, and may only link out to, these domain suffixes
+  // plus the source URLs of registered data assets. For YMYL niches.
+  sources: { preferDomains: [], excludeDomains: [], requireDomains: [], extraUrls: [] },
   clusters: [], // [{ name, seeds: [], favor: bool }]
   skip: { patterns: [], reasons: {} },
+  // allow.patterns (non-empty): a keyword must match at least one, or it is skipped. A hard allowlist for YMYL and gambling-adjacent niches.
+  allow: { patterns: [], reasons: {} },
   dataforseo: { locationCode: 2840, languageCode: 'en', maxKd: 35, minVolume: 50, suggestionsLimit: 100, seedsPerRun: 2, estimates: { keyword_suggestions: 0.02, serp_advanced_aio: 0.006 }, serpTopN: 4 },
   // Cheapest model first. Each rung must still pass every gate; a draft that fails on a rung escalates to the next.
   anthropic: {
@@ -58,6 +67,9 @@ export const DEFAULTS = {
     bannedPhrases: [],
     allowFirstHand: false,
     forbidAffiliateLinks: true,
+    requiredLinkPrefixes: [], // e.g. ['/podcast/']: the body must link at least one internal path under each prefix
+    healthClaims: false, // YMYL health gate: no treats/cures/prevents/reduces/detoxes, no "studies show", no recovery timelines
+    valueTypes: ['tool', 'data', 'facts'], // which value types may ship; drop 'facts' to require a tool or own data
     minAioChars: 200,
   },
   measure: { checkpoints: [14, 28, 60], strikingPosition: [8, 30], minImpressionsStriking: 30, tractionImpressions: 20, pruneAfterDays: 60 },
@@ -104,5 +116,5 @@ export const pageUrl = (cfg, p) => `${origin(cfg)}${p}`;
 export const postPath = (cfg, { category, slug }) => cfg.content.urlTemplate.replace('{category}', category ?? '').replace('{slug}', slug).replace('//', '/');
 
 /** Secrets the weekly workflow needs. */
-export const REQUIRED_SECRETS = ['DATAFORSEO_LOGIN', 'DATAFORSEO_PASSWORD', 'GSC_SA_KEY_BASE64', 'ANTHROPIC_API_KEY', 'GA4_PROPERTY_ID'];
+export const REQUIRED_SECRETS = ['DATAFORSEO_LOGIN', 'DATAFORSEO_PASSWORD', 'GSC_SA_KEY_BASE64', 'ANTHROPIC_API_KEY'];
 export const missingSecrets = (env = process.env) => REQUIRED_SECRETS.filter((k) => !env[k]);
