@@ -101,3 +101,15 @@ Before building any page, ask: **if Google's AI Overview answers this query perf
 ## Commands
 
 `python -m pipeline.run daily|backfill|check` · `python -m unittest discover -s pipeline/tests -t .` · `npm run lint:content` · `npm test` · `npm run build` · `npm run audit -- <url>` · `npm run prerender -- --base <url>` · `/kit-preflight` · `/kit-release-plan` · `/kit-gsc-audit`
+
+## Venture hub
+
+This site is one of Beau's ventures. Before changing anything non-trivial, read its registry file for the domain, repo, Vercel project, decisions and learnings, and the index for the other sites:
+
+- /Users/beaubranton/projects/beaubranton.com/docs/ventures/d1-picks.md
+- /Users/beaubranton/projects/beaubranton.com/docs/ventures/README.md
+
+Rules that apply here:
+- Site strategy and keyword research: docs/seo-strategy.md and docs/research/ (also on branch seo/strategy).
+- House rules (release pacing, no fabricated facts, the AI-Overview filter, no personal names on the site) live in site-kit: /Users/beaubranton/projects/site-kit/CLAUDE.md.
+- A lesson that would help another site belongs in this site's "Learnings" in the registry file, and gets promoted into the user-level skill that owns that job. Cross-site work (new sites, rollouts, shared tooling) belongs in the hub repo, not here.
