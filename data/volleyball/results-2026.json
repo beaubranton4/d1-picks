@@ -10,7 +10,7 @@
   "poll": "AVCA Coaches Poll rank, as NCAA.com shows it on the scoreboard",
   "poll_page": "https://www.ncaa.com/rankings/volleyball-women/d1"
  },
- "updated_at": "2026-10-15T05:25:29Z",
+ "updated_at": "2026-10-15T15:01:39Z",
  "teams": {
   "texas-am": {
    "name": "Texas A&M",
@@ -49731,7 +49731,7 @@
    "date": "2026-10-14",
    "start": "2026-10-14T19:00:00Z",
    "start_known": true,
-   "state": "scheduled",
+   "state": "removed",
    "home": "robert-morris",
    "away": "green-bay",
    "home_sets": null,
