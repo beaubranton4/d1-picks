@@ -1,4 +1,9 @@
 {
-  "$comment": "Site-owned. Path -> ISO release date (YYYY-MM-DD releases at 00:00 UTC) for pages that are not MDX. MDX entries (game pages) use frontmatter publishDate instead. A page listed here 404s in production and stays out of the sitemap until its date. Never backdate. The hockey hub is a stub: its date is the strategy's planned launch week, and the page stays noindex until data/hockey exists, so the date passing never ships a thin page.",
-  "/hockey/predictions": "2026-11-02"
+  "$comment": "Site-owned. Path -> ISO release date (YYYY-MM-DD releases at 00:00 UTC) for pages that are not MDX. MDX entries (game pages) use frontmatter publishDate instead. A page listed here 404s in production and stays out of the sitemap until its date. Never backdate. The hockey hub is a stub: its date is the strategy's planned launch week, and the page stays noindex until data/hockey exists, so the date passing never ships a thin page. Wave 2 data pages (2026-10-21 to 2026-11-04) are hand-scheduled, two a week so the growth loop keeps its one slot under the cap of three; their CSV downloads share the page's date (src/site/download.ts).",
+  "/hockey/predictions": "2026-11-02",
+  "/volleyball/conference-standings": "2026-10-21",
+  "/volleyball/rpi": "2026-10-23",
+  "/volleyball/matchup-calculator": "2026-10-28",
+  "/volleyball/ncaa-tournament-predictions": "2026-10-30",
+  "/volleyball/bracket-simulator": "2026-11-04"
 }

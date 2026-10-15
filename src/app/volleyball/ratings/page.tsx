@@ -31,6 +31,13 @@ export default function VolleyballRatings() {
   const s = ratings();
   const top = s.teams[0];
   const hasMoves = s.teams.some((t) => t.prev_rank != null);
+  const tools = index.keepExisting([
+    '/volleyball/conference-standings',
+    '/volleyball/rpi',
+    '/volleyball/ncaa-tournament-predictions',
+    '/volleyball/bracket-simulator',
+    '/volleyball/matchup-calculator',
+  ]);
 
   return (
     <div>
@@ -121,6 +128,19 @@ export default function VolleyballRatings() {
         Want the matchups these ratings imply? The <Link href="/volleyball/predictions" className="underline">predictions board</Link> turns any two
         ratings into a win probability and set-score odds.
       </p>
+      {tools.length ? (
+        <section aria-labelledby="tools" className="mt-10 border-t-2 border-ink pt-6">
+          <h2 id="tools" className="display text-3xl">Tools built on these ratings</h2>
+          <ul className="mt-3 grid gap-x-8 gap-y-3 sm:grid-cols-2">
+            {tools.map((p) => (
+              <li key={p.path}>
+                <Link href={p.path} className="font-semibold underline">{p.label ?? p.title}</Link>
+                {p.description ? <p className="text-sm text-muted">{p.description}</p> : null}
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
     </div>
   );
 }

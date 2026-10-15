@@ -121,3 +121,42 @@ describe('growth-loop guides', () => {
     expect(pages.filter((p) => p.parent === GUIDES_PATH && modelRoutes.test(p.path))).toEqual([]);
   });
 });
+
+describe('wave 2 data pages', () => {
+  const WAVE2 = [
+    '/volleyball/conference-standings',
+    '/volleyball/rpi',
+    '/volleyball/matchup-calculator',
+    '/volleyball/ncaa-tournament-predictions',
+    '/volleyball/bracket-simulator',
+  ];
+
+  it('are registered, scheduled by date only, and at most two a week', () => {
+    const schedule = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'content/release-schedule.json'), 'utf8')) as Record<string, string>;
+    const perWeek = new Map<string, number>();
+    for (const p of WAVE2) {
+      expect(getAllPages().some((x) => x.path === p), `${p} registered`).toBe(true);
+      const d = schedule[p];
+      expect(d, `${p} scheduled`).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+      expect(d >= '2026-10-21', `${p} is not backdated`).toBe(true);
+      const t = new Date(`${d}T00:00:00Z`);
+      const monday = new Date(t.getTime() - ((t.getUTCDay() + 6) % 7) * 86400_000).toISOString().slice(0, 10);
+      perWeek.set(monday, (perWeek.get(monday) ?? 0) + 1);
+    }
+    for (const [week, n] of perWeek) expect(n, `week of ${week}`).toBeLessThanOrEqual(2);
+  });
+
+  it('none is an orphan once every page is released', () => {
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date('2026-12-01T00:00:00Z'));
+    vi.stubEnv('VERCEL_ENV', 'production');
+    try {
+      const index = createLinkIndex(getAllPages());
+      for (const p of WAVE2) expect(index.has(p), `${p} released`).toBe(true);
+      const navPaths = [...NAV, ...FOOTER].map((n) => n.path);
+      expect(findOrphans(index, { navPaths })).toEqual([]);
+    } finally {
+      vi.useRealTimers();
+    }
+  });
+});

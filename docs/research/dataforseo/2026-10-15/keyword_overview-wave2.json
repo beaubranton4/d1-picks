@@ -1,0 +1,271 @@
+{
+ "$comment": "Extract of the raw DataForSEO response (dataforseo_labs/google/keyword_overview/live, US/en, run 2026-10-15; balance 46.457658 before and 46.414098 after, cost 0.04356). 25 keywords were requested; 18 came back with a record. No record (so no volume claimed): volleyball bracket simulator, ncaa volleyball tournament seeds, volleyball final four predictions, volleyball strength of schedule, ncaa volleyball rankings csv, ncaa volleyball bubble, ncaa volleyball tournament field. Fields kept: search_volume, keyword_difficulty, monthly_searches. The harness did not save the response body, so this is a transcription of the returned values.",
+ "request_cost_usd": 0.04356,
+ "items": [
+  {
+   "keyword": "ncaa volleyball bracket",
+   "search_volume": 49500,
+   "keyword_difficulty": 21,
+   "monthly_searches": {
+    "2025-09": 210,
+    "2025-10": 590,
+    "2025-11": 27100,
+    "2025-12": 673000,
+    "2026-01": 2900,
+    "2026-02": 720,
+    "2026-03": 2900,
+    "2026-04": 1300,
+    "2026-05": 1600,
+    "2026-06": 210,
+    "2026-07": 170,
+    "2026-08": 210
+   }
+  },
+  {
+   "keyword": "volleyball bracketology",
+   "search_volume": 6600,
+   "keyword_difficulty": 4,
+   "monthly_searches": {
+    "2025-09": 260,
+    "2025-10": 590,
+    "2025-11": 6600,
+    "2025-12": 74000,
+    "2026-01": 720,
+    "2026-02": 720,
+    "2026-03": 880,
+    "2026-04": 320,
+    "2026-05": 260,
+    "2026-06": 170,
+    "2026-07": 210,
+    "2026-08": 210
+   }
+  },
+  {
+   "keyword": "ncaa volleyball tournament bracket",
+   "search_volume": 1600,
+   "keyword_difficulty": 22,
+   "monthly_searches": {
+    "2025-10": 70,
+    "2025-11": 2900,
+    "2025-12": 14800,
+    "2026-01": 70,
+    "2026-02": 50,
+    "2026-03": 140,
+    "2026-04": 90,
+    "2026-05": 140,
+    "2026-06": 40,
+    "2026-07": 20,
+    "2026-08": 30,
+    "2026-09": 30
+   }
+  },
+  {
+   "keyword": "ncaa volleyball tournament 2026",
+   "search_volume": 1900,
+   "keyword_difficulty": 18,
+   "monthly_searches": {
+    "2025-09": 40,
+    "2025-10": 70,
+    "2025-11": 1300,
+    "2025-12": 9900,
+    "2026-01": 590,
+    "2026-02": 390,
+    "2026-03": 1300,
+    "2026-04": 3600,
+    "2026-05": 3600,
+    "2026-06": 590,
+    "2026-07": 720,
+    "2026-08": 1900
+   }
+  },
+  {
+   "keyword": "ncaa volleyball selection show",
+   "search_volume": 1600,
+   "keyword_difficulty": 14,
+   "monthly_searches": {
+    "2025-09": 20,
+    "2025-10": 90,
+    "2025-11": 14800,
+    "2025-12": 1000,
+    "2026-01": 10,
+    "2026-02": 20,
+    "2026-03": 20,
+    "2026-04": 170,
+    "2026-05": 20,
+    "2026-06": 10,
+    "2026-07": 10,
+    "2026-08": 10
+   }
+  },
+  {
+   "keyword": "ncaa volleyball rankings",
+   "search_volume": 33100,
+   "keyword_difficulty": 35,
+   "monthly_searches": {
+    "2025-09": 90500,
+    "2025-10": 110000,
+    "2025-11": 135000,
+    "2025-12": 49500,
+    "2026-01": 3600,
+    "2026-02": 2400,
+    "2026-03": 2900,
+    "2026-04": 2900,
+    "2026-05": 1900,
+    "2026-06": 1600,
+    "2026-07": 1600,
+    "2026-08": 33100
+   }
+  },
+  {
+   "keyword": "volleyball rpi",
+   "search_volume": 1000,
+   "keyword_difficulty": 4,
+   "monthly_searches": {
+    "2025-09": 1300,
+    "2025-10": 3600,
+    "2025-11": 6600,
+    "2025-12": 880,
+    "2026-01": 260,
+    "2026-02": 210,
+    "2026-03": 170,
+    "2026-04": 260,
+    "2026-05": 170,
+    "2026-06": 140,
+    "2026-07": 140,
+    "2026-08": 260
+   }
+  },
+  {
+   "keyword": "ncaa volleyball rpi rankings",
+   "search_volume": 1300,
+   "keyword_difficulty": 32,
+   "monthly_searches": {
+    "2025-09": 1900,
+    "2025-10": 4400,
+    "2025-11": 8100,
+    "2025-12": 1000,
+    "2026-01": 390,
+    "2026-02": 140,
+    "2026-03": 170,
+    "2026-04": 170,
+    "2026-05": 110,
+    "2026-06": 110,
+    "2026-07": 170,
+    "2026-08": 390
+   }
+  },
+  {
+   "keyword": "big ten volleyball standings",
+   "search_volume": 9900,
+   "keyword_difficulty": 9,
+   "monthly_searches": {
+    "2025-09": 9900,
+    "2025-10": 40500,
+    "2025-11": 60500,
+    "2025-12": 6600,
+    "2026-01": 720,
+    "2026-02": 590,
+    "2026-03": 590,
+    "2026-04": 720,
+    "2026-05": 390,
+    "2026-06": 590,
+    "2026-07": 390,
+    "2026-08": 1300
+   }
+  },
+  {
+   "keyword": "big ten volleyball rankings",
+   "search_volume": 9900,
+   "keyword_difficulty": 31,
+   "monthly_searches": {
+    "2025-10": 40500,
+    "2025-11": 60500,
+    "2025-12": 6600
+   }
+  },
+  {
+   "keyword": "sec volleyball standings",
+   "search_volume": 5400,
+   "keyword_difficulty": 13,
+   "monthly_searches": {
+    "2025-09": 5400,
+    "2025-10": 18100,
+    "2025-11": 27100,
+    "2025-12": 4400,
+    "2026-01": 480,
+    "2026-02": 390,
+    "2026-03": 480,
+    "2026-04": 480,
+    "2026-05": 320,
+    "2026-06": 590,
+    "2026-07": 390,
+    "2026-08": 880
+   }
+  },
+  {
+   "keyword": "big 12 volleyball standings",
+   "search_volume": 2900,
+   "keyword_difficulty": 12,
+   "monthly_searches": {
+    "2025-09": 3600,
+    "2025-10": 12100,
+    "2025-11": 18100,
+    "2025-12": 2400,
+    "2026-01": 390,
+    "2026-02": 390,
+    "2026-03": 320,
+    "2026-04": 390,
+    "2026-05": 260,
+    "2026-06": 390,
+    "2026-07": 260,
+    "2026-08": 590
+   }
+  },
+  {
+   "keyword": "ncaa volleyball power rankings",
+   "search_volume": 50,
+   "keyword_difficulty": 38,
+   "monthly_searches": {
+    "2025-11": 170
+   }
+  },
+  {
+   "keyword": "volleyball team rankings",
+   "search_volume": 140,
+   "keyword_difficulty": 30,
+   "monthly_searches": {
+    "2025-11": 170
+   }
+  },
+  {
+   "keyword": "ncaa volleyball at large bids",
+   "search_volume": 10,
+   "keyword_difficulty": null,
+   "monthly_searches": {
+    "2025-11": 40
+   }
+  },
+  {
+   "keyword": "volleyball conference standings",
+   "search_volume": 10,
+   "keyword_difficulty": 43,
+   "monthly_searches": {
+    "2025-11": 50
+   }
+  },
+  {
+   "keyword": "volleyball conference rankings",
+   "search_volume": 10,
+   "keyword_difficulty": null,
+   "monthly_searches": {
+    "2025-11": 30
+   }
+  },
+  {
+   "keyword": "college volleyball rankings",
+   "search_volume": null,
+   "keyword_difficulty": 21,
+   "monthly_searches": {}
+  }
+ ]
+}
