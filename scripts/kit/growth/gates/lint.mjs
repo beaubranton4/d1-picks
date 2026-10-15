@@ -2,6 +2,9 @@
 // Gate 1: content lint. Same rule set as the kit's lint-content (frontmatter,
 // no body H1, dashes, invisible characters, banned phrases, meta leaks) plus
 // the growth loop's own: no affiliate links, no fake first-hand claims.
+import { describeHealthClaims } from '../../lib/health-claims.mjs';
+import { missingBlocks } from '../lib/blocks.mjs';
+
 const BANNED = [
   'level up', 'game changer', 'game-changer', 'unlock', 'unleash', 'next level', 'revolutionize', 'supercharge', 'elevate your',
   "in today's fast-paced", 'look no further', 'dive in', 'dive into', 'the secret', 'secrets',
@@ -50,6 +53,7 @@ export function lintDraft(draft, ctx) {
   const h1s = prose.split('\n').filter((l) => /^#\s+/.test(l)).length + (prose.match(/<h1[\s>]/gi) ?? []).length;
   if (h1s) f.push(`${h1s} body H1(s); the template renders the title as the page's one H1, use ## sections`);
   if (!/^#{2}\s+/m.test(prose)) f.push('no ## sections');
+  if (cfg.content.bodyIsMdx && /[{}<]/.test(prose)) f.push('curly brace or "<" in prose; this site compiles the body as MDX where they break the page (write "under" instead of "<", and avoid braces)');
   if (/!\[[^\]]*\]\([^)]*\)|<img\b/i.test(prose)) f.push('raw image in body (drafts ship text and tables only)');
 
   const copy = `${fm.title ?? ''}\n${fm.excerpt ?? ''}\n${prose}`;
@@ -59,6 +63,14 @@ export function lintDraft(draft, ctx) {
   if (INVISIBLE_RE.test(`${copy}\n${JSON.stringify(fm)}`)) f.push('contains invisible or exotic-space characters');
   for (const p of [...BANNED, ...g.bannedPhrases]) if (phraseRe(p).test(copy)) f.push(`banned phrase "${p}"`);
   for (const [re, why] of META_LEAK) if (re.test(copy)) f.push(`meta-leak: ${why}`);
+  if (cfg.content.ext === 'mdx') {
+    // The MDX renderer has no GFM plugin and parses braces and angle brackets as code.
+    if (/[{}]/.test(prose)) f.push('curly braces in body (MDX parses them as an expression; rewrite without them)');
+    if (/</.test(prose)) f.push('angle bracket in body (MDX parses it as JSX; write "under" or "over" instead of "<" or ">")');
+    if (/^\s*\|.*\|\s*$/m.test(prose)) f.push('pipe table in body (this site renders MDX without table support; use a bulleted list)');
+  }
+  f.push(...missingBlocks(body, cfg));
+  if (g.healthClaims) f.push(...describeHealthClaims(copy));
   if (/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}]/u.test(copy)) f.push('contains an emoji');
   if (!g.allowFirstHand && FIRST_HAND.test(copy)) f.push('first-hand claim ("I tested", "we used"); only operator-supplied experience may be stated as first-hand');
   if (g.forbidAffiliateLinks && AFFILIATE.test(body)) f.push('affiliate link in body (this pipeline does not add affiliate links)');

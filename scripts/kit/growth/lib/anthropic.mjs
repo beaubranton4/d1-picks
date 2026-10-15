@@ -28,7 +28,13 @@ export function makeAnthropic({ cfg, ledger, fixturesDir = null, env = process.e
       for (let attempt = 0; attempt < 3; attempt++) {
         const res = await fetch('https://api.anthropic.com/v1/messages', {
           method: 'POST',
-          headers: { 'x-api-key': env.ANTHROPIC_API_KEY, 'anthropic-version': '2023-06-01', 'content-type': 'application/json' },
+          headers: {
+            'x-api-key': env.ANTHROPIC_API_KEY,
+            'anthropic-version': '2023-06-01',
+            'content-type': 'application/json',
+            // Keys that are not scoped to one workspace must name it (optional secret ANTHROPIC_WORKSPACE_ID).
+            ...(env.ANTHROPIC_WORKSPACE_ID ? { 'anthropic-workspace-id': env.ANTHROPIC_WORKSPACE_ID } : {}),
+          },
           body: JSON.stringify({ model, max_tokens: maxTokens, system, messages }),
         });
         if (res.status === 429 || res.status >= 500) {

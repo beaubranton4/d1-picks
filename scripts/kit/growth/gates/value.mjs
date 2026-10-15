@@ -4,6 +4,8 @@
 // draft.value and checked independently.
 import fs from 'node:fs';
 import { abs } from '../lib/config.mjs';
+import { assetSourceUrls } from '../lib/dataassets.mjs';
+import { normUrl } from '../lib/sources.mjs';
 
 const links = (body) => [...body.matchAll(/\]\((\/[^)\s#?]*)/g)].map((m) => m[1].replace(/\/$/, '') || '/');
 
@@ -12,6 +14,8 @@ export function valueDraft(draft, ctx) {
   const v = draft.value ?? {};
   const f = [];
   const types = [];
+  const okTypes = cfg.gates.valueTypes ?? ['tool', 'data', 'facts'];
+  if (v.type && !okTypes.includes(v.type)) f.push(`value type "${v.type}" is not allowed on this site (allowed: ${okTypes.join(', ')})`);
   if (v.type === 'tool') {
     const tool = cfg.content.tools.find((t) => t.path === v.tool);
     if (!tool) f.push(`tool "${v.tool}" is not registered in growth.config.json content.tools`);
@@ -21,7 +25,12 @@ export function valueDraft(draft, ctx) {
   } else if (v.type === 'data') {
     const asset = cfg.content.dataAssets.find((a) => a.file === v.dataFile);
     if (!asset || !fs.existsSync(abs(asset.file))) f.push(`data asset "${v.dataFile}" is not registered or does not exist`);
-    else types.push('data');
+    else {
+      const cited = new Set([...draft.body.matchAll(/\]\((https?:\/\/[^)\s]+)\)/g)].map((m) => normUrl(m[1])));
+      const own = assetSourceUrls(asset).filter((u) => cited.has(normUrl(u)));
+      if (asset.sourceUrlField !== null && assetSourceUrls(asset).length && own.length < (asset.minCites ?? 1)) f.push(`data page must cite at least ${asset.minCites ?? 1} source page(s) from ${asset.file}; cites ${own.length}`);
+      else types.push('data');
+    }
   } else if (v.type === 'facts') {
     const s = factcheck?.stats;
     if (!s) f.push('facts value needs the fact-check results');

@@ -113,3 +113,11 @@ Rules that apply here:
 - Site strategy and keyword research: docs/seo-strategy.md and docs/research/ (also on branch seo/strategy).
 - House rules (release pacing, no fabricated facts, the AI-Overview filter, no personal names on the site) live in site-kit: /Users/beaubranton/projects/site-kit/CLAUDE.md.
 - A lesson that would help another site belongs in this site's "Learnings" in the registry file, and gets promoted into the user-level skill that owns that job. Cross-site work (new sites, rollouts, shared tooling) belongs in the hub repo, not here.
+
+## Growth loop (guides only)
+
+The kit's weekly growth loop (`scripts/kit/growth/`, `.github/workflows/growth-loop.yml`) is on for one cluster: women's D1 volleyball tournament and ratings explainers under `/guides`, each paired with `/volleyball/ratings` and `/results`. Strategy, what is in and out, and the guardrails: `docs/growth/strategy.md`.
+
+- The loop writes `docs/growth/` and `content/guides/` only. It never touches `pipeline/`, `data/volleyball/`, `content/volleyball-games/` or the model-driven routes, and it shares none of their caps.
+- No betting advice, picks, predictions, promotions or anything implying profit; no sport other than women's D1 volleyball (hockey stays gated). A guide that touches odds carries the 21+ line. All enforced by `growth.config.json` and `src/site/pages.test.ts`; never weaken either to get a page out.
+- Loop PRs are future-dated and merged by hand (`autoMerge: false`).

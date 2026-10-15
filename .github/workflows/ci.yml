@@ -68,6 +68,17 @@ jobs:
       - name: Unit tests
         run: npm test
 
+      - name: Growth gate tests
+        run: npm run test:growth
+
+      - name: Re-verify growth-loop pages
+        run: |
+          if [ -n "${{ github.base_ref }}" ]; then
+            npm run growth:verify -- --base "origin/${{ github.base_ref }}"
+          else
+            npm run growth:verify
+          fi
+
       - name: Build
         run: npm run build
 

@@ -77,13 +77,11 @@ A renewed card carries the same borrowing rules as before. According to the [Cit
 
 Digital loans work differently. The [same policy page](${SRC2}) says ebook loans last 14 days. Overdue fines on physical items are $0.25 per day, capped at $5 per item, which matters because accrued fines are what block a renewal.
 
-| Rule | Value | Source |
-|---|---|---|
-| Card term | 3 years | [Libraries Example](${SRC1}) |
-| Renewal window | 30 days before expiry | [Libraries Example](${SRC1}) |
-| Replacement fee | $2 | [Libraries Example](${SRC1}) |
-| Checkout limit | 50 items | [City Reads](${SRC2}) |
-| Ebook loan | 14 days | [City Reads](${SRC2}) |
+- Card term: 3 years, per [Libraries Example](${SRC1})
+- Renewal window: 30 days before expiry, per [Libraries Example](${SRC1})
+- Replacement fee: $2, per [Libraries Example](${SRC1})
+- Checkout limit: 50 items, per [City Reads](${SRC2})
+- Ebook loan: 14 days, per [City Reads](${SRC2})
 
 ## Proof of address when you renew
 

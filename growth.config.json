@@ -1,0 +1,242 @@
+{
+  "$comment": "Site-owned. D1 Picks growth loop: tournament and ratings EXPLAINERS ONLY (seeding, RPI, bracketology, ratings), written as MDX guides under /guides from NCAA and governing-body pages, each paired with our own ratings and results pages. The loop never writes predictions, picks, ratings or results: those are the pipeline's surfaces (pipeline/, data/volleyball/, content/volleyball-games/) and it has its own caps, which the loop does not share. allow.patterns is a hard allowlist; skip.patterns blocks betting and every sport but women's volleyball. See docs/growth/strategy.md. Anthropic cap is $2 a month (the kit's per-site share of ~$20).",
+  "enabled": true,
+  "site": {
+    "name": "D1 Picks",
+    "domain": "d1picks.com",
+    "gscProperty": "sc-domain:d1picks.com",
+    "ga4PropertyId": ""
+  },
+  "voiceGuide": "docs/growth/voice.md",
+  "paths": {
+    "dir": "docs/growth",
+    "fixtures": "scripts/kit/growth/fixtures"
+  },
+  "content": {
+    "dir": "content/guides",
+    "ext": "mdx",
+    "bodyFormat": "markdown",
+    "urlTemplate": "/guides/{slug}",
+    "categories": [
+      "guides"
+    ],
+    "defaultCategory": "guides",
+    "publishDateField": "publishDate",
+    "dateField": null,
+    "descriptionField": "description",
+    "keywordsField": "tags",
+    "titleMustIncludeYear": false,
+    "author": "editorial-team",
+    "tools": [
+      {
+        "path": "/volleyball/ratings",
+        "file": "src/app/volleyball/ratings/page.tsx",
+        "keywords": [
+          "rpi",
+          "rating",
+          "ratings",
+          "ranking",
+          "rankings",
+          "power rating",
+          "strength of schedule",
+          "sos",
+          "seed",
+          "seeds",
+          "seeding",
+          "seeded",
+          "bracket",
+          "bracketology",
+          "selection",
+          "at-large",
+          "at large",
+          "bid",
+          "tournament",
+          "avca",
+          "poll",
+          "regional",
+          "regionals",
+          "pod",
+          "tiebreak"
+        ]
+      },
+      {
+        "path": "/results",
+        "file": "src/app/results/page.tsx",
+        "keywords": [
+          "results",
+          "track record",
+          "accuracy",
+          "calibration",
+          "brier"
+        ]
+      }
+    ],
+    "dataAssets": [],
+    "knownPaths": [
+      "/",
+      "/about",
+      "/editorial-policy",
+      "/methodology",
+      "/responsible-gambling",
+      "/volleyball/predictions",
+      "/volleyball/ratings",
+      "/results"
+    ],
+    "factPatterns": [],
+    "requiredBlocks": [
+      {
+        "id": "our-data",
+        "position": "end",
+        "markdown": "## See it in our data\n\nOur [volleyball ratings](/volleyball/ratings) rate every D1 team from this season's results, and our [graded results](/results) show how every logged prediction did. Both update daily from the model, and this guide uses neither to say who will win.",
+        "test": "\\]\\(/volleyball/ratings\\)[\\s\\S]*\\]\\(/results\\)"
+      },
+      {
+        "id": "sources-checked",
+        "position": "end",
+        "markdown": "## Sources and date checked\n\nRules and procedures change each season. We checked every page below on {today}; confirm with the NCAA before you rely on a detail.\n\n{sources}",
+        "test": "Sources and date checked[\\s\\S]*checked every page below on \\d{4}-\\d{2}-\\d{2}"
+      },
+      {
+        "id": "responsible-gambling",
+        "position": "end",
+        "when": "\\b(odds|bets?|betting|wagers?|sportsbooks?|gambl\\w*|moneyline|spreads?|fair lines?|parlays?)\\b",
+        "markdown": "*21+ only. D1 Picks takes no bets and this guide is not betting advice or a prediction. If gambling stops being fun, call or text 1-800-MY-RESET or read our [responsible gambling](/responsible-gambling) page.*",
+        "test": "21\\+ only[\\s\\S]*\\]\\(/responsible-gambling\\)"
+      }
+    ]
+  },
+  "clusters": [
+    {
+      "name": "tournament-and-seeding",
+      "favor": true,
+      "weight": 1.2,
+      "seeds": [
+        "ncaa volleyball tournament seeding",
+        "ncaa volleyball bracketology",
+        "ncaa volleyball selection process",
+        "ncaa volleyball at-large bids",
+        "ncaa volleyball regional seeds",
+        "volleyball national seeds"
+      ]
+    },
+    {
+      "name": "ratings-and-rpi",
+      "favor": true,
+      "seeds": [
+        "ncaa volleyball rpi",
+        "volleyball rpi explained",
+        "volleyball power ratings",
+        "volleyball strength of schedule",
+        "ncaa volleyball rankings explained",
+        "avca coaches poll volleyball"
+      ]
+    }
+  ],
+  "allow": {
+    "patterns": [
+      "^(?=.*\\bvolleyball\\b)(?=.*\\b(seed\\w*|bracket\\w*|rpi|selection (show|committee|process|criteria)|at[- ]large|automatic (bid|qualifier)|auto[- ]?bid|qualif\\w+|tournament|ncaa tournament|championship|regionals?|final four|rating|ratings|ranking|rankings|power rating|strength of schedule|sos|avca|coaches poll|poll|tiebreak\\w*|conference tournament|pod|host(ing)? (site|sites)|first round|top[- ]16|national seeds?|how .{0,40}(works?|calculated|determined|chosen|picked)|what is)\\b)"
+    ],
+    "reasons": {
+      "*": "outside the allowed cluster (women's volleyball tournament, seeding, RPI and ratings explainers)"
+    }
+  },
+  "skip": {
+    "patterns": [
+      "\\b(bet|bets|betting|bettor|bettors|wager\\w*|gambl\\w*|sportsbooks?|odds|moneyline|spreads?|parlays?|props?|over[- ]?under|totals?|handicap\\w*|futures|best bets?|free picks?|picks|best picks?|pick of the day|predictions?|predict\\w*|projections?|promos?|promo codes?|bonus\\w*|free bets?|sign[- ]?up offers?|guarantee\\w*|locks?|profit\\w*|roi|expected value|kelly|units?|arbitrage|hedg\\w*|sharp|fade|chalk|underdogs?|draftkings|fanduel|betmgm|caesars|bet365|espn bet|fanatics|kalshi|polymarket|prizepicks|underdog fantasy|prediction markets?|dfs|fantasy)\\b",
+      "\\b(hockey|baseball|softball|basketball|football|soccer|lacrosse|hoops|nfl|nba|mlb|nhl|wnba|ncaab|ncaaf|cbb|cfb)\\b",
+      "\\b(men'?s|mens|boys|club|high school|youth|junior|juniors|beach|sand|pro|professional|olympics?|olympic|fivb|vnl|usa volleyball|div(ision)? (ii|iii|2|3)|d2|d3|naia|juco)\\b",
+      "\\b(injur\\w*|transfer portal|recruit\\w*|commit\\w*|nil|scholarship\\w*|tickets?|stream\\w*|tv|schedule today|score today|live scores?|watch)\\b",
+      "\\bnear me\\b"
+    ],
+    "reasons": {
+      "\\b(hockey|baseball|softball|basketball|football|soccer|lacrosse|hoops|nfl|nba|mlb|nhl|wnba|ncaab|ncaaf|cbb|cfb)\\b": "outside women's volleyball; other sports stay gated until their model exists",
+      "\\b(men'?s|mens|boys|club|high school|youth|junior|juniors|beach|sand|pro|professional|olympics?|olympic|fivb|vnl|usa volleyball|div(ision)? (ii|iii|2|3)|d2|d3|naia|juco)\\b": "outside the women's D1 volleyball model (other levels, genders and sports are not modelled)",
+      "\\b(injur\\w*|transfer portal|recruit\\w*|commit\\w*|nil|scholarship\\w*|tickets?|stream\\w*|tv|schedule today|score today|live scores?|watch)\\b": "news, recruiting, ticket and live-score queries are not explainers we can source from NCAA rules pages",
+      "\\bnear me\\b": "local-pack query",
+      "\\b(bet|bets|betting|bettor|bettors|wager\\w*|gambl\\w*|sportsbooks?|odds|moneyline|spreads?|parlays?|props?|over[- ]?under|totals?|handicap\\w*|futures|best bets?|free picks?|picks|best picks?|pick of the day|predictions?|predict\\w*|projections?|promos?|promo codes?|bonus\\w*|free bets?|sign[- ]?up offers?|guarantee\\w*|locks?|profit\\w*|roi|expected value|kelly|units?|arbitrage|hedg\\w*|sharp|fade|chalk|underdogs?|draftkings|fanduel|betmgm|caesars|bet365|espn bet|fanatics|kalshi|polymarket|prizepicks|underdog fantasy|prediction markets?|dfs|fantasy)\\b": "betting, picks, predictions, promotions and anything implying profit are out of scope; the pipeline owns predictions and we give no betting advice"
+    }
+  },
+  "sources": {
+    "preferDomains": [
+      "ncaa.org",
+      "ncaa.com",
+      "avca.org",
+      "fivb.com",
+      "usavolleyball.org"
+    ],
+    "requireDomains": [
+      "ncaa.org",
+      "ncaa.com",
+      "avca.org"
+    ],
+    "excludeDomains": [
+      "reddit.com",
+      "quora.com",
+      "pinterest.com",
+      "facebook.com",
+      "instagram.com",
+      "tiktok.com",
+      "youtube.com",
+      "draftkings.com",
+      "fanduel.com",
+      "betmgm.com",
+      "covers.com",
+      "actionnetwork.com",
+      "oddsshark.com",
+      "vegasinsider.com",
+      "dimers.com",
+      "warrennolan.com"
+    ],
+    "extraUrls": []
+  },
+  "caps": {
+    "monthlyUsd": {
+      "dataforseo": 1,
+      "anthropic": 2
+    },
+    "weeklyPages": 1,
+    "perRunPages": 1,
+    "minLeadDays": 3
+  },
+  "release": {
+    "weekdays": [
+      2,
+      4,
+      6
+    ],
+    "maxHorizonDays": 56
+  },
+  "gates": {
+    "minWords": 600,
+    "minInternalLinks": 2,
+    "minVerifiedBlocks": 3,
+    "minSourceDomains": 2,
+    "maxSimilarity": 0.3,
+    "healthClaims": false,
+    "valueTypes": [
+      "tool",
+      "data"
+    ],
+    "bannedPhrases": [
+      "best bet",
+      "best bets",
+      "free pick",
+      "free picks",
+      "pick of the day",
+      "parlay",
+      "promo code",
+      "bonus bet",
+      "sign up bonus",
+      "guaranteed",
+      "profit",
+      "beat the books",
+      "beat the sportsbook",
+      "easy money",
+      "can't miss",
+      "cant miss",
+      "hammer",
+      "smash"
+    ]
+  },
+  "autoMerge": false
+}

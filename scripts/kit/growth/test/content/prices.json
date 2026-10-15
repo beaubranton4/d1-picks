@@ -1,0 +1,5 @@
+[
+  { "listing_name": "Alpha Studio", "metro": "austin-tx", "item": "Manual drainage session, 60 min", "price": 130, "quote_text": "60-minutes $130", "source_url": "https://alpha.example/pricing", "observed_at": "2026-10-04", "listing_status": "verified" },
+  { "listing_name": "Beta Clinic", "metro": "houston-tx", "item": "Manual drainage session", "price": 150, "quote_text": "Session $150", "source_url": "https://beta.example/rates", "observed_at": "2026-10-03", "listing_status": "verified" },
+  { "listing_name": "Gamma", "metro": "houston-tx", "item": "Session", "price": 99, "quote_text": "$99", "source_url": "https://gamma.example/p", "observed_at": "2026-10-03", "listing_status": "unverified" }
+]

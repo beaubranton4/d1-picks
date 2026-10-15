@@ -1,0 +1,139 @@
+name: Growth loop
+
+# Weekly SEO growth loop (scripts/kit/growth): measure last pages, pick a topic
+# from Search Console + DataForSEO, filter AI-Overview-answered queries, draft
+# with the Anthropic API, run the gates, and open a PR with a future-dated
+# page. With GROWTH_PR_TOKEN set the PR auto-merges once CI passes.
+#
+# This site's loop may only write docs/growth/ and content/guides/. It never touches the
+# model-driven surfaces (pipeline/, data/volleyball/, content/volleyball-games/) or the daily job.
+# DOES NOTHING until all five secrets exist AND growth.config.json has
+# "enabled": true. Setup: docs/growth/README.md.
+#
+# Secrets: DATAFORSEO_LOGIN, DATAFORSEO_PASSWORD, GSC_SA_KEY_BASE64,
+#          ANTHROPIC_API_KEY   (GA4_PROPERTY_ID is optional)
+# Optional: GROWTH_PR_TOKEN (fine-grained PAT, contents+pull-requests write).
+#           Pull requests opened with the default GITHUB_TOKEN do not trigger
+#           CI, so without this token the PR is opened but never auto-merged.
+
+on:
+  schedule:
+    - cron: '17 14 * * 1' # Mondays 14:17 UTC
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Fixtures only: no keys, no spend, nothing written to the repo'
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: growth-loop-guides
+  cancel-in-progress: false
+
+jobs:
+  growth:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Gate on secrets and the kill switch
+        id: gate
+        env:
+          DATAFORSEO_LOGIN: ${{ secrets.DATAFORSEO_LOGIN }}
+          DATAFORSEO_PASSWORD: ${{ secrets.DATAFORSEO_PASSWORD }}
+          GSC_SA_KEY_BASE64: ${{ secrets.GSC_SA_KEY_BASE64 }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          ANTHROPIC_WORKSPACE_ID: ${{ secrets.ANTHROPIC_WORKSPACE_ID }}
+          GA4_PROPERTY_ID: ${{ secrets.GA4_PROPERTY_ID }}
+          DRY: ${{ inputs.dry_run }}
+        run: |
+          missing=""
+          for k in DATAFORSEO_LOGIN DATAFORSEO_PASSWORD GSC_SA_KEY_BASE64 ANTHROPIC_API_KEY; do
+            [ -z "${!k}" ] && missing="$missing $k"
+          done
+          if [ -n "$missing" ] && [ "$DRY" != "true" ]; then
+            echo "::notice::Growth loop is off. Missing secret(s):$missing. Add them under Settings, Secrets and variables, Actions. Nothing was done."
+            echo "enabled=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "enabled=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: actions/checkout@v7
+        if: steps.gate.outputs.enabled == 'true'
+        with:
+          ref: main
+          fetch-depth: 0
+          token: ${{ secrets.GROWTH_PR_TOKEN || github.token }}
+
+      - uses: actions/setup-node@v7
+        if: steps.gate.outputs.enabled == 'true'
+        with:
+          node-version: 24
+          cache: npm
+
+      - if: steps.gate.outputs.enabled == 'true'
+        run: npm ci
+
+      - name: Gate unit tests
+        if: steps.gate.outputs.enabled == 'true'
+        run: npm run test:growth
+
+      - name: Run the loop
+        if: steps.gate.outputs.enabled == 'true'
+        env:
+          DATAFORSEO_LOGIN: ${{ secrets.DATAFORSEO_LOGIN }}
+          DATAFORSEO_PASSWORD: ${{ secrets.DATAFORSEO_PASSWORD }}
+          GSC_SA_KEY_BASE64: ${{ secrets.GSC_SA_KEY_BASE64 }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          ANTHROPIC_WORKSPACE_ID: ${{ secrets.ANTHROPIC_WORKSPACE_ID }}
+          GA4_PROPERTY_ID: ${{ secrets.GA4_PROPERTY_ID }}
+        run: |
+          if [ "${{ inputs.dry_run }}" = "true" ]; then
+            node scripts/kit/growth/run.mjs --dry-run
+          else
+            node scripts/kit/growth/run.mjs --pr-body "$RUNNER_TEMP/pr-body.md" | tee "$RUNNER_TEMP/run.json"
+          fi
+
+      - name: Open the pull request
+        if: steps.gate.outputs.enabled == 'true' && inputs.dry_run != true
+        env:
+          GH_TOKEN: ${{ secrets.GROWTH_PR_TOKEN || github.token }}
+          HAS_PAT: ${{ secrets.GROWTH_PR_TOKEN != '' }}
+        run: |
+          if [ -z "$(git status --porcelain -uall)" ]; then echo "Nothing to commit."; exit 0; fi
+          # Only the loop's own surfaces may change.
+          BAD=$(git status --porcelain -uall | awk '{print $2}' | grep -vE '^(docs/growth/|content/guides/)' || true)
+          if [ -n "$BAD" ]; then echo "Refusing: unexpected files changed:"; echo "$BAD"; exit 1; fi
+          WEEK=$(date -u +%G-W%V)
+          BRANCH="growth/$WEEK-$(date -u +%H%M)"
+          git config user.name "growth-loop[bot]"
+          git config user.email "growth-loop[bot]@users.noreply.github.com"
+          git checkout -b "$BRANCH"
+          for p in docs/growth content/guides; do [ -e "$p" ] && git add -A "$p"; done
+          git commit -m "growth: weekly loop $WEEK" -m "Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
+          git push -u origin "$BRANCH"
+          BODY="$RUNNER_TEMP/pr-body.md"
+          [ -f "$BODY" ] || printf 'Weekly growth loop: measurements, decisions and report only (no new page this week).\n' > "$BODY"
+          URL=$(gh pr create --base main --head "$BRANCH" --title "growth: weekly loop $WEEK" --body-file "$BODY")
+          echo "PR: $URL"
+          AUTO=$(node -p "require('./growth.config.json').autoMerge !== false")
+          if [ "$HAS_PAT" = "true" ] && [ "$AUTO" = "true" ]; then
+            # GitHub's free plan has no auto-merge or required checks on private repos, so wait for
+            # CI ourselves and merge only if the `verify` check passes (up to 20 minutes).
+            STATE=""
+            for i in $(seq 1 120); do
+              STATE=$(gh pr checks "$URL" 2>/dev/null | awk '$1=="verify"{print $2}' | head -1)
+              case "$STATE" in pass|fail) break ;; esac
+              sleep 10
+            done
+            if [ "$STATE" = "pass" ]; then
+              gh pr merge "$URL" --squash --delete-branch
+            else
+              echo "::warning::verify was '${STATE:-missing}', not merging. Review $URL by hand."
+            fi
+          else
+            echo "::notice::Auto-merge skipped (needs GROWTH_PR_TOKEN and autoMerge true). Merge $URL by hand."
+          fi
