@@ -6,6 +6,11 @@
         every check. Safe to re-run the same day.
     python -m pipeline.run backfill [--sport volleyball]
         Fetch every date from season_start through the prediction window.
+    python -m pipeline.run regrade [--sport volleyball] --back-days 21
+        One-off catch-up for predictions stranded past the daily job's
+        7-day lookback: re-fetch the past N days of results (through today),
+        then append grades for logged predictions whose match is now final.
+        Writes no predictions, ratings or pages. The daily default is unchanged.
     python -m pipeline.run check [--sport volleyball] [--base origin/main]
         Guardrails only, no network: ledger integrity (append-only against
         --base when given), the number trace on every game page, and the
@@ -15,7 +20,7 @@ from __future__ import annotations
 
 import argparse
 import sys
-from datetime import date
+from datetime import date, timedelta
 
 from . import backtest, ledger, pages, ratings, results
 from .common import DATA, daterange, iso, load_json, local_today, publishing_config, sport_config, sport_dir, utc_now, write_json
@@ -94,11 +99,27 @@ def cmd_daily(cfg: dict, fetch: bool) -> int:
     return 1 if problems else 0
 
 
+def cmd_regrade(cfg: dict, back_days: int) -> int:
+    now = utc_now()
+    today = local_today(cfg["timezone"])
+    first = max(date.fromisoformat(cfg["season_start"]), today - timedelta(days=back_days))
+    dates = list(daterange(first, today))
+    print(f"regrade {cfg['sport']}: {dates[0]} to {dates[-1]} ({len(dates)} dates)")
+    store = results.refresh(cfg, dates)
+    graded = ledger.grade(cfg, store, now)
+    print(f"grades: {len(graded)} new")
+    problems = run_checks(cfg, None)
+    for p in problems:
+        print(f"CHECK FAILED {p}")
+    return 1 if problems else 0
+
+
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(prog="python -m pipeline.run", description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("command", choices=["daily", "backfill", "check"])
+    ap.add_argument("command", choices=["daily", "backfill", "regrade", "check"])
     ap.add_argument("--sport", default="volleyball")
     ap.add_argument("--no-fetch", action="store_true", help="daily: use the saved results instead of NCAA.com")
+    ap.add_argument("--back-days", type=int, help="regrade: how many days of results to re-read (one-off, not saved to config)")
     ap.add_argument("--base", help="check: git ref the ledger must be an append-only extension of")
     args = ap.parse_args(argv)
     cfg = sport_config(args.sport)
@@ -108,6 +129,10 @@ def main(argv: list[str] | None = None) -> int:
         print(f"backfill {cfg['sport']}: {dates[0]} to {dates[-1]} ({len(dates)} dates)")
         results.refresh(cfg, dates)
         return 0
+    if args.command == "regrade":
+        if not args.back_days:
+            ap.error("regrade needs --back-days N")
+        return cmd_regrade(cfg, args.back_days)
     if args.command == "daily":
         return cmd_daily(cfg, fetch=not args.no_fetch)
     problems = run_checks(cfg, args.base)
