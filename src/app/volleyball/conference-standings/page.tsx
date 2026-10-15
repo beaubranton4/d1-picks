@@ -7,7 +7,7 @@ import { ratings } from '@/site/data';
 import { conferenceTables, NCAA_FIELD, NO_AUTO_BID, SIM } from '@/site/derived';
 import { etStamp, ordinal, pct, shortDate } from '@/site/format';
 import { linkIndex } from '@/site/pages';
-import { Assumptions, Byline, DatasetLd, DownloadLink, MoreData } from '@/site/toolkit';
+import { Assumptions, AutoBidNotice, Byline, DatasetLd, DownloadLink, MoreData } from '@/site/toolkit';
 import { SourceLink } from '@/site/ui';
 
 const PATH = '/volleyball/conference-standings';
@@ -61,6 +61,8 @@ export default function ConferenceStandings() {
           <DownloadLink href={CSV_PATH} label="Download the standings (CSV)" detail={`${s.params.teams} teams, ${tables.length} conferences, as of ${s.as_of}`} />
         </div>
       </header>
+
+      <AutoBidNotice />
 
       <section aria-labelledby="strength" className="mt-10">
         <h2 id="strength" className="display text-3xl">Conferences ranked by strength</h2>

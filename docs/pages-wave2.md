@@ -49,7 +49,7 @@ top 32 seeded nationally in pods of four, pairings of ones with eights and so on
 
 ## Assumptions the pages state
 
-- Our feed lists 32 leagues; the NCAA says 31 automatic bids. We assume the reconstituted Pac-12 has none. Unverified: change
+- Our feed lists 32 leagues; the NCAA lists 31 automatic bids (NCAA.com and bid specs, checked 2026-10-15). We assume the new Pac-12 has none (first championship the week of Nov. 23; a projected list of 31 qualifiers has no Pac-12). Unconfirmed, stated on the pages and in the CSVs: change
   `NO_AUTO_BID` in `src/site/derived.ts` if wrong.
 - Conference champions are simulated as an eight-team neutral-floor bracket. Leagues that award the bid for the regular season differ.
 - Rating uncertainty (about 1 / sqrt(0.25 + 0.76 per match)) is our approximation, not a pipeline output.

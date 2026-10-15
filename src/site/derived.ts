@@ -21,12 +21,26 @@ import {
 export const SIM = { fieldTrials: 4000, fieldSeed: 20261015, bracketTrials: 20000, bracketSeed: 20261016 } as const;
 
 /**
- * Leagues with no automatic bid. The NCAA says 31 conferences get one in 2026
- * while NCAA.com's scoreboard feed groups teams into 32 leagues. We assume the
- * reconstituted Pac-12 is the one without a bid. This is our assumption, not an
- * NCAA statement, and the pages say so.
+ * THE ONE PLACE to flip the automatic-bid assumption. League keys (as in
+ * data/volleyball/ratings) that get NO automatic bid in 2026. The NCAA lists 31
+ * automatic bids for 2026 while NCAA.com's feed groups teams into 32 leagues.
+ * We assume the new 9-team Pac-12 is the one without a bid, because its first
+ * volleyball championship is not until the week of Nov. 23 and the projected
+ * list of 31 qualifiers we checked has no Pac-12 entry. That is our assumption,
+ * NOT an NCAA statement. Set to [] to give the Pac-12 a bid (32 leagues, so the
+ * model would then use 32 automatic and 32 at-large spots; the NCAA's 31/33
+ * split would no longer hold, so also revisit NCAA_FIELD).
  */
-export const NO_AUTO_BID = ['pac-12'];
+export const NO_AUTO_BID: string[] = ['pac-12'];
+
+/** Sources and date for the visible note on the pages and in the CSVs. */
+export const AUTO_BID_NOTE = {
+  checked: '2026-10-15',
+  ncaaUrl: 'https://www.ncaa.com/championships/volleyball-women/d1/road-to-the-championship',
+  bidSpecUrl: 'https://ncaaorg.s3.amazonaws.com/championships/marketing/bids/2026-28BidSpec/2026-28D1WVB_BID_SPECS.pdf',
+  floUrl: 'https://www.flovolleyball.tv/articles/16232795-ncaa-womens-volleyball-tournament-2026-whos-in-the-field',
+  csv: 'NCAA lists 31 automatic bids for 2026; D1 Picks assumes the Pac-12 has none this year (assumption, checked 2026-10-15). Pac-12 odds change if that is wrong.',
+} as const;
 
 export const NCAA_FIELD = { teams: 64, auto: 31, atLarge: 33, selection: '2026-11-29' } as const;
 
