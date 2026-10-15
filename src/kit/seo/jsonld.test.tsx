@@ -10,9 +10,7 @@ import {
   itemList,
   localBusiness,
   organization,
-  person,
   product,
-  profilePage,
   website,
 } from './jsonld';
 
@@ -73,12 +71,13 @@ describe('faqPage', () => {
 describe('article', () => {
   const base = { path: '/guides/x', title: 'T', description: 'D', datePublished: '2026-09-28', author };
 
-  it('has a Person author with a profile URL and the real publish date', () => {
+  it('has an Organization author pointing at /about and the real publish date', () => {
     const a = article(base);
     expect(a).toMatchObject({ '@type': 'Article', headline: 'T', datePublished: '2026-09-28' });
     const p = a.author as Record<string, unknown>;
-    expect(p['@type']).toBe('Person');
-    expect(p.url).toBe(`${siteOrigin}/authors/${author}`);
+    expect(p['@type']).toBe('Organization');
+    expect(p.url).toBe(`${siteOrigin}/about`);
+    expect(JSON.stringify(a)).not.toContain('"Person"');
   });
 
   it('omits dateModified unless one is passed', () => {
@@ -126,12 +125,5 @@ describe('product', () => {
     const p = product({ name: 'Lamp', description: 'A lamp', offer: { price: 20, priceCurrency: 'USD', url: 'https://x.test' } });
     expect(p).toMatchObject({ '@type': 'Product', offers: { '@type': 'Offer', availability: 'https://schema.org/InStock' } });
     expect(JSON.stringify(p)).not.toMatch(/rating|review/i);
-  });
-});
-
-describe('person / profilePage', () => {
-  it('wraps the author Person in a ProfilePage', () => {
-    expect(person(author)['@type']).toBe('Person');
-    expect(profilePage(author)).toMatchObject({ '@type': 'ProfilePage', mainEntity: { '@type': 'Person' } });
   });
 });

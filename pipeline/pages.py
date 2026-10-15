@@ -30,7 +30,7 @@ from . import fmt, model, writer
 from .common import CONTENT, DATA, iso, load_json, sport_dir, write_json
 from .ledger import all_rows, lock_deadline
 
-AUTHOR = "beau-branton"
+AUTHOR = "editorial-team"
 # Words the content lint (site.config.json contentRules + the kit list) would reject; checked here first
 # so a page that would fail the lint is never written.
 BANNED = [

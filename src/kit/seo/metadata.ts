@@ -10,7 +10,7 @@
  *   missing or outside 70-160 characters, so a thin <head> never ships.
  */
 import type { Metadata } from 'next';
-import { absoluteUrl, authorPath, brandPattern, config, normalizePath } from '../config';
+import { absoluteUrl, brandPattern, config, normalizePath } from '../config';
 import { isProduction } from '../env';
 import { isReleased } from '../release';
 
@@ -29,8 +29,6 @@ export type MetadataInput = {
   publishedTime?: string;
   /** article only: set ONLY for a real material update */
   modifiedTime?: string;
-  /** author slugs */
-  authors?: string[];
   /** Append " | Site Name" unless the title already names the brand. Default true. */
   brand?: boolean;
   /** Force noindex (e.g. a utility page). Release state and env still apply. */
@@ -85,7 +83,6 @@ export function buildMetadata(input: MetadataInput): Metadata {
           images: [ogImage],
           publishedTime: input.publishedTime,
           ...(input.modifiedTime ? { modifiedTime: input.modifiedTime } : {}),
-          authors: (input.authors ?? []).map((s) => absoluteUrl(authorPath(s))),
         }
       : { type: type === 'profile' ? 'profile' : 'website', url, title, description, siteName: config.name, locale: config.locale, images: [ogImage] };
 

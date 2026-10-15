@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Breadcrumbs } from '@/kit/components/Breadcrumbs';
 import { RelatedLinks } from '@/kit/components/RelatedLinks';
-import { absoluteUrl, authorPath, getAuthor } from '@/kit/config';
+import { absoluteUrl, getAuthor } from '@/kit/config';
 import { getCollection, getEntry } from '@/kit/content';
 import { Mdx } from '@/kit/mdx';
 import { assertReleased } from '@/kit/release';
@@ -173,8 +173,8 @@ export default async function GamePage({ params }: PageProps<'/volleyball/predic
           </div>
           <p className="mt-8 border-t border-line pt-4 text-sm text-muted">
             Written automatically by the D1 Picks model from the numbers on this page, logged {etStamp(f.predicted_at)} using ratings as
-            of {shortDate(f.ratings_as_of)} (model {f.model}). The model and this page template are built and maintained by{' '}
-            <Link href={authorPath(author.slug)} className="underline">
+            of {shortDate(f.ratings_as_of)} (model {f.model}). The model and this page template are maintained by the{' '}
+            <Link href="/about" className="underline">
               {author.name}
             </Link>
             . How we publish without a human edit: <Link href="/editorial-policy" className="underline">editorial policy</Link>.

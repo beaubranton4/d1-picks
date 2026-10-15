@@ -4,13 +4,14 @@
  *
  * Builders return plain objects (unit-tested for shape) and throw on missing
  * required inputs rather than emitting half-empty schema. House rules baked in:
- *   - Article author is a Person with a real profile URL; datePublished is the
- *     real release date; dateModified appears ONLY when you pass one.
+ *   - Article author is the site's editorial team, an Organization pointing at
+ *     /about (never a Person); datePublished is the real release date;
+ *     dateModified appears ONLY when you pass one.
  *   - faqPage is only ever rendered by <Faq>, next to the visible questions.
  *   - No rating/review builders: nothing here can emit a star rating, so a
  *     template cannot invent one. Add reviews only from a verified source.
  */
-import { absoluteUrl, authorPath, config, getAuthor, siteOrigin } from '../config';
+import { absoluteUrl, config, getAuthor, siteOrigin } from '../config';
 
 type Json = Record<string, unknown>;
 const CONTEXT = 'https://schema.org';
@@ -84,21 +85,16 @@ export function faqPage(items: { question: string; answer: string }[]): Json {
   };
 }
 
-export function person(slug: string): Json {
+/** The editorial byline as an Organization. Never a Person. */
+export function editorialAuthor(slug: string): Json {
   const a = getAuthor(slug);
   return {
-    '@type': 'Person',
-    '@id': `${absoluteUrl(authorPath(a.slug))}#person`,
+    '@type': 'Organization',
+    '@id': `${absoluteUrl('/about')}#${a.slug}`,
     name: a.name,
-    url: absoluteUrl(authorPath(a.slug)),
+    url: absoluteUrl('/about'),
     description: a.bio,
-    ...(a.photo ? { image: absoluteUrl(a.photo) } : {}),
-    ...(a.sameAs.length ? { sameAs: a.sameAs } : {}),
   };
-}
-
-export function profilePage(slug: string): Json {
-  return { '@context': CONTEXT, '@type': 'ProfilePage', mainEntity: person(slug) };
 }
 
 export function article(input: {
@@ -127,7 +123,7 @@ export function article(input: {
     mainEntityOfPage: { '@type': 'WebPage', '@id': url },
     datePublished: published,
     ...(input.dateModified ? { dateModified: input.dateModified } : {}),
-    author: person(req(input.author, 'article author')),
+    author: editorialAuthor(req(input.author, 'article author')),
     publisher: orgRef(),
     ...(input.image ? { image: [absoluteUrl(input.image)] } : {}),
     inLanguage: config.language,

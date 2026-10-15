@@ -13,7 +13,6 @@ const SECTION_ORDER: [PageType, string][] = [
   ['article', 'Guides'],
   ['about', 'About'],
   ['policy', 'About'],
-  ['author', 'Authors'],
 ];
 
 export function buildLlmsTxt(pages: PageEntry[]): string {

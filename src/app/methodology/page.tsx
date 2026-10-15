@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { AuthorBio } from '@/kit/components/AuthorBio';
 import { Breadcrumbs } from '@/kit/components/Breadcrumbs';
 import { buildMetadata } from '@/kit/seo/metadata';
 import { backtest, ratings } from '@/site/data';
@@ -222,9 +221,6 @@ export default function Methodology() {
           normal prior of precision {p.prior_precision} and walk-forward calibration.
         </p>
       </article>
-      <div className="max-w-2xl">
-        <AuthorBio slug="beau-branton" />
-      </div>
     </div>
   );
 }

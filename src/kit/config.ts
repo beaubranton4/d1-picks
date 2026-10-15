@@ -5,13 +5,16 @@
  */
 import raw from '../../site.config.json';
 
+/**
+ * An editorial byline. An organization, not a person: name it "<Site Name>
+ * Editorial Team" (or "<Site Name> editors"). `bio` is one sentence on how the
+ * team works; it describes the process and invents no staff, headcounts or
+ * credentials. `slug` is what a guide's `author:` frontmatter points at.
+ */
 export type Author = {
   slug: string;
   name: string;
   bio: string;
-  credentials: string[];
-  photo?: string;
-  sameAs: string[];
 };
 
 export type Collection = {
@@ -57,13 +60,9 @@ function validate(c: SiteConfig): SiteConfig {
   if (!/^[a-z0-9.-]+$/i.test(c.canonicalHost)) {
     fail(`"canonicalHost" must be a bare host like "example.com" (got "${c.canonicalHost}")`);
   }
-  if (!Array.isArray(c.authors) || c.authors.length === 0) fail('"authors" needs at least one real author');
+  if (!Array.isArray(c.authors) || c.authors.length === 0) fail('"authors" needs at least one editorial byline (an organization, e.g. "<Site> Editorial Team")');
   for (const a of c.authors) {
     if (!a.slug || !a.name || !a.bio) fail(`author "${a.slug ?? '?'}" needs slug, name and bio`);
-  }
-  for (const a of c.authors) {
-    a.credentials = Array.isArray(a.credentials) ? a.credentials : [];
-    a.sameAs = Array.isArray(a.sameAs) ? a.sameAs : [];
   }
   c.organization = { logo: c.organization?.logo ?? '/logo.png', sameAs: c.organization?.sameAs ?? [] };
   c.affiliateTags ??= {};
@@ -101,10 +100,6 @@ export function getAuthor(slug: string): Author {
   const a = config.authors.find((x) => x.slug === slug);
   if (!a) throw new Error(`[site-kit] unknown author "${slug}"; add it to site.config.json authors[]`);
   return a;
-}
-
-export function authorPath(slug: string): string {
-  return `/authors/${slug}`;
 }
 
 export const brandPattern = new RegExp(config.brandRegex, 'i');

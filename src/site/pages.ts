@@ -97,13 +97,6 @@ export function getAllPages(): PageEntry[] {
       type: 'policy',
       parent: '/about',
     },
-    ...config.authors.map<PageEntry>((a) => ({
-      path: `/authors/${a.slug}`,
-      title: a.name,
-      description: a.bio,
-      type: 'author',
-      parent: '/about',
-    })),
   ];
 }
 

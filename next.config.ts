@@ -15,6 +15,8 @@ const nextConfig: NextConfig = {
   // Retired or renamed pages: one permanent hop to the closest live parent.
   async redirects() {
     return [
+      // The editorial team replaced the personal author page.
+      { source: '/authors/beau-branton', destination: '/about', statusCode: 301 },
       // The old app's /baseball/{date}, /{date} and /articles/* URLs are not redirected: they
       // carried fabricated picks, and nothing here replaces them, so they 404 (no soft-404 to home).
     ];

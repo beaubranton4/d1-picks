@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { Breadcrumbs } from '@/kit/components/Breadcrumbs';
-import { authorPath, config } from '@/kit/config';
+import { config } from '@/kit/config';
 import { buildMetadata } from '@/kit/seo/metadata';
 import { linkIndex } from '@/site/pages';
 
@@ -31,13 +31,11 @@ export default function AboutPage() {
         and a methodology page behind it.
       </p>
       <h2>Who runs it</h2>
-      <ul>
-        {config.authors.map((a) => (
-          <li key={a.slug}>
-            <Link href={authorPath(a.slug)}>{a.name}</Link>: {a.bio}
-          </li>
-        ))}
-      </ul>
+      <p>
+        {config.name} is published by its editorial team rather than a named individual. The ratings model, the prediction log and every
+        match page come from one automated pipeline, and the rules it follows are public in the{' '}
+        <Link href="/editorial-policy">editorial policy</Link>.
+      </p>
       <h2>How it works</h2>
       <p>
         A daily job reads results from the NCAA.com scoreboard, refits the ratings, logs a prediction for every upcoming D1 match and

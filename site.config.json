@@ -18,16 +18,9 @@
   },
   "authors": [
     {
-      "slug": "beau-branton",
-      "name": "Beau Branton",
-      "bio": "Beau Branton is a data analyst and founder who builds models and reference sites from public data. He studied at Stanford University and played professional baseball in the Seattle Mariners organization.",
-      "credentials": [
-        "Stanford University alumnus",
-        "Data analyst",
-        "Former professional baseball player, Seattle Mariners organization"
-      ],
-      "photo": "",
-      "sameAs": []
+      "slug": "editorial-team",
+      "name": "D1 Picks Editorial Team",
+      "bio": "The D1 Picks editorial team publishes the ratings model, logs every prediction before first serve, grades it against the final score, and corrects errors when they are found."
     }
   ],
   "affiliateTags": {},

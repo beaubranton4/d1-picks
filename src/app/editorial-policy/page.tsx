@@ -69,10 +69,10 @@ export default function EditorialPolicyPage() {
         as odds, with no claim that anyone should bet them. We publish team markets only, never college player props.
       </p>
 
-      <h2>People</h2>
+      <h2>Authorship</h2>
       <p>
-        Beau Branton built the model and the site and is responsible for what they publish. Anything written by a person carries
-        their name; first-hand language appears only when that person actually did the thing described.
+        Pages are bylined to the {config.name} editorial team rather than an individual. First-hand language, such as having watched a
+        match or tested something, appears only when it actually happened.
       </p>
 
       <h2>Corrections</h2>
