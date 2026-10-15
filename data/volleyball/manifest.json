@@ -3,13 +3,15 @@
  "sport": "volleyball",
  "season": 2026,
  "model": "vb-bt-1",
- "updated_at": "2026-10-15T04:38:35Z",
+ "updated_at": "2026-10-15T05:25:29Z",
  "results": "results-2026.json",
  "ratings": "ratings/2026-10-15.json",
  "backtest": "backtest-2026.json",
  "predictions": [
   "predictions/2026-10.jsonl"
  ],
- "grades": [],
+ "grades": [
+  "grades/2026-10.jsonl"
+ ],
  "game_pages": "game-pages.json"
 }
