@@ -1,0 +1,169 @@
+{
+ "slug": "florida-vs-texas-am-2026-10-16",
+ "sport": "volleyball",
+ "season": 2026,
+ "match_id": "6628694",
+ "prediction_id": "vo-2026-6628694-2026-10-16",
+ "predicted_at": "2026-10-15T04:38:23Z",
+ "date": "2026-10-16",
+ "start": "2026-10-16T23:00:00Z",
+ "start_known": true,
+ "url": "https://www.ncaa.com/game/6628694",
+ "selected_on": "2026-10-15",
+ "reasons": [
+  "both AVCA-ranked (No. 7 and No. 19)",
+  "both in our top 40 (4th and 27th)"
+ ],
+ "model": "vb-bt-1",
+ "ratings_as_of": "2026-10-15",
+ "n_teams": 348,
+ "home": {
+  "id": "texas-am",
+  "name": "Texas A&M",
+  "conference_name": "SEC",
+  "rank": 27,
+  "rating": 2.0442,
+  "match_win_vs_avg": 0.9427,
+  "wins": 10,
+  "losses": 6,
+  "sets_won": 36,
+  "sets_lost": 21,
+  "last5": "WWWWL",
+  "sos_rank": 17,
+  "avca_rank": 19,
+  "d1_matches": 16,
+  "recent": [
+   {
+    "date": "2026-09-22",
+    "opponent": "rice",
+    "opponent_name": "Rice",
+    "home": true,
+    "won": true,
+    "sets_for": 3,
+    "sets_against": 0,
+    "url": "https://www.ncaa.com/game/6628486"
+   },
+   {
+    "date": "2026-09-27",
+    "opponent": "south-carolina",
+    "opponent_name": "South Carolina",
+    "home": true,
+    "won": true,
+    "sets_for": 3,
+    "sets_against": 0,
+    "url": "https://www.ncaa.com/game/6625638"
+   },
+   {
+    "date": "2026-10-02",
+    "opponent": "alabama",
+    "opponent_name": "Alabama",
+    "home": true,
+    "won": true,
+    "sets_for": 3,
+    "sets_against": 0,
+    "url": "https://www.ncaa.com/game/6628692"
+   },
+   {
+    "date": "2026-10-04",
+    "opponent": "mississippi-st",
+    "opponent_name": "Mississippi St.",
+    "home": true,
+    "won": true,
+    "sets_for": 3,
+    "sets_against": 0,
+    "url": "https://www.ncaa.com/game/6628446"
+   },
+   {
+    "date": "2026-10-11",
+    "opponent": "arkansas",
+    "opponent_name": "Arkansas",
+    "home": false,
+    "won": false,
+    "sets_for": 1,
+    "sets_against": 3,
+    "url": "https://www.ncaa.com/game/6628681"
+   }
+  ]
+ },
+ "away": {
+  "id": "florida",
+  "name": "Florida",
+  "conference_name": "SEC",
+  "rank": 4,
+  "rating": 3.2508,
+  "match_win_vs_avg": 0.9926,
+  "wins": 12,
+  "losses": 2,
+  "sets_won": 39,
+  "sets_lost": 9,
+  "last5": "WWWWL",
+  "sos_rank": 21,
+  "avca_rank": 7,
+  "d1_matches": 14,
+  "recent": [
+   {
+    "date": "2026-09-23",
+    "opponent": "jacksonville",
+    "opponent_name": "Jacksonville",
+    "home": true,
+    "won": true,
+    "sets_for": 3,
+    "sets_against": 0,
+    "url": "https://www.ncaa.com/game/6628351"
+   },
+   {
+    "date": "2026-09-27",
+    "opponent": "oklahoma",
+    "opponent_name": "Oklahoma",
+    "home": false,
+    "won": true,
+    "sets_for": 3,
+    "sets_against": 0,
+    "url": "https://www.ncaa.com/game/6639034"
+   },
+   {
+    "date": "2026-10-02",
+    "opponent": "tennessee",
+    "opponent_name": "Tennessee",
+    "home": true,
+    "won": true,
+    "sets_for": 3,
+    "sets_against": 0,
+    "url": "https://www.ncaa.com/game/6625212"
+   },
+   {
+    "date": "2026-10-09",
+    "opponent": "missouri",
+    "opponent_name": "Missouri",
+    "home": false,
+    "won": true,
+    "sets_for": 3,
+    "sets_against": 0,
+    "url": "https://www.ncaa.com/game/6626234"
+   },
+   {
+    "date": "2026-10-11",
+    "opponent": "vanderbilt",
+    "opponent_name": "Vanderbilt",
+    "home": false,
+    "won": false,
+    "sets_for": 1,
+    "sets_against": 3,
+    "url": "https://www.ncaa.com/game/6628678"
+   }
+  ]
+ },
+ "p_home": 0.2163,
+ "sets": {
+  "home_3_0": 0.0385,
+  "home_3_1": 0.0765,
+  "home_3_2": 0.1013,
+  "away_3_0": 0.2906,
+  "away_3_1": 0.2943,
+  "away_3_2": 0.1988
+ },
+ "fair_home": 362,
+ "fair_away": -362,
+ "p_home_neutral": 0.1772,
+ "h2h": []
+}

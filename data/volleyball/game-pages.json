@@ -1,1 +1,55 @@
-[]
+[
+ {
+  "slug": "purdue-vs-nebraska-2026-10-17",
+  "match_id": "6627203",
+  "prediction_id": "vo-2026-6627203-2026-10-17",
+  "selected_on": "2026-10-15",
+  "selected_at": "2026-10-15T04:38:23Z",
+  "reasons": [
+   "both AVCA-ranked (No. 13 and No. 1)",
+   "both in our top 40 (21st and 2nd)"
+  ]
+ },
+ {
+  "slug": "florida-vs-texas-am-2026-10-16",
+  "match_id": "6628694",
+  "prediction_id": "vo-2026-6628694-2026-10-16",
+  "selected_on": "2026-10-15",
+  "selected_at": "2026-10-15T04:38:23Z",
+  "reasons": [
+   "both AVCA-ranked (No. 7 and No. 19)",
+   "both in our top 40 (4th and 27th)"
+  ]
+ },
+ {
+  "slug": "indiana-vs-oregon-2026-10-16",
+  "match_id": "6624251",
+  "prediction_id": "vo-2026-6624251-2026-10-16",
+  "selected_on": "2026-10-15",
+  "selected_at": "2026-10-15T04:38:23Z",
+  "reasons": [
+   "both AVCA-ranked (No. 18 and No. 11)",
+   "both in our top 40 (25th and 10th)"
+  ]
+ },
+ {
+  "slug": "byu-vs-utah-2026-10-15",
+  "match_id": "6626887",
+  "prediction_id": "vo-2026-6626887-2026-10-15",
+  "selected_on": "2026-10-15",
+  "selected_at": "2026-10-15T04:38:23Z",
+  "reasons": [
+   "both in our top 40 (7th and 13th)"
+  ]
+ },
+ {
+  "slug": "penn-st-vs-ucla-2026-10-16",
+  "match_id": "6625958",
+  "prediction_id": "vo-2026-6625958-2026-10-16",
+  "selected_on": "2026-10-15",
+  "selected_at": "2026-10-15T04:38:23Z",
+  "reasons": [
+   "both in our top 40 (14th and 12th)"
+  ]
+ }
+]

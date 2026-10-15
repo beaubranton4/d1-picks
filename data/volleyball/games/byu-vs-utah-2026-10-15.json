@@ -1,0 +1,168 @@
+{
+ "slug": "byu-vs-utah-2026-10-15",
+ "sport": "volleyball",
+ "season": 2026,
+ "match_id": "6626887",
+ "prediction_id": "vo-2026-6626887-2026-10-15",
+ "predicted_at": "2026-10-15T04:38:23Z",
+ "date": "2026-10-15",
+ "start": "2026-10-16T01:00:00Z",
+ "start_known": true,
+ "url": "https://www.ncaa.com/game/6626887",
+ "selected_on": "2026-10-15",
+ "reasons": [
+  "both in our top 40 (7th and 13th)"
+ ],
+ "model": "vb-bt-1",
+ "ratings_as_of": "2026-10-15",
+ "n_teams": 348,
+ "home": {
+  "id": "utah",
+  "name": "Utah",
+  "conference_name": "Big 12",
+  "rank": 13,
+  "rating": 2.5519,
+  "match_win_vs_avg": 0.9747,
+  "wins": 12,
+  "losses": 4,
+  "sets_won": 40,
+  "sets_lost": 13,
+  "last5": "WWLWW",
+  "sos_rank": 36,
+  "avca_rank": null,
+  "d1_matches": 16,
+  "recent": [
+   {
+    "date": "2026-09-25",
+    "opponent": "colorado",
+    "opponent_name": "Colorado",
+    "home": false,
+    "won": true,
+    "sets_for": 3,
+    "sets_against": 0,
+    "url": "https://www.ncaa.com/game/6628227"
+   },
+   {
+    "date": "2026-09-27",
+    "opponent": "baylor",
+    "opponent_name": "Baylor",
+    "home": true,
+    "won": true,
+    "sets_for": 3,
+    "sets_against": 1,
+    "url": "https://www.ncaa.com/game/6625833"
+   },
+   {
+    "date": "2026-10-01",
+    "opponent": "kansas",
+    "opponent_name": "Kansas",
+    "home": false,
+    "won": false,
+    "sets_for": 0,
+    "sets_against": 3,
+    "url": "https://www.ncaa.com/game/6625742"
+   },
+   {
+    "date": "2026-10-03",
+    "opponent": "kansas-st",
+    "opponent_name": "Kansas St.",
+    "home": false,
+    "won": true,
+    "sets_for": 3,
+    "sets_against": 0,
+    "url": "https://www.ncaa.com/game/6627517"
+   },
+   {
+    "date": "2026-10-08",
+    "opponent": "west-virginia",
+    "opponent_name": "West Virginia",
+    "home": true,
+    "won": true,
+    "sets_for": 3,
+    "sets_against": 0,
+    "url": "https://www.ncaa.com/game/6626569"
+   }
+  ]
+ },
+ "away": {
+  "id": "byu",
+  "name": "BYU",
+  "conference_name": "Big 12",
+  "rank": 7,
+  "rating": 2.9068,
+  "match_win_vs_avg": 0.9863,
+  "wins": 13,
+  "losses": 1,
+  "sets_won": 40,
+  "sets_lost": 11,
+  "last5": "WWWWW",
+  "sos_rank": 34,
+  "avca_rank": 14,
+  "d1_matches": 14,
+  "recent": [
+   {
+    "date": "2026-09-25",
+    "opponent": "baylor",
+    "opponent_name": "Baylor",
+    "home": true,
+    "won": true,
+    "sets_for": 3,
+    "sets_against": 2,
+    "url": "https://www.ncaa.com/game/6625832"
+   },
+   {
+    "date": "2026-10-01",
+    "opponent": "kansas-st",
+    "opponent_name": "Kansas St.",
+    "home": false,
+    "won": true,
+    "sets_for": 3,
+    "sets_against": 1,
+    "url": "https://www.ncaa.com/game/6626883"
+   },
+   {
+    "date": "2026-10-02",
+    "opponent": "kansas",
+    "opponent_name": "Kansas",
+    "home": false,
+    "won": true,
+    "sets_for": 3,
+    "sets_against": 0,
+    "url": "https://www.ncaa.com/game/6625743"
+   },
+   {
+    "date": "2026-10-08",
+    "opponent": "houston",
+    "opponent_name": "Houston",
+    "home": false,
+    "won": true,
+    "sets_for": 3,
+    "sets_against": 0,
+    "url": "https://www.ncaa.com/game/6626885"
+   },
+   {
+    "date": "2026-10-10",
+    "opponent": "west-virginia",
+    "opponent_name": "West Virginia",
+    "home": true,
+    "won": true,
+    "sets_for": 3,
+    "sets_against": 0,
+    "url": "https://www.ncaa.com/game/6626571"
+   }
+  ]
+ },
+ "p_home": 0.4477,
+ "sets": {
+  "home_3_0": 0.1052,
+  "home_3_1": 0.1666,
+  "home_3_2": 0.1759,
+  "away_3_0": 0.1471,
+  "away_3_1": 0.2084,
+  "away_3_2": 0.1967
+ },
+ "fair_home": 123,
+ "fair_away": -123,
+ "p_home_neutral": 0.3942,
+ "h2h": []
+}

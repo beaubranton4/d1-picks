@@ -1,0 +1,168 @@
+{
+ "slug": "penn-st-vs-ucla-2026-10-16",
+ "sport": "volleyball",
+ "season": 2026,
+ "match_id": "6625958",
+ "prediction_id": "vo-2026-6625958-2026-10-16",
+ "predicted_at": "2026-10-15T04:38:23Z",
+ "date": "2026-10-16",
+ "start": "2026-10-17T02:00:00Z",
+ "start_known": true,
+ "url": "https://www.ncaa.com/game/6625958",
+ "selected_on": "2026-10-15",
+ "reasons": [
+  "both in our top 40 (14th and 12th)"
+ ],
+ "model": "vb-bt-1",
+ "ratings_as_of": "2026-10-15",
+ "n_teams": 348,
+ "home": {
+  "id": "ucla",
+  "name": "UCLA",
+  "conference_name": "Big Ten",
+  "rank": 12,
+  "rating": 2.567,
+  "match_win_vs_avg": 0.9753,
+  "wins": 13,
+  "losses": 4,
+  "sets_won": 41,
+  "sets_lost": 19,
+  "last5": "WLWWW",
+  "sos_rank": 12,
+  "avca_rank": null,
+  "d1_matches": 17,
+  "recent": [
+   {
+    "date": "2026-09-26",
+    "opponent": "northwestern",
+    "opponent_name": "Northwestern",
+    "home": false,
+    "won": true,
+    "sets_for": 3,
+    "sets_against": 0,
+    "url": "https://www.ncaa.com/game/6625282"
+   },
+   {
+    "date": "2026-10-02",
+    "opponent": "michigan-st",
+    "opponent_name": "Michigan St.",
+    "home": true,
+    "won": false,
+    "sets_for": 0,
+    "sets_against": 3,
+    "url": "https://www.ncaa.com/game/6624365"
+   },
+   {
+    "date": "2026-10-03",
+    "opponent": "michigan",
+    "opponent_name": "Michigan",
+    "home": true,
+    "won": true,
+    "sets_for": 3,
+    "sets_against": 0,
+    "url": "https://www.ncaa.com/game/6624337"
+   },
+   {
+    "date": "2026-10-09",
+    "opponent": "maryland",
+    "opponent_name": "Maryland",
+    "home": false,
+    "won": true,
+    "sets_for": 3,
+    "sets_against": 2,
+    "url": "https://www.ncaa.com/game/6624634"
+   },
+   {
+    "date": "2026-10-10",
+    "opponent": "rutgers",
+    "opponent_name": "Rutgers",
+    "home": false,
+    "won": true,
+    "sets_for": 3,
+    "sets_against": 1,
+    "url": "https://www.ncaa.com/game/6625957"
+   }
+  ]
+ },
+ "away": {
+  "id": "penn-st",
+  "name": "Penn St.",
+  "conference_name": "Big Ten",
+  "rank": 14,
+  "rating": 2.5079,
+  "match_win_vs_avg": 0.9728,
+  "wins": 12,
+  "losses": 4,
+  "sets_won": 39,
+  "sets_lost": 17,
+  "last5": "LLWWW",
+  "sos_rank": 9,
+  "avca_rank": 15,
+  "d1_matches": 16,
+  "recent": [
+   {
+    "date": "2026-09-27",
+    "opponent": "michigan-st",
+    "opponent_name": "Michigan St.",
+    "home": false,
+    "won": false,
+    "sets_for": 1,
+    "sets_against": 3,
+    "url": "https://www.ncaa.com/game/6624364"
+   },
+   {
+    "date": "2026-10-01",
+    "opponent": "nebraska",
+    "opponent_name": "Nebraska",
+    "home": true,
+    "won": false,
+    "sets_for": 0,
+    "sets_against": 3,
+    "url": "https://www.ncaa.com/game/6639892"
+   },
+   {
+    "date": "2026-10-03",
+    "opponent": "iowa",
+    "opponent_name": "Iowa",
+    "home": true,
+    "won": true,
+    "sets_for": 3,
+    "sets_against": 1,
+    "url": "https://www.ncaa.com/game/6625379"
+   },
+   {
+    "date": "2026-10-09",
+    "opponent": "northwestern",
+    "opponent_name": "Northwestern",
+    "home": true,
+    "won": true,
+    "sets_for": 3,
+    "sets_against": 0,
+    "url": "https://www.ncaa.com/game/6625286"
+   },
+   {
+    "date": "2026-10-11",
+    "opponent": "washington",
+    "opponent_name": "Washington",
+    "home": true,
+    "won": true,
+    "sets_for": 3,
+    "sets_against": 0,
+    "url": "https://www.ncaa.com/game/6639893"
+   }
+  ]
+ },
+ "p_home": 0.5719,
+ "sets": {
+  "home_3_0": 0.1561,
+  "home_3_1": 0.2162,
+  "home_3_2": 0.1995,
+  "away_3_0": 0.0983,
+  "away_3_1": 0.1588,
+  "away_3_2": 0.171
+ },
+ "fair_home": -134,
+ "fair_away": 134,
+ "p_home_neutral": 0.5178,
+ "h2h": []
+}
