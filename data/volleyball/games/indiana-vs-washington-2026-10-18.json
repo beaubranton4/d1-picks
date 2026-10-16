@@ -1,0 +1,169 @@
+{
+ "slug": "indiana-vs-washington-2026-10-18",
+ "sport": "volleyball",
+ "season": 2026,
+ "match_id": "6624252",
+ "prediction_id": "vo-2026-6624252-2026-10-18",
+ "predicted_at": "2026-10-16T14:51:55Z",
+ "date": "2026-10-18",
+ "start": "2026-10-18T21:00:00Z",
+ "start_known": true,
+ "url": "https://www.ncaa.com/game/6624252",
+ "selected_on": "2026-10-16",
+ "reasons": [
+  "both AVCA-ranked (No. 18 and No. 20)",
+  "both in our top 40 (25th and 20th)"
+ ],
+ "model": "vb-bt-1",
+ "ratings_as_of": "2026-10-16",
+ "n_teams": 348,
+ "home": {
+  "id": "washington",
+  "name": "Washington",
+  "conference_name": "Big Ten",
+  "rank": 20,
+  "rating": 2.3191,
+  "match_win_vs_avg": 0.9628,
+  "wins": 13,
+  "losses": 2,
+  "sets_won": 39,
+  "sets_lost": 14,
+  "last5": "WLWWL",
+  "sos_rank": 28,
+  "avca_rank": 20,
+  "d1_matches": 15,
+  "recent": [
+   {
+    "date": "2026-09-27",
+    "opponent": "michigan",
+    "opponent_name": "Michigan",
+    "home": false,
+    "won": true,
+    "sets_for": 3,
+    "sets_against": 0,
+    "url": "https://www.ncaa.com/game/6624335"
+   },
+   {
+    "date": "2026-10-02",
+    "opponent": "illinois",
+    "opponent_name": "Illinois",
+    "home": true,
+    "won": false,
+    "sets_for": 0,
+    "sets_against": 3,
+    "url": "https://www.ncaa.com/game/6624390"
+   },
+   {
+    "date": "2026-10-04",
+    "opponent": "purdue",
+    "opponent_name": "Purdue",
+    "home": true,
+    "won": true,
+    "sets_for": 3,
+    "sets_against": 0,
+    "url": "https://www.ncaa.com/game/6627190"
+   },
+   {
+    "date": "2026-10-09",
+    "opponent": "ohio-st",
+    "opponent_name": "Ohio St.",
+    "home": false,
+    "won": true,
+    "sets_for": 3,
+    "sets_against": 0,
+    "url": "https://www.ncaa.com/game/6637636"
+   },
+   {
+    "date": "2026-10-11",
+    "opponent": "penn-st",
+    "opponent_name": "Penn St.",
+    "home": false,
+    "won": false,
+    "sets_for": 0,
+    "sets_against": 3,
+    "url": "https://www.ncaa.com/game/6639893"
+   }
+  ]
+ },
+ "away": {
+  "id": "indiana",
+  "name": "Indiana",
+  "conference_name": "Big Ten",
+  "rank": 25,
+  "rating": 2.0632,
+  "match_win_vs_avg": 0.9443,
+  "wins": 10,
+  "losses": 5,
+  "sets_won": 32,
+  "sets_lost": 22,
+  "last5": "WLWLL",
+  "sos_rank": 7,
+  "avca_rank": 18,
+  "d1_matches": 15,
+  "recent": [
+   {
+    "date": "2026-09-26",
+    "opponent": "maryland",
+    "opponent_name": "Maryland",
+    "home": true,
+    "won": true,
+    "sets_for": 3,
+    "sets_against": 0,
+    "url": "https://www.ncaa.com/game/6624246"
+   },
+   {
+    "date": "2026-10-01",
+    "opponent": "wisconsin",
+    "opponent_name": "Wisconsin",
+    "home": false,
+    "won": false,
+    "sets_for": 2,
+    "sets_against": 3,
+    "url": "https://www.ncaa.com/game/6624247"
+   },
+   {
+    "date": "2026-10-04",
+    "opponent": "rutgers",
+    "opponent_name": "Rutgers",
+    "home": false,
+    "won": true,
+    "sets_for": 3,
+    "sets_against": 1,
+    "url": "https://www.ncaa.com/game/6624248"
+   },
+   {
+    "date": "2026-10-08",
+    "opponent": "nebraska",
+    "opponent_name": "Nebraska",
+    "home": true,
+    "won": false,
+    "sets_for": 0,
+    "sets_against": 3,
+    "url": "https://www.ncaa.com/game/6624249"
+   },
+   {
+    "date": "2026-10-11",
+    "opponent": "southern-california",
+    "opponent_name": "Southern California",
+    "home": true,
+    "won": false,
+    "sets_for": 0,
+    "sets_against": 3,
+    "url": "https://www.ncaa.com/game/6624250"
+   }
+  ]
+ },
+ "p_home": 0.628,
+ "sets": {
+  "home_3_0": 0.1844,
+  "home_3_1": 0.2383,
+  "home_3_2": 0.2053,
+  "away_3_0": 0.08,
+  "away_3_1": 0.1366,
+  "away_3_2": 0.1554
+ },
+ "fair_home": -169,
+ "fair_away": 169,
+ "p_home_neutral": 0.5766,
+ "h2h": []
+}

@@ -1,0 +1,168 @@
+{
+ "slug": "baylor-vs-tcu-2026-10-18",
+ "sport": "volleyball",
+ "season": 2026,
+ "match_id": "6625838",
+ "prediction_id": "vo-2026-6625838-2026-10-18",
+ "predicted_at": "2026-10-16T14:51:55Z",
+ "date": "2026-10-18",
+ "start": "2026-10-18T19:00:00Z",
+ "start_known": true,
+ "url": "https://www.ncaa.com/game/6625838",
+ "selected_on": "2026-10-16",
+ "reasons": [
+  "both in our top 40 (22nd and 16th)"
+ ],
+ "model": "vb-bt-1",
+ "ratings_as_of": "2026-10-16",
+ "n_teams": 348,
+ "home": {
+  "id": "tcu",
+  "name": "TCU",
+  "conference_name": "Big 12",
+  "rank": 16,
+  "rating": 2.3836,
+  "match_win_vs_avg": 0.9665,
+  "wins": 14,
+  "losses": 3,
+  "sets_won": 42,
+  "sets_lost": 18,
+  "last5": "WWWWL",
+  "sos_rank": 17,
+  "avca_rank": 10,
+  "d1_matches": 17,
+  "recent": [
+   {
+    "date": "2026-09-27",
+    "opponent": "west-virginia",
+    "opponent_name": "West Virginia",
+    "home": false,
+    "won": true,
+    "sets_for": 3,
+    "sets_against": 1,
+    "url": "https://www.ncaa.com/game/6626566"
+   },
+   {
+    "date": "2026-10-02",
+    "opponent": "colorado",
+    "opponent_name": "Colorado",
+    "home": true,
+    "won": true,
+    "sets_for": 3,
+    "sets_against": 1,
+    "url": "https://www.ncaa.com/game/6628229"
+   },
+   {
+    "date": "2026-10-04",
+    "opponent": "ucf",
+    "opponent_name": "UCF",
+    "home": true,
+    "won": true,
+    "sets_for": 3,
+    "sets_against": 1,
+    "url": "https://www.ncaa.com/game/6627007"
+   },
+   {
+    "date": "2026-10-09",
+    "opponent": "arizona",
+    "opponent_name": "Arizona",
+    "home": true,
+    "won": true,
+    "sets_for": 3,
+    "sets_against": 0,
+    "url": "https://www.ncaa.com/game/6628249"
+   },
+   {
+    "date": "2026-10-11",
+    "opponent": "arizona-st",
+    "opponent_name": "Arizona St.",
+    "home": false,
+    "won": false,
+    "sets_for": 0,
+    "sets_against": 3,
+    "url": "https://www.ncaa.com/game/6627533"
+   }
+  ]
+ },
+ "away": {
+  "id": "baylor",
+  "name": "Baylor",
+  "conference_name": "Big 12",
+  "rank": 22,
+  "rating": 2.2863,
+  "match_win_vs_avg": 0.9608,
+  "wins": 11,
+  "losses": 5,
+  "sets_won": 37,
+  "sets_lost": 20,
+  "last5": "LWLWW",
+  "sos_rank": 14,
+  "avca_rank": null,
+  "d1_matches": 16,
+  "recent": [
+   {
+    "date": "2026-09-27",
+    "opponent": "utah",
+    "opponent_name": "Utah",
+    "home": false,
+    "won": false,
+    "sets_for": 1,
+    "sets_against": 3,
+    "url": "https://www.ncaa.com/game/6625833"
+   },
+   {
+    "date": "2026-10-02",
+    "opponent": "ucf",
+    "opponent_name": "UCF",
+    "home": true,
+    "won": true,
+    "sets_for": 3,
+    "sets_against": 1,
+    "url": "https://www.ncaa.com/game/6625834"
+   },
+   {
+    "date": "2026-10-04",
+    "opponent": "colorado",
+    "opponent_name": "Colorado",
+    "home": true,
+    "won": false,
+    "sets_for": 1,
+    "sets_against": 3,
+    "url": "https://www.ncaa.com/game/6625835"
+   },
+   {
+    "date": "2026-10-08",
+    "opponent": "texas-tech",
+    "opponent_name": "Texas Tech",
+    "home": false,
+    "won": true,
+    "sets_for": 3,
+    "sets_against": 0,
+    "url": "https://www.ncaa.com/game/6625836"
+   },
+   {
+    "date": "2026-10-11",
+    "opponent": "arizona",
+    "opponent_name": "Arizona",
+    "home": true,
+    "won": true,
+    "sets_for": 3,
+    "sets_against": 0,
+    "url": "https://www.ncaa.com/game/6625837"
+   }
+  ]
+ },
+ "p_home": 0.5817,
+ "sets": {
+  "home_3_0": 0.1608,
+  "home_3_1": 0.2201,
+  "home_3_2": 0.2008,
+  "away_3_0": 0.0949,
+  "away_3_1": 0.1549,
+  "away_3_2": 0.1685
+ },
+ "fair_home": -139,
+ "fair_away": 139,
+ "p_home_neutral": 0.5293,
+ "h2h": []
+}

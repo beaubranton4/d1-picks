@@ -2,113 +2,113 @@
  "sport": "volleyball",
  "season": 2026,
  "model": "vb-bt-1",
- "generated_at": "2026-10-15T15:01:42Z",
+ "generated_at": "2026-10-16T14:52:08Z",
  "label": "Walk-forward backtest. Not part of the live record.",
  "min_median_matches": 4,
  "prior_precision": 0.25,
  "first_day": "2026-09-05",
- "last_day": "2026-10-14",
+ "last_day": "2026-10-15",
  "result": {
-  "matches": 2222,
-  "favorites_won": 1662,
-  "accuracy": 0.748,
-  "brier": 0.1651,
-  "log_loss": 0.5014,
-  "home_team_won": 0.568,
+  "matches": 2270,
+  "favorites_won": 1702,
+  "accuracy": 0.7498,
+  "brier": 0.1644,
+  "log_loss": 0.4996,
+  "home_team_won": 0.5634,
   "calibration": [
    {
     "bucket": "50-60",
-    "matches": 489,
-    "avg_predicted": 0.5493,
-    "favorite_won": 0.5051
+    "matches": 503,
+    "avg_predicted": 0.5494,
+    "favorite_won": 0.5109
    },
    {
     "bucket": "60-70",
-    "matches": 472,
+    "matches": 480,
     "avg_predicted": 0.6501,
-    "favorite_won": 0.6737
+    "favorite_won": 0.675
    },
    {
     "bucket": "70-80",
-    "matches": 425,
-    "avg_predicted": 0.751,
-    "favorite_won": 0.8
+    "matches": 434,
+    "avg_predicted": 0.7513,
+    "favorite_won": 0.7995
    },
    {
     "bucket": "80-90",
-    "matches": 410,
-    "avg_predicted": 0.8471,
-    "favorite_won": 0.8683
+    "matches": 417,
+    "avg_predicted": 0.8474,
+    "favorite_won": 0.8705
    },
    {
     "bucket": "90-100",
-    "matches": 426,
-    "avg_predicted": 0.9506,
-    "favorite_won": 0.9413
+    "matches": 436,
+    "avg_predicted": 0.9507,
+    "favorite_won": 0.9427
    }
   ]
  },
  "uncalibrated": {
-  "matches": 2222,
-  "favorites_won": 1662,
-  "accuracy": 0.748,
-  "brier": 0.169,
-  "log_loss": 0.5213,
-  "home_team_won": 0.568
+  "matches": 2270,
+  "favorites_won": 1702,
+  "accuracy": 0.7498,
+  "brier": 0.1682,
+  "log_loss": 0.5186,
+  "home_team_won": 0.5634
  },
- "calibration_scale": 0.6365,
- "calibration_rows": 2222,
+ "calibration_scale": 0.6419,
+ "calibration_rows": 2270,
  "baselines": {
   "coin_flip": {
    "brier": 0.25,
    "log_loss": 0.6931
   },
   "home_team": {
-   "accuracy": 0.568
+   "accuracy": 0.5634
   }
  },
  "prior_precision_grid": [
   {
    "prior_precision": 0.0625,
-   "matches": 2222,
-   "log_loss": 4.6242,
-   "brier": 0.2583,
-   "accuracy": 0.6953
+   "matches": 2270,
+   "log_loss": 4.5353,
+   "brier": 0.2557,
+   "accuracy": 0.6982
   },
   {
    "prior_precision": 0.125,
-   "matches": 2222,
-   "log_loss": 0.5023,
-   "brier": 0.1644,
-   "accuracy": 0.7511
+   "matches": 2270,
+   "log_loss": 0.5005,
+   "brier": 0.1638,
+   "accuracy": 0.7529
   },
   {
    "prior_precision": 0.25,
-   "matches": 2222,
-   "log_loss": 0.5014,
-   "brier": 0.1651,
-   "accuracy": 0.748
+   "matches": 2270,
+   "log_loss": 0.4996,
+   "brier": 0.1644,
+   "accuracy": 0.7498
   },
   {
    "prior_precision": 0.5,
-   "matches": 2222,
-   "log_loss": 0.5042,
-   "brier": 0.1671,
-   "accuracy": 0.7444
+   "matches": 2270,
+   "log_loss": 0.5025,
+   "brier": 0.1665,
+   "accuracy": 0.7463
   },
   {
    "prior_precision": 1.0,
-   "matches": 2222,
-   "log_loss": 0.5118,
-   "brier": 0.1709,
-   "accuracy": 0.7367
+   "matches": 2270,
+   "log_loss": 0.5101,
+   "brier": 0.1702,
+   "accuracy": 0.7388
   },
   {
    "prior_precision": 2.0,
-   "matches": 2222,
-   "log_loss": 0.5248,
-   "brier": 0.1766,
-   "accuracy": 0.7277
+   "matches": 2270,
+   "log_loss": 0.5232,
+   "brier": 0.1759,
+   "accuracy": 0.7282
   }
  ]
 }

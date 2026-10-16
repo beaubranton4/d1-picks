@@ -1,0 +1,169 @@
+{
+ "slug": "arizona-st-vs-kansas-2026-10-18",
+ "sport": "volleyball",
+ "season": 2026,
+ "match_id": "6625746",
+ "prediction_id": "vo-2026-6625746-2026-10-18",
+ "predicted_at": "2026-10-16T14:51:55Z",
+ "date": "2026-10-18",
+ "start": "2026-10-18T16:00:00Z",
+ "start_known": true,
+ "url": "https://www.ncaa.com/game/6625746",
+ "selected_on": "2026-10-16",
+ "reasons": [
+  "both AVCA-ranked (No. 8 and No. 17)",
+  "both in our top 40 (21st and 12th)"
+ ],
+ "model": "vb-bt-1",
+ "ratings_as_of": "2026-10-16",
+ "n_teams": 348,
+ "home": {
+  "id": "kansas",
+  "name": "Kansas",
+  "conference_name": "Big 12",
+  "rank": 12,
+  "rating": 2.5294,
+  "match_win_vs_avg": 0.9737,
+  "wins": 12,
+  "losses": 4,
+  "sets_won": 40,
+  "sets_lost": 14,
+  "last5": "WWLWW",
+  "sos_rank": 27,
+  "avca_rank": 17,
+  "d1_matches": 16,
+  "recent": [
+   {
+    "date": "2026-09-27",
+    "opponent": "texas-tech",
+    "opponent_name": "Texas Tech",
+    "home": false,
+    "won": true,
+    "sets_for": 3,
+    "sets_against": 0,
+    "url": "https://www.ncaa.com/game/6625741"
+   },
+   {
+    "date": "2026-10-01",
+    "opponent": "utah",
+    "opponent_name": "Utah",
+    "home": true,
+    "won": true,
+    "sets_for": 3,
+    "sets_against": 0,
+    "url": "https://www.ncaa.com/game/6625742"
+   },
+   {
+    "date": "2026-10-02",
+    "opponent": "byu",
+    "opponent_name": "BYU",
+    "home": true,
+    "won": false,
+    "sets_for": 0,
+    "sets_against": 3,
+    "url": "https://www.ncaa.com/game/6625743"
+   },
+   {
+    "date": "2026-10-11",
+    "opponent": "ucf",
+    "opponent_name": "UCF",
+    "home": false,
+    "won": true,
+    "sets_for": 3,
+    "sets_against": 1,
+    "url": "https://www.ncaa.com/game/6625744"
+   },
+   {
+    "date": "2026-10-15",
+    "opponent": "kansas-st",
+    "opponent_name": "Kansas St.",
+    "home": false,
+    "won": true,
+    "sets_for": 3,
+    "sets_against": 0,
+    "url": "https://www.ncaa.com/game/6625745"
+   }
+  ]
+ },
+ "away": {
+  "id": "arizona-st",
+  "name": "Arizona St.",
+  "conference_name": "Big 12",
+  "rank": 21,
+  "rating": 2.3186,
+  "match_win_vs_avg": 0.9628,
+  "wins": 14,
+  "losses": 3,
+  "sets_won": 45,
+  "sets_lost": 18,
+  "last5": "WWWWW",
+  "sos_rank": 25,
+  "avca_rank": 8,
+  "d1_matches": 17,
+  "recent": [
+   {
+    "date": "2026-09-27",
+    "opponent": "cincinnati",
+    "opponent_name": "Cincinnati",
+    "home": false,
+    "won": true,
+    "sets_for": 3,
+    "sets_against": 1,
+    "url": "https://www.ncaa.com/game/6627527"
+   },
+   {
+    "date": "2026-10-04",
+    "opponent": "iowa-st",
+    "opponent_name": "Iowa St.",
+    "home": true,
+    "won": true,
+    "sets_for": 3,
+    "sets_against": 1,
+    "url": "https://www.ncaa.com/game/6627528"
+   },
+   {
+    "date": "2026-10-09",
+    "opponent": "colorado",
+    "opponent_name": "Colorado",
+    "home": true,
+    "won": true,
+    "sets_for": 3,
+    "sets_against": 1,
+    "url": "https://www.ncaa.com/game/6627531"
+   },
+   {
+    "date": "2026-10-11",
+    "opponent": "tcu",
+    "opponent_name": "TCU",
+    "home": true,
+    "won": true,
+    "sets_for": 3,
+    "sets_against": 0,
+    "url": "https://www.ncaa.com/game/6627533"
+   },
+   {
+    "date": "2026-10-15",
+    "opponent": "arizona",
+    "opponent_name": "Arizona",
+    "home": true,
+    "won": true,
+    "sets_for": 3,
+    "sets_against": 1,
+    "url": "https://www.ncaa.com/game/6627534"
+   }
+  ]
+ },
+ "p_home": 0.615,
+ "sets": {
+  "home_3_0": 0.1775,
+  "home_3_1": 0.2332,
+  "home_3_2": 0.2043,
+  "away_3_0": 0.084,
+  "away_3_1": 0.1417,
+  "away_3_2": 0.1593
+ },
+ "fair_home": -160,
+ "fair_away": 160,
+ "p_home_neutral": 0.5632,
+ "h2h": []
+}

@@ -1,0 +1,169 @@
+{
+ "slug": "north-carolina-vs-louisville-2026-10-18",
+ "sport": "volleyball",
+ "season": 2026,
+ "match_id": "6627031",
+ "prediction_id": "vo-2026-6627031-2026-10-18",
+ "predicted_at": "2026-10-16T14:51:55Z",
+ "date": "2026-10-18",
+ "start": "2026-10-18T17:00:00Z",
+ "start_known": true,
+ "url": "https://www.ncaa.com/game/6627031",
+ "selected_on": "2026-10-16",
+ "reasons": [
+  "both AVCA-ranked (No. 23 and No. 3)",
+  "both in our top 40 (26th and 5th)"
+ ],
+ "model": "vb-bt-1",
+ "ratings_as_of": "2026-10-16",
+ "n_teams": 348,
+ "home": {
+  "id": "louisville",
+  "name": "Louisville",
+  "conference_name": "ACC",
+  "rank": 5,
+  "rating": 3.2026,
+  "match_win_vs_avg": 0.9919,
+  "wins": 16,
+  "losses": 2,
+  "sets_won": 49,
+  "sets_lost": 11,
+  "last5": "WWWWW",
+  "sos_rank": 15,
+  "avca_rank": 3,
+  "d1_matches": 18,
+  "recent": [
+   {
+    "date": "2026-09-27",
+    "opponent": "boston-college",
+    "opponent_name": "Boston College",
+    "home": false,
+    "won": true,
+    "sets_for": 3,
+    "sets_against": 0,
+    "url": "https://www.ncaa.com/game/6627027"
+   },
+   {
+    "date": "2026-09-30",
+    "opponent": "notre-dame",
+    "opponent_name": "Notre Dame",
+    "home": true,
+    "won": true,
+    "sets_for": 3,
+    "sets_against": 0,
+    "url": "https://www.ncaa.com/game/6626341"
+   },
+   {
+    "date": "2026-10-03",
+    "opponent": "notre-dame",
+    "opponent_name": "Notre Dame",
+    "home": false,
+    "won": true,
+    "sets_for": 3,
+    "sets_against": 0,
+    "url": "https://www.ncaa.com/game/6626342"
+   },
+   {
+    "date": "2026-10-08",
+    "opponent": "california",
+    "opponent_name": "California",
+    "home": true,
+    "won": true,
+    "sets_for": 3,
+    "sets_against": 1,
+    "url": "https://www.ncaa.com/game/6627028"
+   },
+   {
+    "date": "2026-10-11",
+    "opponent": "stanford",
+    "opponent_name": "Stanford",
+    "home": true,
+    "won": true,
+    "sets_for": 3,
+    "sets_against": 0,
+    "url": "https://www.ncaa.com/game/6627030"
+   }
+  ]
+ },
+ "away": {
+  "id": "north-carolina",
+  "name": "North Carolina",
+  "conference_name": "ACC",
+  "rank": 26,
+  "rating": 2.0559,
+  "match_win_vs_avg": 0.9437,
+  "wins": 11,
+  "losses": 3,
+  "sets_won": 35,
+  "sets_lost": 18,
+  "last5": "WWWWW",
+  "sos_rank": 32,
+  "avca_rank": 23,
+  "d1_matches": 14,
+  "recent": [
+   {
+    "date": "2026-09-27",
+    "opponent": "wake-forest",
+    "opponent_name": "Wake Forest",
+    "home": false,
+    "won": true,
+    "sets_for": 3,
+    "sets_against": 2,
+    "url": "https://www.ncaa.com/game/6638106"
+   },
+   {
+    "date": "2026-10-02",
+    "opponent": "clemson",
+    "opponent_name": "Clemson",
+    "home": true,
+    "won": true,
+    "sets_for": 3,
+    "sets_against": 0,
+    "url": "https://www.ncaa.com/game/6628398"
+   },
+   {
+    "date": "2026-10-04",
+    "opponent": "georgia-tech",
+    "opponent_name": "Georgia Tech",
+    "home": true,
+    "won": true,
+    "sets_for": 3,
+    "sets_against": 2,
+    "url": "https://www.ncaa.com/game/6638330"
+   },
+   {
+    "date": "2026-10-09",
+    "opponent": "virginia-tech",
+    "opponent_name": "Virginia Tech",
+    "home": false,
+    "won": true,
+    "sets_for": 3,
+    "sets_against": 0,
+    "url": "https://www.ncaa.com/game/6628435"
+   },
+   {
+    "date": "2026-10-11",
+    "opponent": "virginia",
+    "opponent_name": "Virginia",
+    "home": false,
+    "won": true,
+    "sets_for": 3,
+    "sets_against": 0,
+    "url": "https://www.ncaa.com/game/6628534"
+   }
+  ]
+ },
+ "p_home": 0.8454,
+ "sets": {
+  "home_3_0": 0.3526,
+  "home_3_1": 0.3105,
+  "home_3_2": 0.1823,
+  "away_3_0": 0.0253,
+  "away_3_1": 0.0536,
+  "away_3_2": 0.0757
+ },
+ "fair_home": -547,
+ "fair_away": 547,
+ "p_home_neutral": 0.8103,
+ "h2h": []
+}
