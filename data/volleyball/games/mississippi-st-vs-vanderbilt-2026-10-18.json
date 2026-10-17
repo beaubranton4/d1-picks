@@ -1,0 +1,168 @@
+{
+ "slug": "mississippi-st-vs-vanderbilt-2026-10-18",
+ "sport": "volleyball",
+ "season": 2026,
+ "match_id": "6628447",
+ "prediction_id": "vo-2026-6628447-2026-10-18",
+ "predicted_at": "2026-10-16T14:51:55Z",
+ "date": "2026-10-18",
+ "start": "2026-10-18T18:00:00Z",
+ "start_known": true,
+ "url": "https://www.ncaa.com/game/6628447",
+ "selected_on": "2026-10-17",
+ "reasons": [
+  "both in our top 40 (39th and 8th)"
+ ],
+ "model": "vb-bt-1",
+ "ratings_as_of": "2026-10-16",
+ "n_teams": 348,
+ "home": {
+  "id": "vanderbilt",
+  "name": "Vanderbilt",
+  "conference_name": "SEC",
+  "rank": 8,
+  "rating": 2.9039,
+  "match_win_vs_avg": 0.9862,
+  "wins": 13,
+  "losses": 2,
+  "sets_won": 41,
+  "sets_lost": 10,
+  "last5": "LWWWW",
+  "sos_rank": 29,
+  "avca_rank": 24,
+  "d1_matches": 15,
+  "recent": [
+   {
+    "date": "2026-09-27",
+    "opponent": "missouri",
+    "opponent_name": "Missouri",
+    "home": false,
+    "won": false,
+    "sets_for": 1,
+    "sets_against": 3,
+    "url": "https://www.ncaa.com/game/6626233"
+   },
+   {
+    "date": "2026-09-30",
+    "opponent": "lsu",
+    "opponent_name": "LSU",
+    "home": false,
+    "won": true,
+    "sets_for": 3,
+    "sets_against": 0,
+    "url": "https://www.ncaa.com/game/6625618"
+   },
+   {
+    "date": "2026-10-04",
+    "opponent": "ole-miss",
+    "opponent_name": "Ole Miss",
+    "home": false,
+    "won": true,
+    "sets_for": 3,
+    "sets_against": 0,
+    "url": "https://www.ncaa.com/game/6628674"
+   },
+   {
+    "date": "2026-10-09",
+    "opponent": "auburn",
+    "opponent_name": "Auburn",
+    "home": true,
+    "won": true,
+    "sets_for": 3,
+    "sets_against": 0,
+    "url": "https://www.ncaa.com/game/6627979"
+   },
+   {
+    "date": "2026-10-11",
+    "opponent": "florida",
+    "opponent_name": "Florida",
+    "home": true,
+    "won": true,
+    "sets_for": 3,
+    "sets_against": 1,
+    "url": "https://www.ncaa.com/game/6628678"
+   }
+  ]
+ },
+ "away": {
+  "id": "mississippi-st",
+  "name": "Mississippi St.",
+  "conference_name": "SEC",
+  "rank": 39,
+  "rating": 1.56,
+  "match_win_vs_avg": 0.8855,
+  "wins": 13,
+  "losses": 4,
+  "sets_won": 40,
+  "sets_lost": 17,
+  "last5": "LLWWL",
+  "sos_rank": 102,
+  "avca_rank": null,
+  "d1_matches": 17,
+  "recent": [
+   {
+    "date": "2026-10-02",
+    "opponent": "texas",
+    "opponent_name": "Texas",
+    "home": false,
+    "won": false,
+    "sets_for": 0,
+    "sets_against": 3,
+    "url": "https://www.ncaa.com/game/6628445"
+   },
+   {
+    "date": "2026-10-04",
+    "opponent": "texas-am",
+    "opponent_name": "Texas A&M",
+    "home": false,
+    "won": false,
+    "sets_for": 0,
+    "sets_against": 3,
+    "url": "https://www.ncaa.com/game/6628446"
+   },
+   {
+    "date": "2026-10-09",
+    "opponent": "georgia",
+    "opponent_name": "Georgia",
+    "home": true,
+    "won": true,
+    "sets_for": 3,
+    "sets_against": 0,
+    "url": "https://www.ncaa.com/game/6627174"
+   },
+   {
+    "date": "2026-10-11",
+    "opponent": "south-carolina",
+    "opponent_name": "South Carolina",
+    "home": true,
+    "won": true,
+    "sets_for": 3,
+    "sets_against": 0,
+    "url": "https://www.ncaa.com/game/6625642"
+   },
+   {
+    "date": "2026-10-14",
+    "opponent": "missouri",
+    "opponent_name": "Missouri",
+    "home": false,
+    "won": false,
+    "sets_for": 0,
+    "sets_against": 3,
+    "url": "https://www.ncaa.com/game/6626236"
+   }
+  ]
+ },
+ "p_home": 0.8793,
+ "sets": {
+  "home_3_0": 0.396,
+  "home_3_1": 0.3156,
+  "home_3_2": 0.1677,
+  "away_3_0": 0.0187,
+  "away_3_1": 0.0413,
+  "away_3_2": 0.0607
+ },
+ "fair_home": -729,
+ "fair_away": 729,
+ "p_home_neutral": 0.8493,
+ "h2h": []
+}

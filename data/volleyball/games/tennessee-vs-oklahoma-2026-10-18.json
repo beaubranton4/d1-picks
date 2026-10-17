@@ -1,0 +1,168 @@
+{
+ "slug": "tennessee-vs-oklahoma-2026-10-18",
+ "sport": "volleyball",
+ "season": 2026,
+ "match_id": "6625238",
+ "prediction_id": "vo-2026-6625238-2026-10-18",
+ "predicted_at": "2026-10-16T14:51:55Z",
+ "date": "2026-10-18",
+ "start": "2026-10-18T19:00:00Z",
+ "start_known": true,
+ "url": "https://www.ncaa.com/game/6625238",
+ "selected_on": "2026-10-17",
+ "reasons": [
+  "both in our top 40 (7th and 36th)"
+ ],
+ "model": "vb-bt-1",
+ "ratings_as_of": "2026-10-16",
+ "n_teams": 348,
+ "home": {
+  "id": "oklahoma",
+  "name": "Oklahoma",
+  "conference_name": "SEC",
+  "rank": 36,
+  "rating": 1.6562,
+  "match_win_vs_avg": 0.8994,
+  "wins": 10,
+  "losses": 4,
+  "sets_won": 33,
+  "sets_lost": 21,
+  "last5": "LWLWW",
+  "sos_rank": 40,
+  "avca_rank": null,
+  "d1_matches": 14,
+  "recent": [
+   {
+    "date": "2026-09-27",
+    "opponent": "florida",
+    "opponent_name": "Florida",
+    "home": true,
+    "won": false,
+    "sets_for": 0,
+    "sets_against": 3,
+    "url": "https://www.ncaa.com/game/6639034"
+   },
+   {
+    "date": "2026-10-02",
+    "opponent": "south-carolina",
+    "opponent_name": "South Carolina",
+    "home": false,
+    "won": true,
+    "sets_for": 3,
+    "sets_against": 1,
+    "url": "https://www.ncaa.com/game/6625639"
+   },
+   {
+    "date": "2026-10-04",
+    "opponent": "georgia",
+    "opponent_name": "Georgia",
+    "home": false,
+    "won": false,
+    "sets_for": 1,
+    "sets_against": 3,
+    "url": "https://www.ncaa.com/game/6627173"
+   },
+   {
+    "date": "2026-10-07",
+    "opponent": "texas-am",
+    "opponent_name": "Texas A&M",
+    "home": true,
+    "won": true,
+    "sets_for": 3,
+    "sets_against": 2,
+    "url": "https://www.ncaa.com/game/6628693"
+   },
+   {
+    "date": "2026-10-11",
+    "opponent": "texas",
+    "opponent_name": "Texas",
+    "home": true,
+    "won": true,
+    "sets_for": 3,
+    "sets_against": 0,
+    "url": "https://www.ncaa.com/game/6628597"
+   }
+  ]
+ },
+ "away": {
+  "id": "tennessee",
+  "name": "Tennessee",
+  "conference_name": "SEC",
+  "rank": 7,
+  "rating": 2.9847,
+  "match_win_vs_avg": 0.988,
+  "wins": 12,
+  "losses": 3,
+  "sets_won": 38,
+  "sets_lost": 10,
+  "last5": "LLWWW",
+  "sos_rank": 33,
+  "avca_rank": 9,
+  "d1_matches": 15,
+  "recent": [
+   {
+    "date": "2026-09-25",
+    "opponent": "texas",
+    "opponent_name": "Texas",
+    "home": true,
+    "won": false,
+    "sets_for": 2,
+    "sets_against": 3,
+    "url": "https://www.ncaa.com/game/6625211"
+   },
+   {
+    "date": "2026-10-02",
+    "opponent": "florida",
+    "opponent_name": "Florida",
+    "home": false,
+    "won": false,
+    "sets_for": 0,
+    "sets_against": 3,
+    "url": "https://www.ncaa.com/game/6625212"
+   },
+   {
+    "date": "2026-10-04",
+    "opponent": "auburn",
+    "opponent_name": "Auburn",
+    "home": false,
+    "won": true,
+    "sets_for": 3,
+    "sets_against": 0,
+    "url": "https://www.ncaa.com/game/6625231"
+   },
+   {
+    "date": "2026-10-09",
+    "opponent": "ole-miss",
+    "opponent_name": "Ole Miss",
+    "home": true,
+    "won": true,
+    "sets_for": 3,
+    "sets_against": 0,
+    "url": "https://www.ncaa.com/game/6625232"
+   },
+   {
+    "date": "2026-10-11",
+    "opponent": "lsu",
+    "opponent_name": "LSU",
+    "home": true,
+    "won": true,
+    "sets_for": 3,
+    "sets_against": 0,
+    "url": "https://www.ncaa.com/game/6625233"
+   }
+  ]
+ },
+ "p_home": 0.1885,
+ "sets": {
+  "home_3_0": 0.0323,
+  "home_3_1": 0.0661,
+  "home_3_2": 0.0901,
+  "away_3_0": 0.3164,
+  "away_3_1": 0.3024,
+  "away_3_2": 0.1927
+ },
+ "fair_home": 431,
+ "fair_away": -431,
+ "p_home_neutral": 0.1535,
+ "h2h": []
+}

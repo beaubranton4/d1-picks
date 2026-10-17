@@ -1,0 +1,168 @@
+{
+ "slug": "michigan-vs-illinois-2026-10-18",
+ "sport": "volleyball",
+ "season": 2026,
+ "match_id": "6624341",
+ "prediction_id": "vo-2026-6624341-2026-10-18",
+ "predicted_at": "2026-10-16T14:51:55Z",
+ "date": "2026-10-18",
+ "start": "2026-10-18T18:00:00Z",
+ "start_known": true,
+ "url": "https://www.ncaa.com/game/6624341",
+ "selected_on": "2026-10-17",
+ "reasons": [
+  "both in our top 40 (35th and 23rd)"
+ ],
+ "model": "vb-bt-1",
+ "ratings_as_of": "2026-10-16",
+ "n_teams": 348,
+ "home": {
+  "id": "illinois",
+  "name": "Illinois",
+  "conference_name": "Big Ten",
+  "rank": 23,
+  "rating": 2.2089,
+  "match_win_vs_avg": 0.9556,
+  "wins": 12,
+  "losses": 6,
+  "sets_won": 41,
+  "sets_lost": 23,
+  "last5": "WLLLW",
+  "sos_rank": 21,
+  "avca_rank": null,
+  "d1_matches": 18,
+  "recent": [
+   {
+    "date": "2026-10-02",
+    "opponent": "washington",
+    "opponent_name": "Washington",
+    "home": false,
+    "won": true,
+    "sets_for": 3,
+    "sets_against": 0,
+    "url": "https://www.ncaa.com/game/6624390"
+   },
+   {
+    "date": "2026-10-04",
+    "opponent": "oregon",
+    "opponent_name": "Oregon",
+    "home": false,
+    "won": false,
+    "sets_for": 1,
+    "sets_against": 3,
+    "url": "https://www.ncaa.com/game/6624391"
+   },
+   {
+    "date": "2026-10-08",
+    "opponent": "wisconsin",
+    "opponent_name": "Wisconsin",
+    "home": true,
+    "won": false,
+    "sets_for": 0,
+    "sets_against": 3,
+    "url": "https://www.ncaa.com/game/6624392"
+   },
+   {
+    "date": "2026-10-11",
+    "opponent": "purdue",
+    "opponent_name": "Purdue",
+    "home": false,
+    "won": false,
+    "sets_for": 2,
+    "sets_against": 3,
+    "url": "https://www.ncaa.com/game/6624393"
+   },
+   {
+    "date": "2026-10-15",
+    "opponent": "michigan-st",
+    "opponent_name": "Michigan St.",
+    "home": true,
+    "won": true,
+    "sets_for": 3,
+    "sets_against": 1,
+    "url": "https://www.ncaa.com/game/6624369"
+   }
+  ]
+ },
+ "away": {
+  "id": "michigan",
+  "name": "Michigan",
+  "conference_name": "Big Ten",
+  "rank": 35,
+  "rating": 1.7073,
+  "match_win_vs_avg": 0.9062,
+  "wins": 11,
+  "losses": 6,
+  "sets_won": 38,
+  "sets_lost": 23,
+  "last5": "LWLWL",
+  "sos_rank": 34,
+  "avca_rank": null,
+  "d1_matches": 17,
+  "recent": [
+   {
+    "date": "2026-09-27",
+    "opponent": "washington",
+    "opponent_name": "Washington",
+    "home": true,
+    "won": false,
+    "sets_for": 0,
+    "sets_against": 3,
+    "url": "https://www.ncaa.com/game/6624335"
+   },
+   {
+    "date": "2026-10-02",
+    "opponent": "southern-california",
+    "opponent_name": "Southern California",
+    "home": false,
+    "won": true,
+    "sets_for": 3,
+    "sets_against": 1,
+    "url": "https://www.ncaa.com/game/6624336"
+   },
+   {
+    "date": "2026-10-03",
+    "opponent": "ucla",
+    "opponent_name": "UCLA",
+    "home": false,
+    "won": false,
+    "sets_for": 0,
+    "sets_against": 3,
+    "url": "https://www.ncaa.com/game/6624337"
+   },
+   {
+    "date": "2026-10-09",
+    "opponent": "iowa",
+    "opponent_name": "Iowa",
+    "home": true,
+    "won": true,
+    "sets_for": 3,
+    "sets_against": 1,
+    "url": "https://www.ncaa.com/game/6624338"
+   },
+   {
+    "date": "2026-10-10",
+    "opponent": "oregon",
+    "opponent_name": "Oregon",
+    "home": true,
+    "won": false,
+    "sets_for": 1,
+    "sets_against": 3,
+    "url": "https://www.ncaa.com/game/6624339"
+   }
+  ]
+ },
+ "p_home": 0.6966,
+ "sets": {
+  "home_3_0": 0.2249,
+  "home_3_1": 0.2644,
+  "home_3_2": 0.2072,
+  "away_3_0": 0.0602,
+  "away_3_1": 0.1098,
+  "away_3_2": 0.1335
+ },
+ "fair_home": -230,
+ "fair_away": 230,
+ "p_home_neutral": 0.648,
+ "h2h": []
+}
